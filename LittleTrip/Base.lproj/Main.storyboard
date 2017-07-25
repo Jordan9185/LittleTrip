@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="iU7-tR-31M">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -18,9 +18,60 @@
                         <viewControllerLayoutGuide type="bottom" id="rhT-Zb-OLi"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="J6v-3w-aqR">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="landing" translatesAutoresizingMaskIntoConstraints="NO" id="3Mc-uo-p8V">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="188"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="aPb-GH-FbH">
+                                <rect key="frame" x="30" y="223" width="260" height="265"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Little Trip" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EjV-rq-8fe">
+                                        <rect key="frame" x="0.0" y="0.0" width="260" height="37"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="31"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="W8C-MA-IOU">
+                                        <rect key="frame" x="0.0" y="57" width="260" height="37"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q2n-Hm-Y3Z">
+                                        <rect key="frame" x="0.0" y="114" width="260" height="37"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kmz-A4-xV3">
+                                        <rect key="frame" x="0.0" y="171" width="260" height="37"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Sign In">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Register" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8cr-Ls-0lR">
+                                        <rect key="frame" x="0.0" y="228" width="260" height="37"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" red="0.038198027759790421" green="0.059342540800571442" blue="0.081147052347660065" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="aPb-GH-FbH" secondAttribute="trailing" constant="30" id="7wO-hL-pjr"/>
+                            <constraint firstItem="rhT-Zb-OLi" firstAttribute="top" secondItem="aPb-GH-FbH" secondAttribute="bottom" constant="80" id="8SR-kV-mmU"/>
+                            <constraint firstItem="aPb-GH-FbH" firstAttribute="leading" secondItem="J6v-3w-aqR" secondAttribute="leading" constant="30" id="Sxw-KV-NaI"/>
+                            <constraint firstAttribute="trailing" secondItem="3Mc-uo-p8V" secondAttribute="trailing" id="Txw-8k-kjt"/>
+                            <constraint firstItem="3Mc-uo-p8V" firstAttribute="leading" secondItem="J6v-3w-aqR" secondAttribute="leading" id="bPE-Ob-ZR5"/>
+                            <constraint firstItem="rhT-Zb-OLi" firstAttribute="top" secondItem="3Mc-uo-p8V" secondAttribute="bottom" constant="380" id="emS-2m-lH9"/>
+                            <constraint firstItem="3Mc-uo-p8V" firstAttribute="top" secondItem="90J-kD-Odj" secondAttribute="bottom" constant="-20" id="wds-xU-sSY"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Tuu-Mf-xrQ"/>
                 </viewController>
@@ -47,4 +98,7 @@
             <point key="canvasLocation" x="146.40000000000001" y="-91.304347826086968"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="landing" width="960" height="639"/>
+    </resources>
 </document>
