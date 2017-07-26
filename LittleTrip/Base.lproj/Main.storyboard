@@ -55,6 +55,9 @@
                                                         <state key="normal" title="Sign In">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="signInButtonTapped:" destination="enM-2F-fuN" eventType="touchUpInside" id="rYd-xJ-WkT"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MSp-j2-MIo">
                                                         <rect key="frame" x="0.0" y="228" width="315" height="37"/>
@@ -113,6 +116,34 @@
             </objects>
             <point key="canvasLocation" x="1085.5999999999999" y="-91.304347826086968"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="Smu-iF-ate">
+            <objects>
+                <viewController id="k5n-d2-IXE" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ig7-v9-fSd"/>
+                        <viewControllerLayoutGuide type="bottom" id="r4h-yQ-cB5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wh6-VM-H7s">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jC9-Df-Iba">
+                                <rect key="frame" x="166" y="274" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="dHL-UR-ozv"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eWv-Cy-mrq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1086" y="737"/>
+        </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="1wd-L6-iiN">
             <objects>
@@ -162,6 +193,9 @@
                                                         <state key="normal" title="Sign Up">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="signUpButtonTapped:" destination="HHT-7y-Agz" eventType="touchUpInside" id="TNE-8r-shJ"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XUX-kb-h3Z">
                                                         <rect key="frame" x="0.0" y="228" width="315" height="37"/>
@@ -220,7 +254,7 @@
         <!--Navigation Controller-->
         <scene sceneID="tWL-zh-UdK">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="iU7-tR-31M" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="LoginFlow" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="iU7-tR-31M" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="mnj-9w-tZn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -234,6 +268,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7fz-Kg-CQ4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="146.40000000000001" y="-91.304347826086968"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="3Ku-aS-KR6">
+            <objects>
+                <navigationController storyboardIdentifier="MainFlow" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fZN-Mb-4ND" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ckX-kw-jEz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="k5n-d2-IXE" kind="relationship" relationship="rootViewController" id="veb-fW-K5c"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eSN-hj-Fr5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="146" y="737"/>
         </scene>
     </scenes>
     <resources>

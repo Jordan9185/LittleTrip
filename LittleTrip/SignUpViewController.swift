@@ -8,6 +8,8 @@
 
 import UIKit
 
+import FirebaseAuth
+
 class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     
@@ -30,6 +32,36 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         passwordTextField.delegate = self
         
         addObserverForKeyboardEvent()
+        
+    }
+    
+    @IBAction func signUpButtonTapped(_ sender: UIButton) {
+        
+        let email = emailTextField.text ?? ""
+        
+        if email == "" {
+            
+            return
+        }
+        
+        let password = passwordTextField.text ?? ""
+        
+        if password == "" {
+            
+            return
+        }
+        
+        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+            
+            if let error = error {
+                return
+            }
+            
+            print("\(user) has been created.")
+            
+        }
+        
+        self.navigationController?.popViewController(animated: true)
         
     }
     

@@ -8,6 +8,8 @@
 
 import UIKit
 
+import FirebaseAuth
+
 class SignInViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var signInButton: UIButton!
@@ -29,6 +31,38 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         passwordTextField.delegate = self
         
         addObserverForKeyboardEvent()
+        
+    }
+    
+    @IBAction func signInButtonTapped(_ sender: UIButton) {
+        
+        let email = emailTextField.text ?? ""
+        
+        if email == "" {
+            
+            return
+            
+        }
+        
+        let password = passwordTextField.text ?? ""
+        
+        if password == "" {
+            
+            return
+            
+        }
+        
+        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+            
+            if let error = error {
+                
+                return
+                
+            }
+            
+            print("\(user) is sign in .")
+            
+        }
         
     }
     

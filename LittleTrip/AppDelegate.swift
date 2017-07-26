@@ -13,12 +13,33 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
+    var handle: AuthStateDidChangeListenerHandle?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         FirebaseApp.configure()
+        
+        Auth.auth().addStateDidChangeListener { auth, user in
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+            
+            if let user = user {
+                
+                let nextViewController = storyboard.instantiateViewController(withIdentifier: "MainFlow")
+                
+                self.window?.rootViewController = nextViewController
+                
+            } else {
+                
+                let nextViewController = storyboard.instantiateViewController(withIdentifier: "LoginFlow")
+                
+                self.window?.rootViewController = nextViewController
+                
+            }
+            
+        }
         
         return true
     }
