@@ -9,8 +9,6 @@
 import UIKit
 
 class SignInViewController: UIViewController, UITextFieldDelegate {
-
-    @IBOutlet var mainContentStackView: UIStackView!
     
     @IBOutlet var signInButton: UIButton!
 
@@ -68,7 +66,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     
     func keyboardWillHide(notification: NSNotification) {
 
-        scrollView.contentInset = UIEdgeInsets.zero
+        scrollView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
     
     }
 
