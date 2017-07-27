@@ -14,6 +14,8 @@
 		9821C5071F28245A0024B9D4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9821C5061F28245A0024B9D4 /* SignUpViewController.swift */; };
 		986438E11F27349A001DABC6 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986438E01F27349A001DABC6 /* SignInViewController.swift */; };
 		986438E91F28207A001DABC6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 986438E81F28207A001DABC6 /* GoogleService-Info.plist */; };
+		98D11F561F2972C600A157BF /* ScheduleMainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D11F551F2972C600A157BF /* ScheduleMainTableViewController.swift */; };
+		98D11F581F2974E500A157BF /* ScheduleMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D11F571F2974E500A157BF /* ScheduleMainTableViewCell.swift */; };
 		DA0586470B0A67F6D9D3E96C /* Pods_LittleTrip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C927CC867582E8F80889C170 /* Pods_LittleTrip.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +31,8 @@
 		9821C5061F28245A0024B9D4 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		986438E01F27349A001DABC6 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		986438E81F28207A001DABC6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		98D11F551F2972C600A157BF /* ScheduleMainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleMainTableViewController.swift; sourceTree = "<group>"; };
+		98D11F571F2974E500A157BF /* ScheduleMainTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleMainTableViewCell.swift; sourceTree = "<group>"; };
 		C927CC867582E8F80889C170 /* Pods_LittleTrip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LittleTrip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -85,6 +89,7 @@
 				9821C5011F2821AB0024B9D4 /* AppDelegate */,
 				986438DE1F273455001DABC6 /* SignIn */,
 				9821C5051F2824320024B9D4 /* SignUp */,
+				98D11F541F29726100A157BF /* ScheduleMain */,
 				9821C5031F2822250024B9D4 /* Storyboard */,
 				9821C5041F2822360024B9D4 /* Plist */,
 				9821C5021F2822140024B9D4 /* Assets */,
@@ -140,6 +145,15 @@
 				986438E01F27349A001DABC6 /* SignInViewController.swift */,
 			);
 			name = SignIn;
+			sourceTree = "<group>";
+		};
+		98D11F541F29726100A157BF /* ScheduleMain */ = {
+			isa = PBXGroup;
+			children = (
+				98D11F551F2972C600A157BF /* ScheduleMainTableViewController.swift */,
+				98D11F571F2974E500A157BF /* ScheduleMainTableViewCell.swift */,
+			);
+			name = ScheduleMain;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,7 +282,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9821C5071F28245A0024B9D4 /* SignUpViewController.swift in Sources */,
+				98D11F561F2972C600A157BF /* ScheduleMainTableViewController.swift in Sources */,
 				986438E11F27349A001DABC6 /* SignInViewController.swift in Sources */,
+				98D11F581F2974E500A157BF /* ScheduleMainTableViewCell.swift in Sources */,
 				980C55FE1F27324B007B4810 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
