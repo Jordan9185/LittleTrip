@@ -29,6 +29,8 @@ struct Schedule {
     
     let uid: String
     
+    let imageUrl: String
+    
 }
 
 class ScheduleMainTableViewController: UITableViewController {
@@ -69,7 +71,8 @@ class ScheduleMainTableViewController: UITableViewController {
                             title: value["title"] as! String,
                             days: value["days"] as! Int,
                             createdDate: value["createdDate"] as! String,
-                            uid: value["uid"] as! String
+                            uid: value["uid"] as! String,
+                            imageUrl: value["imageURL"] as! String
                         )
                         
                     )
@@ -112,24 +115,9 @@ class ScheduleMainTableViewController: UITableViewController {
 
         cell.titleLabel.text = schedules[indexPath.row].title
         
-        let storage = Storage.storage()
+        cell.backgroundImageView.contentMode = .scaleAspectFill
         
-        let downloadRef = storage.reference(withPath: "ScheduleImage/father-656734_1920.jpg")
-        
-        downloadRef.getMetadata { (metadata, error) in
-            
-            if let error = error {
-                
-                return
-                
-            } else {
-                
-                cell.backgroundImageView.contentMode = .scaleAspectFill
-                
-                cell.backgroundImageView.sd_setImage(with: metadata?.downloadURL()?.absoluteURL)
-                
-            }
-        }
+        cell.backgroundImageView.sd_setImage(with: URL(string: schedules[indexPath.row].imageUrl))
         
         return cell
         

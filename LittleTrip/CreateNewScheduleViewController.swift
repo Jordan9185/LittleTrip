@@ -91,16 +91,38 @@ class CreateNewScheduleViewController: UIViewController, UIImagePickerController
 
         let key = ref.childByAutoId().key
         
-        let schedule = [
-            "title": scheduleName,
-            "days": Int(days),
-            "createdDate": date,
-            "uid": Auth.auth().currentUser?.uid
-        ] as [String : Any]
-        
-        let childUpdates = ["/\(key)": schedule]
-        
-        ref.updateChildValues(childUpdates)
+        if let imageData = UIImageJPEGRepresentation(willUploadImageView.image!, 0.7) {
+            
+            let metaData = StorageMetadata()
+            
+            metaData.contentType = "image/jpeg"
+            
+            let imageRef = Storage.storage().reference().child("ScheduleImage/\(key).jpg")
+            
+            imageRef.putData(imageData, metadata: metaData, completion: { (metaData, error) in
+                
+                if let error = error {
+                    
+                    print("Upload Image fail: \(error)")
+                    
+                    return
+                    
+                }
+                
+                let schedule = [
+                    "title": scheduleName,
+                    "days": Int(days),
+                    "createdDate": date,
+                    "uid": Auth.auth().currentUser?.uid,
+                    "imageURL": metaData!.downloadURL()!.absoluteString
+                    ] as [String : Any]
+                
+                let childUpdates = ["/\(key)": schedule]
+                
+                ref.updateChildValues(childUpdates)
+                
+            })
+        }
         
         dismiss(animated: true, completion: nil)
         
