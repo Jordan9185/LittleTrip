@@ -279,17 +279,17 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XRF-hO-bKD">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="179.5"/>
                                         </imageView>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yRC-NP-xei">
+                                        <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yRC-NP-xei">
                                             <rect key="frame" x="0.0" y="129" width="375" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XYc-DE-KgA">
                                                     <rect key="frame" x="20" y="0.0" width="335" height="50"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="XYc-DE-KgA" firstAttribute="top" secondItem="yRC-NP-xei" secondAttribute="top" id="ZAe-tR-AbO"/>
                                                 <constraint firstAttribute="trailing" secondItem="XYc-DE-KgA" secondAttribute="trailing" constant="20" id="iAV-hT-nYs"/>
@@ -328,6 +328,9 @@
                             <color key="tintColor" red="0.038198027760000003" green="0.059342540800000003" blue="0.081147052349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="schedulesTableView" destination="5F7-fw-fY1" id="Tul-XN-khA"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xfq-OH-ERm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
