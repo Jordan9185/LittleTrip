@@ -27,6 +27,8 @@ struct Schedule {
     
     let createdDate: String
     
+    let uid: String
+    
 }
 
 class ScheduleMainTableViewController: UITableViewController {
@@ -47,25 +49,34 @@ class ScheduleMainTableViewController: UITableViewController {
     
         var scheduleRef: DatabaseReference!
         
+
+        
         scheduleRef = Database.database().reference().child("schedule")
         
         scheduleRef.observe(DataEventType.value, with: { (snapshot) in
+
+            var localSchedules: [Schedule] = []
             
-            if let schedules = snapshot.value as? [[String:Any]] {
+            if let schedules = snapshot.value as? [String:Any] {
                 
                 for schedule in schedules {
                     
-                    self.schedules.append(
+                    let value = schedule.value as! [String:Any]
+                    
+                    localSchedules.append(
                         
                         Schedule(
-                            title: schedule["title"] as! String,
-                            days: schedule["days"] as! Int,
-                            createdDate: schedule["createdDate"] as! String
+                            title: value["title"] as! String,
+                            days: value["days"] as! Int,
+                            createdDate: value["createdDate"] as! String,
+                            uid: value["uid"] as! String
                         )
                         
                     )
                     
                 }
+                
+                self.schedules = localSchedules
                 
                 self.schedulesTableView.reloadData()
                 
@@ -101,7 +112,6 @@ class ScheduleMainTableViewController: UITableViewController {
 
         cell.titleLabel.text = schedules[indexPath.row].title
         
-        
         let storage = Storage.storage()
         
         let downloadRef = storage.reference(withPath: "ScheduleImage/father-656734_1920.jpg")
@@ -120,7 +130,6 @@ class ScheduleMainTableViewController: UITableViewController {
                 
             }
         }
-        
         
         return cell
         

@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import FirebaseDatabase
+import FirebaseStorage
+import FirebaseAuth
 
 class CreateNewScheduleViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -17,6 +20,8 @@ class CreateNewScheduleViewController: UIViewController, UIImagePickerController
     @IBOutlet var dateTextField: UITextField!
     
     @IBOutlet var daysTextField: UITextField!
+    
+    let dateFormatter = DateFormatter()
     
     override func viewDidLoad() {
         
@@ -39,16 +44,14 @@ class CreateNewScheduleViewController: UIViewController, UIImagePickerController
         dateTextField.inputView = datePicker
         
         dateTextField.inputAccessoryView = toolbar
-
-    }
-    
-    func doneButtonTapped() {
-        
-        let dateFormatter = DateFormatter()
         
         dateFormatter.dateFormat = "yyyy-MM-dd"
         
         dateTextField.text = dateFormatter.string(from: Date())
+
+    }
+    
+    func doneButtonTapped() {
         
         dateTextField.resignFirstResponder()
         
@@ -72,7 +75,34 @@ class CreateNewScheduleViewController: UIViewController, UIImagePickerController
     
     @IBAction func uploadButtonTapped(_ sender: UIBarButtonItem) {
         
+        let scheduleName = scheduleNameTextField.text ?? ""
+        
+        let date = dateTextField.text ?? ""
+        
+        let days = daysTextField.text ?? ""
+        
+        if scheduleName == "" { return }
+        
+        if date == "" { return }
+        
+        if days == "" { return }
+        
+        let ref = Database.database().reference().child("schedule")
 
+        let key = ref.childByAutoId().key
+        
+        let schedule = [
+            "title": scheduleName,
+            "days": Int(days),
+            "createdDate": date,
+            "uid": Auth.auth().currentUser?.uid
+        ] as [String : Any]
+        
+        let childUpdates = ["/\(key)": schedule]
+        
+        ref.updateChildValues(childUpdates)
+        
+        dismiss(animated: true, completion: nil)
         
     }
     
