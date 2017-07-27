@@ -413,7 +413,11 @@
                                                 <action selector="cancelButtonTapped:" destination="pvo-8E-nfl" id="JGX-dO-jSz"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="CcK-p1-tyy"/>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="CcK-p1-tyy">
+                                            <connections>
+                                                <action selector="uploadButtonTapped:" destination="pvo-8E-nfl" id="gcY-Im-6fz"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -429,6 +433,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="dateTextField" destination="rqm-VJ-7Y8" id="9iu-cL-bXR"/>
+                        <outlet property="daysTextField" destination="h9U-b4-iof" id="HFb-9o-vDq"/>
+                        <outlet property="scheduleNameTextField" destination="O51-SU-v00" id="fxb-PK-QUf"/>
                         <outlet property="willUploadImageView" destination="gHJ-Jx-Tbb" id="rnK-mD-GIr"/>
                     </connections>
                 </viewController>
