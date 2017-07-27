@@ -29,7 +29,7 @@ class ScheduleMainTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -46,6 +46,20 @@ class ScheduleMainTableViewController: UITableViewController {
         return cell
     }
 
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        switch section {
+            
+        case 0: return "My schedule"
+            
+        case 1: return "I am joining"
+        
+        default: return ""
+            
+        }
+        
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
