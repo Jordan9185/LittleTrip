@@ -107,11 +107,17 @@ class ScheduleMainTableViewController: UITableViewController {
         let downloadRef = storage.reference(withPath: "ScheduleImage/father-656734_1920.jpg")
         
         downloadRef.getMetadata { (metadata, error) in
+            
             if let error = error {
+                
                 return
+                
             } else {
-                cell.backgroundImageView.contentMode = .scaleToFill
+                
+                cell.backgroundImageView.contentMode = .scaleAspectFill
+                
                 cell.backgroundImageView.sd_setImage(with: metadata?.downloadURL()?.absoluteURL)
+                
             }
         }
         
