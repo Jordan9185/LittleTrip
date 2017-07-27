@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseDatabase
+import FirebaseStorage
 
 enum scheduleSection: Int {
     
@@ -31,12 +32,20 @@ class ScheduleMainTableViewController: UITableViewController {
 
     var schedules: [Schedule] = []
     
+    var testImage: UIImage!
+    
     @IBOutlet var schedulesTableView: UITableView!
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
+        getScheduleDataOnServer()
+
+    }
+
+    func getScheduleDataOnServer() {
+    
         var scheduleRef: DatabaseReference!
         
         scheduleRef = Database.database().reference().child("schedule")
@@ -44,7 +53,21 @@ class ScheduleMainTableViewController: UITableViewController {
         scheduleRef.observe(DataEventType.value, with: { (snapshot) in
             
             if let schedules = snapshot.value as? [[String:Any]] {
-            
+                
+                let storage = Storage.storage()
+                
+                let downloadRef = storage.reference(withPath: "ScheduleImage/father-656734_1920.jpg")
+                
+                downloadRef.getData(maxSize: 1 * 1024 * 1024) { (data, error) in
+                    
+                    if let error = error {
+                        
+                        return
+                        
+                    }
+                    
+                    self.testImage = UIImage(data: data!)
+
                 for schedule in schedules {
                     
                     self.schedules.append(
@@ -61,11 +84,15 @@ class ScheduleMainTableViewController: UITableViewController {
                 
                 self.schedulesTableView.reloadData()
                 
+    
+                }
+                
             }
             
         })
+        
     }
-
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -91,6 +118,8 @@ class ScheduleMainTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "scheduleCell", for: indexPath) as! ScheduleMainTableViewCell
 
         cell.titleLabel.text = schedules[indexPath.row].title
+        
+        cell.backgroundImageView.image = self.testImage
         
         return cell
         
