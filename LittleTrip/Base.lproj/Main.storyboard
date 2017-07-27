@@ -276,7 +276,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XRF-hO-bKD">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="XRF-hO-bKD">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="179.5"/>
                                         </imageView>
                                         <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yRC-NP-xei">
@@ -335,6 +335,7 @@
     </scenes>
     <resources>
         <image name="landing" width="960" height="639"/>
+        <image name="placeholder" width="640" height="640"/>
         <image name="signup" width="640" height="423"/>
     </resources>
 </document>

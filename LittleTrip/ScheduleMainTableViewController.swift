@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseDatabase
 import FirebaseStorage
+import SDWebImage
 
 enum scheduleSection: Int {
     
@@ -32,8 +33,6 @@ class ScheduleMainTableViewController: UITableViewController {
 
     var schedules: [Schedule] = []
     
-    var testImage: UIImage!
-    
     @IBOutlet var schedulesTableView: UITableView!
     
     override func viewDidLoad() {
@@ -54,20 +53,6 @@ class ScheduleMainTableViewController: UITableViewController {
             
             if let schedules = snapshot.value as? [[String:Any]] {
                 
-                let storage = Storage.storage()
-                
-                let downloadRef = storage.reference(withPath: "ScheduleImage/father-656734_1920.jpg")
-                
-                downloadRef.getData(maxSize: 1 * 1024 * 1024) { (data, error) in
-                    
-                    if let error = error {
-                        
-                        return
-                        
-                    }
-                    
-                    self.testImage = UIImage(data: data!)
-
                 for schedule in schedules {
                     
                     self.schedules.append(
@@ -83,9 +68,6 @@ class ScheduleMainTableViewController: UITableViewController {
                 }
                 
                 self.schedulesTableView.reloadData()
-                
-    
-                }
                 
             }
             
@@ -119,7 +101,20 @@ class ScheduleMainTableViewController: UITableViewController {
 
         cell.titleLabel.text = schedules[indexPath.row].title
         
-        cell.backgroundImageView.image = self.testImage
+        
+        let storage = Storage.storage()
+        
+        let downloadRef = storage.reference(withPath: "ScheduleImage/father-656734_1920.jpg")
+        
+        downloadRef.getMetadata { (metadata, error) in
+            if let error = error {
+                return
+            } else {
+                cell.backgroundImageView.contentMode = .scaleToFill
+                cell.backgroundImageView.sd_setImage(with: metadata?.downloadURL()?.absoluteURL)
+            }
+        }
+        
         
         return cell
         
