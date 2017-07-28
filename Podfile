@@ -13,5 +13,7 @@ target 'LittleTrip' do
 	pod 'Firebase/Database'
 	pod 'SDWebImage/WebP'
 	pod 'SwiftLint'
-
+	pod 'GoogleMaps'
+  	pod 'GooglePlaces'
+  	
 end
