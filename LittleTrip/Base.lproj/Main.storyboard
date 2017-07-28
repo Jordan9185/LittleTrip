@@ -309,7 +309,7 @@
                                 <connections>
                                     <outlet property="backgroundImageView" destination="XRF-hO-bKD" id="snT-2Q-Exw"/>
                                     <outlet property="titleLabel" destination="XYc-DE-KgA" id="cOG-We-4su"/>
-                                    <segue destination="bkv-Eq-tin" kind="show" id="idb-mh-dwf"/>
+                                    <segue destination="bkv-Eq-tin" kind="show" identifier="moveToDailyTabBarController" id="idb-mh-dwf"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -473,10 +473,10 @@
             </objects>
             <point key="canvasLocation" x="1966" y="747"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Daily Tab Bar View Controller-->
         <scene sceneID="Rd8-hb-fAL">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="bkv-Eq-tin" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="DailyTabBarViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bkv-Eq-tin" customClass="DailyTabBarViewController" customModule="LittleTrip" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="JpA-Gj-j7v">
                         <autoresizingMask key="autoresizingMask"/>

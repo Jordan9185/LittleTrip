@@ -119,6 +119,8 @@ class ScheduleMainTableViewController: UITableViewController {
         
         cell.backgroundImageView.sd_setImage(with: URL(string: schedules[indexPath.row].imageUrl))
         
+        cell.tag = indexPath.row
+        
         return cell
         
     }
@@ -132,6 +134,20 @@ class ScheduleMainTableViewController: UITableViewController {
         case scheduleSection.iAmJoining.rawValue : return "I am joining"
         
         default: return ""
+            
+        }
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "moveToDailyTabBarController" {
+            
+            let cell = sender as! ScheduleMainTableViewCell
+            
+            let nextViewController = segue.destination as! DailyTabBarViewController
+            
+            nextViewController.schedule = schedules[cell.tag]
             
         }
         
