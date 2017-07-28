@@ -338,33 +338,42 @@
             <point key="canvasLocation" x="1118" y="958"/>
         </scene>
         <!--Daily Schedule-->
-        <scene sceneID="lJa-dG-eWh">
+        <scene sceneID="Kbn-Rs-Iqr">
             <objects>
-                <tableViewController id="kxZ-fA-e4T" customClass="DailyScheduleTableViewController" customModule="LittleTrip" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="92" sectionHeaderHeight="28" sectionFooterHeight="28" id="JkE-tw-hcR">
+                <tableViewController id="Ab6-au-qxe" customClass="DailyScheduleTableViewController" customModule="LittleTrip" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="101" sectionHeaderHeight="28" sectionFooterHeight="28" id="uFK-ab-xkv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="92" id="6j3-x6-neT">
-                                <rect key="frame" x="0.0" y="28" width="375" height="92"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dailyScheduleCell" rowHeight="101" id="YoK-vc-qra" customClass="DailyScheduleTableViewCell" customModule="LittleTrip" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="101"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6j3-x6-neT" id="GrS-PV-Bar">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="92"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YoK-vc-qra" id="C3k-qk-OZh">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="101"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5LY-m5-nrB">
+                                            <rect key="frame" x="143" y="29" width="42" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="kxZ-fA-e4T" id="QKR-hS-Uu0"/>
-                            <outlet property="delegate" destination="kxZ-fA-e4T" id="KwZ-9q-TTk"/>
+                            <outlet property="dataSource" destination="Ab6-au-qxe" id="noV-rx-xLy"/>
+                            <outlet property="delegate" destination="Ab6-au-qxe" id="omd-un-J8d"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Daily Schedule" id="8fj-Ii-0q4"/>
+                    <navigationItem key="navigationItem" title="Daily Schedule" id="Kbb-Jg-I2t"/>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GE7-rR-cMt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bFC-bY-a7G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3190" y="1520"/>
+            <point key="canvasLocation" x="3189.5999999999999" y="1519.7901049475263"/>
         </scene>
         <!--New Schedule-->
         <scene sceneID="rBu-Lu-lf0">
@@ -504,7 +513,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="kxZ-fA-e4T" kind="relationship" relationship="rootViewController" id="dri-C2-3df"/>
+                        <segue destination="Ab6-au-qxe" kind="relationship" relationship="rootViewController" id="Rno-fs-hyG"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5DZ-dp-QPV" userLabel="First Responder" sceneMemberID="firstResponder"/>
