@@ -17,6 +17,15 @@
   },
   "dailySchedule" : {
   	"-Kq2zhx_eFfSkUlS1VqG" : {
+  		"0" : [
+  			{
+  				"startTime" : "08:00",
+  				"endTime" : "09:00",
+  				"locationName" : "烏石漁港",
+  				"latitude" : "24.866710",
+  				"longitude" : "121.836982"
+  			}
+  		],
   		"1" : [
   			{
   				"startTime" : "08:00",
@@ -27,15 +36,6 @@
   			}
   		],
   		"2" : [
-  			{
-  				"startTime" : "08:00",
-  				"endTime" : "09:00",
-  				"locationName" : "烏石漁港",
-  				"latitude" : "24.866710",
-  				"longitude" : "121.836982"
-  			}
-  		],
-  		"3" : [
   			{
   				"startTime" : "08:00",
   				"endTime" : "09:00",
