@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="iU7-tR-31M">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="iU7-tR-31M">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -259,7 +259,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eSN-hj-Fr5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="146" y="737"/>
+            <point key="canvasLocation" x="146" y="958"/>
         </scene>
         <!--My Schedule-->
         <scene sceneID="GdE-ax-fQa">
@@ -309,6 +309,7 @@
                                 <connections>
                                     <outlet property="backgroundImageView" destination="XRF-hO-bKD" id="snT-2Q-Exw"/>
                                     <outlet property="titleLabel" destination="XYc-DE-KgA" id="cOG-We-4su"/>
+                                    <segue destination="bkv-Eq-tin" kind="show" id="idb-mh-dwf"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -334,7 +335,36 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xfq-OH-ERm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1085.5999999999999" y="735.38230884557731"/>
+            <point key="canvasLocation" x="1118" y="958"/>
+        </scene>
+        <!--Daily Schedule-->
+        <scene sceneID="lJa-dG-eWh">
+            <objects>
+                <tableViewController id="kxZ-fA-e4T" customClass="DailyScheduleTableViewController" customModule="LittleTrip" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="92" sectionHeaderHeight="28" sectionFooterHeight="28" id="JkE-tw-hcR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="92" id="6j3-x6-neT">
+                                <rect key="frame" x="0.0" y="28" width="375" height="92"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6j3-x6-neT" id="GrS-PV-Bar">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="92"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="kxZ-fA-e4T" id="QKR-hS-Uu0"/>
+                            <outlet property="delegate" destination="kxZ-fA-e4T" id="KwZ-9q-TTk"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Daily Schedule" id="8fj-Ii-0q4"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GE7-rR-cMt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3190" y="1520"/>
         </scene>
         <!--New Schedule-->
         <scene sceneID="rBu-Lu-lf0">
@@ -441,7 +471,121 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1wR-i4-hRv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1965.5999999999999" y="735.38230884557731"/>
+            <point key="canvasLocation" x="1966" y="747"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="Rd8-hb-fAL">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="bkv-Eq-tin" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="JpA-Gj-j7v">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="NJa-gb-grj" kind="relationship" relationship="viewControllers" id="r8C-QL-qna"/>
+                        <segue destination="WEI-i3-E2x" kind="relationship" relationship="viewControllers" id="uah-nX-dhs"/>
+                        <segue destination="MSH-Ij-ULG" kind="relationship" relationship="viewControllers" id="06Y-eP-Q9D"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V9K-rd-VHG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1118" y="2293"/>
+        </scene>
+        <!--Daily Schedule-->
+        <scene sceneID="k1P-q7-Ido">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NJa-gb-grj" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Daily Schedule" id="bkJ-fc-SmX"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AgQ-lx-zTQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="kxZ-fA-e4T" kind="relationship" relationship="rootViewController" id="dri-C2-3df"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5DZ-dp-QPV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2105" y="1520"/>
+        </scene>
+        <!--Map-->
+        <scene sceneID="S7o-hZ-9Q5">
+            <objects>
+                <viewController id="wj1-Te-56p" customClass="MapViewController" customModule="LittleTrip" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="sae-Dz-fyJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="hFO-4W-oeN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zsu-1r-gep">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Map" id="OAN-2G-IRZ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g2f-hB-fF5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3190" y="2176"/>
+        </scene>
+        <!--Baggage list-->
+        <scene sceneID="cta-OB-hCt">
+            <objects>
+                <viewController id="ag8-JZ-gSm" customClass="BaggageListViewController" customModule="LittleTrip" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="slk-Xk-JFe"/>
+                        <viewControllerLayoutGuide type="bottom" id="gbj-j8-SbL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OAm-Sg-ml4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Baggage list" id="oW7-zB-eGs"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4sv-b7-b8Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3190" y="2848"/>
+        </scene>
+        <!--Map-->
+        <scene sceneID="v27-6G-cBx">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="WEI-i3-E2x" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Map" id="lWI-tT-4PG"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fbn-4P-a33">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="wj1-Te-56p" kind="relationship" relationship="rootViewController" id="2Ko-Cc-Adk"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="al9-CO-3uu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2105" y="2178"/>
+        </scene>
+        <!--Baggage list-->
+        <scene sceneID="SZc-uC-eEj">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MSH-Ij-ULG" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Baggage list" id="9vP-pK-VUG"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="SrV-kL-sNN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ag8-JZ-gSm" kind="relationship" relationship="rootViewController" id="wbk-Wa-e6h"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pd3-nS-R14" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2105" y="2849"/>
         </scene>
     </scenes>
     <resources>
