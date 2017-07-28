@@ -496,7 +496,7 @@
         <scene sceneID="k1P-q7-Ido">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NJa-gb-grj" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Daily Schedule" id="bkJ-fc-SmX"/>
+                    <tabBarItem key="tabBarItem" title="Daily Schedule" image="dailyschedule" id="bkJ-fc-SmX"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="AgQ-lx-zTQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -553,7 +553,7 @@
         <scene sceneID="v27-6G-cBx">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="WEI-i3-E2x" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Map" id="lWI-tT-4PG"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="map" id="lWI-tT-4PG"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fbn-4P-a33">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -572,7 +572,7 @@
         <scene sceneID="SZc-uC-eEj">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MSH-Ij-ULG" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Baggage list" id="9vP-pK-VUG"/>
+                    <tabBarItem key="tabBarItem" title="Baggage list" image="baglist" selectedImage="baglist-selected" id="9vP-pK-VUG"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="SrV-kL-sNN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -589,7 +589,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="baglist" width="32" height="32"/>
+        <image name="baglist-selected" width="32" height="32"/>
+        <image name="dailyschedule" width="32" height="32"/>
         <image name="landing" width="960" height="639"/>
+        <image name="map" width="32" height="32"/>
         <image name="placeholder" width="640" height="640"/>
         <image name="signup" width="640" height="423"/>
     </resources>
