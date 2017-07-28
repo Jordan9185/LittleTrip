@@ -24,18 +24,8 @@ class DailyScheduleTableViewController: UITableViewController {
         let dailyScheduleRef = Database.database().reference().child("dailySchedule").child(currentSchedule.scheduleId)
         
         dailyScheduleRef.observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            if let snapshotValues = snapshot.value as? [String:Any] {
-                
-                for snapshotValue in snapshotValues {
+            print(snapshot.value)
 
-                   
-                    if let dayValues = snapshotValue.value as? [[String:Any]] {
-                         print(dayValues)
-                    }
-                }
-                
-            }
         })
         
     }
