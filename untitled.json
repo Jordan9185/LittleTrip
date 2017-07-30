@@ -21,7 +21,14 @@
   			{
   				"startTime" : "08:00",
   				"endTime" : "09:00",
-  				"locationName" : "烏石漁港",
+  				"locationName" : "烏石漁港0",
+  				"latitude" : "24.866710",
+  				"longitude" : "121.836982"
+  			},
+  			{
+  				"startTime" : "09:00",
+  				"endTime" : "10:00",
+  				"locationName" : "烏石漁港01",
   				"latitude" : "24.866710",
   				"longitude" : "121.836982"
   			}
@@ -30,7 +37,7 @@
   			{
   				"startTime" : "08:00",
   				"endTime" : "09:00",
-  				"locationName" : "烏石漁港",
+  				"locationName" : "烏石漁港1",
   				"latitude" : "24.866710",
   				"longitude" : "121.836982"
   			}
@@ -39,7 +46,7 @@
   			{
   				"startTime" : "08:00",
   				"endTime" : "09:00",
-  				"locationName" : "烏石漁港",
+  				"locationName" : "烏石漁港2",
   				"latitude" : "24.866710",
   				"longitude" : "121.836982"
   			}

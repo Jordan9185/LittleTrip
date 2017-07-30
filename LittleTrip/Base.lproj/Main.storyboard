@@ -391,6 +391,11 @@
                                         <constraint firstAttribute="bottom" secondItem="3RE-b5-5vu" secondAttribute="bottom" id="ro0-GF-sPJ"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="endTimeLabel" destination="dX6-UK-QfQ" id="y20-S0-tnS"/>
+                                    <outlet property="locationNameButton" destination="xkl-Re-4ms" id="oPo-lf-9sE"/>
+                                    <outlet property="startTimeLabel" destination="Bnn-K5-oeQ" id="JXi-O7-pP7"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -399,6 +404,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Daily Schedule" id="Kbb-Jg-I2t"/>
+                    <connections>
+                        <outlet property="dailySchedulesTableView" destination="uFK-ab-xkv" id="gNW-kA-NZ9"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bFC-bY-a7G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

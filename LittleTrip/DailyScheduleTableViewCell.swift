@@ -10,6 +10,12 @@ import UIKit
 
 class DailyScheduleTableViewCell: UITableViewCell {
 
+    @IBOutlet var startTimeLabel: UILabel!
+    
+    @IBOutlet var endTimeLabel: UILabel!
+    
+    @IBOutlet var locationNameButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
