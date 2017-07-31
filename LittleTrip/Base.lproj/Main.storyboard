@@ -380,6 +380,9 @@
                                                     <rect key="frame" x="80" y="0.0" width="295" height="100.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                     <state key="normal" title="Button"/>
+                                                    <connections>
+                                                        <action selector="pickLocationButtonTapped:" destination="Ab6-au-qxe" eventType="touchUpInside" id="Fxb-qC-UXS"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </stackView>

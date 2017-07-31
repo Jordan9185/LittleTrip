@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseDatabase
+import GooglePlacePicker
 
 struct DailySchedule {
     
@@ -155,12 +156,30 @@ class DailyScheduleTableViewController: UITableViewController {
     
     func createNewDailySchedule(sender: UIButton) {
         
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+    }
+    
+    @IBAction func pickLocationButtonTapped(_ sender: UIButton) {
         
-        let nextViewController = storyboard.instantiateViewController(withIdentifier: "CreateDailyScheduleViewController")
+        let config = GMSPlacePickerConfig(viewport: nil)
         
-        self.navigationController?.present(nextViewController, animated: true, completion: nil)
+        let placePicker = GMSPlacePicker(config: config)
         
+        placePicker.pickPlace(callback: { (place, error) -> Void in
+            if let error = error {
+                print("Pick Place error: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let place = place else {
+                print("No place selected")
+                return
+            }
+            
+            print("Place name \(place.name)")
+            print("Place address \(place.formattedAddress)")
+            print("Place attributions \(place.attributions)")
+            print("Place coordinate \(place.coordinate)")
+        })
     }
     
 }
