@@ -34,6 +34,8 @@ class DailyScheduleTableViewController: UITableViewController {
     
     var dailySchedules: [Int: [DailySchedule]] = [:]
     
+    var dailyScheduleRef: DatabaseReference?
+    
     @IBOutlet var dailySchedulesTableView: UITableView!
     
     override func viewDidLoad() {
@@ -50,9 +52,9 @@ class DailyScheduleTableViewController: UITableViewController {
     
     func catchDailySchedules() {
         
-        let dailyScheduleRef = Database.database().reference().child("dailySchedule").child(currentSchedule.scheduleId)
+        self.dailyScheduleRef = Database.database().reference().child("dailySchedule").child(currentSchedule.scheduleId)
         
-        dailyScheduleRef.observeSingleEvent(of: .value, with: { (snapshot) in
+        self.dailyScheduleRef?.observeSingleEvent(of: .value, with: { (snapshot) in
             
             if let snapshotValues = snapshot.value as? [[[String:Any]]] {
                 
@@ -191,9 +193,33 @@ class DailyScheduleTableViewController: UITableViewController {
             
             self.dailySchedules[indexPath.section]?[indexPath.row] = currentDailySchedule!
             
+            self.syncDailySchedulesfromLocal(
+                indexPath: indexPath,
+                placeName: place.name ,
+                placeCoordinate: place.coordinate
+            )
+            
             self.dailySchedulesTableView.reloadData()
             
         })
+        
+    }
+    
+    func syncDailySchedulesfromLocal(indexPath: IndexPath, placeName: String, placeCoordinate: CLLocationCoordinate2D) {
+        
+        let updateDic: [String:Any] = {
+            [
+                "endTime" : "09:00",
+                "latitude" : "\(placeCoordinate.latitude)",
+                "locationName" : placeName,
+                "longitude" : "\(placeCoordinate.longitude)",
+                "startTime" : "08:00"
+            ]
+        }()
+        
+        let currentDailyScheduleRef = self.dailyScheduleRef?.child("\(indexPath.section)").child("\(indexPath.row)")
+        
+        currentDailyScheduleRef?.updateChildValues(updateDic)
         
     }
     
