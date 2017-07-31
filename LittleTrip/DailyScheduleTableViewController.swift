@@ -54,7 +54,7 @@ class DailyScheduleTableViewController: UITableViewController {
         
         self.dailyScheduleRef = Database.database().reference().child("dailySchedule").child(currentSchedule.scheduleId)
         
-        self.dailyScheduleRef?.observeSingleEvent(of: .value, with: { (snapshot) in
+        self.dailyScheduleRef?.observe(.value, with: { (snapshot) in
             
             if let snapshotValues = snapshot.value as? [[[String:Any]]] {
                 
@@ -163,6 +163,26 @@ class DailyScheduleTableViewController: UITableViewController {
     }
     
     func createNewDailySchedule(sender: UIButton) {
+        
+        let updateDic: [String:Any] = {
+            [
+                "endTime" : "09:00",
+                "latitude" : "21.0",
+                "locationName" : "尚未選擇",
+                "longitude" : "125.0",
+                "startTime" : "08:00"
+            ]
+        }()
+        
+        let currentSection = sender.tag
+        
+        let newRow = (self.dailySchedules[currentSection]?.count)!
+        
+        let currentDailyScheduleRef = self.dailyScheduleRef?.child("\(currentSection)").child("\(newRow)")
+        
+        currentDailyScheduleRef?.updateChildValues(updateDic)
+        
+        self.dailySchedulesTableView.reloadData()
         
     }
     
