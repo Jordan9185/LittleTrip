@@ -23,6 +23,12 @@ struct DailySchedule {
     
 }
 
+enum DailyScheduleError: Error {
+    
+    case dailyDataOfSectionError
+    
+}
+
 class DailyScheduleTableViewController: UITableViewController {
 
     var currentSchedule: Schedule!
@@ -40,7 +46,7 @@ class DailyScheduleTableViewController: UITableViewController {
         currentSchedule = myTabBarViewController.schedule!
         
         catchDailySchedules()
-        
+
     }
     
     func catchDailySchedules() {
@@ -57,7 +63,7 @@ class DailyScheduleTableViewController: UITableViewController {
                     
                     for snapshotValues in snapshotValues[index] {
                         
-                        let d = DailySchedule(
+                        let newDailySchedule = DailySchedule(
                             locationName: snapshotValues["locationName"] as! String,
                             startTime: snapshotValues["startTime"] as! String,
                             endTime: snapshotValues["endTime"] as! String,
@@ -65,7 +71,7 @@ class DailyScheduleTableViewController: UITableViewController {
                             longitude: snapshotValues["longitude"] as! String
                         )
                         
-                        snapshotValuesArray.append(d)
+                        snapshotValuesArray.append(newDailySchedule)
                         
                     }
                     
@@ -121,4 +127,40 @@ class DailyScheduleTableViewController: UITableViewController {
         return "Day \(section + 1)" // 0-based
         
     }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.dailySchedulesTableView.frame.width, height: 40))
+        
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.dailySchedulesTableView.frame.width, height: 40))
+        
+        button.setTitle("Add new daily schedule for day\(section + 1)...", for: .normal)
+        
+        button.backgroundColor = .black
+        
+        button.tag = section
+        
+        button.addTarget(self, action: #selector(createNewDailySchedule), for: .touchUpInside)
+        
+        footerView.addSubview(button)
+        
+        return footerView
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        
+        return 40
+        
+    }
+    
+    func createNewDailySchedule(sender: UIButton) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        
+        let nextViewController = storyboard.instantiateViewController(withIdentifier: "CreateDailyScheduleViewController")
+        
+        self.navigationController?.present(nextViewController, animated: true, completion: nil)
+        
+    }
+    
 }
