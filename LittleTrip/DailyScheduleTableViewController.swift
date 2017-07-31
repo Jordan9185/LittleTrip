@@ -12,15 +12,13 @@ import GooglePlacePicker
 
 struct DailySchedule {
     
-    let locationName: String
+    var locationName: String
     
-    let startTime: String
+    var startTime: String
     
-    let endTime: String
+    var endTime: String
     
-    let latitude: String
-    
-    let longitude: String
+    var coordinate: CLLocationCoordinate2D
     
 }
 
@@ -64,12 +62,18 @@ class DailyScheduleTableViewController: UITableViewController {
                     
                     for snapshotValues in snapshotValues[index] {
                         
+                        let latitude = snapshotValues["latitude"] as! String
+                        
+                        let longitude = snapshotValues["longitude"] as! String
+                        
                         let newDailySchedule = DailySchedule(
                             locationName: snapshotValues["locationName"] as! String,
                             startTime: snapshotValues["startTime"] as! String,
                             endTime: snapshotValues["endTime"] as! String,
-                            latitude: snapshotValues["latitude"] as! String,
-                            longitude: snapshotValues["longitude"] as! String
+                            coordinate: CLLocationCoordinate2D(
+                                latitude: Double(latitude)!,
+                                longitude: Double(longitude)!
+                            )
                         )
                         
                         snapshotValuesArray.append(newDailySchedule)
@@ -120,6 +124,8 @@ class DailyScheduleTableViewController: UITableViewController {
         
         cell.locationNameButton.setTitle(currentDailySchedule?.locationName, for: .normal)
         
+        cell.locationNameButton.tag = indexPath.section * 1000 + indexPath.row
+        
         return cell
     }
     
@@ -160,6 +166,10 @@ class DailyScheduleTableViewController: UITableViewController {
     
     @IBAction func pickLocationButtonTapped(_ sender: UIButton) {
         
+        let indexPath = IndexPath(row: sender.tag % 1000, section: sender.tag / 1000)
+        
+        var currentDailySchedule = self.dailySchedules[indexPath.section]?[indexPath.row]
+        
         let config = GMSPlacePickerConfig(viewport: nil)
         
         let placePicker = GMSPlacePicker(config: config)
@@ -175,11 +185,16 @@ class DailyScheduleTableViewController: UITableViewController {
                 return
             }
             
-            print("Place name \(place.name)")
-            print("Place address \(place.formattedAddress)")
-            print("Place attributions \(place.attributions)")
-            print("Place coordinate \(place.coordinate)")
+            currentDailySchedule?.locationName = place.name
+
+            currentDailySchedule?.coordinate = place.coordinate
+            
+            self.dailySchedules[indexPath.section]?[indexPath.row] = currentDailySchedule!
+            
+            self.dailySchedulesTableView.reloadData()
+            
         })
+        
     }
     
 }
