@@ -53,7 +53,7 @@ class DailyScheduleTableViewController: UITableViewController {
     func catchDailySchedules() {
         
         self.dailyScheduleRef = Database.database().reference().child("dailySchedule").child(currentSchedule.scheduleId)
-        
+
         self.dailyScheduleRef?.observe(.value, with: { (snapshot) in
             
             if let snapshotValues = snapshot.value as? [[[String:Any]]] {
@@ -90,6 +90,9 @@ class DailyScheduleTableViewController: UITableViewController {
                 
             }
             
+        }, withCancel: { (error) in
+            print("no ref")
+            print(error)
         })
     }
     

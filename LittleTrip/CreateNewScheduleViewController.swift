@@ -87,9 +87,13 @@ class CreateNewScheduleViewController: UIViewController, UIImagePickerController
         
         if days == "" { return }
         
-        let ref = Database.database().reference().child("schedule")
+        let ref = Database.database().reference()
+        
+        let scheduleRef = ref.child("schedule")
 
-        let key = ref.childByAutoId().key
+        let dailyScheduleRef = ref.child("dailySchedule")
+        
+        let key = scheduleRef.childByAutoId().key
         
         if let imageData = UIImageJPEGRepresentation(willUploadImageView.image!, 0.7) {
             
@@ -119,7 +123,23 @@ class CreateNewScheduleViewController: UIViewController, UIImagePickerController
                 
                 let childUpdates = ["/\(key)": schedule]
                 
-                ref.updateChildValues(childUpdates)
+                scheduleRef.updateChildValues(childUpdates)
+                
+                let daysInt = Int(days)!
+                
+                for day in 0..<daysInt {
+                    
+                    let newDailyScheduleDic = [
+                        "endTime" : "09:00",
+                        "latitude" : "24.866710",
+                        "locationName" : "尚未選擇",
+                        "longitude" : "121.836982",
+                        "startTime" : "08:00"
+                        ] as [String : Any]
+                    
+                    dailyScheduleRef.child(key).updateChildValues(["\(day)": ["0": newDailyScheduleDic]])
+                    
+                }
                 
             })
         }
