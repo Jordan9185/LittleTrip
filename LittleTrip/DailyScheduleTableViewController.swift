@@ -22,12 +22,6 @@ struct DailySchedule {
     
 }
 
-enum DailyScheduleError: Error {
-    
-    case dailyDataOfSectionError
-    
-}
-
 class DailyScheduleTableViewController: UITableViewController {
 
     var currentSchedule: Schedule!
@@ -123,13 +117,19 @@ class DailyScheduleTableViewController: UITableViewController {
 
         let currentDailySchedule = self.dailySchedules[indexPath.section]?[indexPath.row]
         
-        cell.startTimeLabel.text = currentDailySchedule?.startTime
+        cell.startTimeTextField.text = currentDailySchedule?.startTime
         
-        cell.endTimeLabel.text = currentDailySchedule?.endTime
+        cell.endTimeTextField.text = currentDailySchedule?.endTime
         
         cell.locationNameButton.setTitle(currentDailySchedule?.locationName, for: .normal)
         
         cell.locationNameButton.tag = indexPath.section * 1000 + indexPath.row
+        
+        cell.startTimeTextField.tag = indexPath.section * 1000 + indexPath.row
+        
+        cell.endTimeTextField.tag = indexPath.section * 1000 + indexPath.row
+        
+        cell.dailyScheduleRef = self.dailyScheduleRef
         
         return cell
     }
@@ -266,3 +266,4 @@ class DailyScheduleTableViewController: UITableViewController {
     }
     
 }
+
