@@ -7,36 +7,103 @@
 //
 
 import UIKit
+import FirebaseDatabase
+
+struct DailySchedule {
+    
+    let locationName: String
+    
+    let startTime: String
+    
+    let endTime: String
+    
+    let latitude: String
+    
+    let longitude: String
+    
+}
+
+enum DailyScheduleError: Error {
+    
+    case dailyDataOfSectionError
+    
+}
 
 class DailyScheduleTableViewController: UITableViewController {
 
     var currentSchedule: Schedule!
     
+    var dailySchedules: [Int: [DailySchedule]] = [:]
+    
+    @IBOutlet var dailySchedulesTableView: UITableView!
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
 
         let myTabBarViewController = self.tabBarController as! DailyTabBarViewController
         
         currentSchedule = myTabBarViewController.schedule!
         
-        print(currentSchedule)
-    }
+        catchDailySchedules()
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-
+    
+    func catchDailySchedules() {
+        
+        let dailyScheduleRef = Database.database().reference().child("dailySchedule").child(currentSchedule.scheduleId)
+        
+        dailyScheduleRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            if let snapshotValues = snapshot.value as? [[[String:Any]]] {
+                
+                for (index , _) in snapshotValues.enumerated() {
+                    
+                    var snapshotValuesArray: [DailySchedule] = []
+                    
+                    for snapshotValues in snapshotValues[index] {
+                        
+                        let newDailySchedule = DailySchedule(
+                            locationName: snapshotValues["locationName"] as! String,
+                            startTime: snapshotValues["startTime"] as! String,
+                            endTime: snapshotValues["endTime"] as! String,
+                            latitude: snapshotValues["latitude"] as! String,
+                            longitude: snapshotValues["longitude"] as! String
+                        )
+                        
+                        snapshotValuesArray.append(newDailySchedule)
+                        
+                    }
+                    
+                    self.dailySchedules.updateValue(snapshotValuesArray, forKey: index)
+                    
+                }
+                
+                self.dailySchedulesTableView.reloadData()
+                
+            }
+            
+        })
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+
         return currentSchedule.days
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 1
+        
+        if let count = self.dailySchedules[section]?.count {
+            
+            return count
+            
+        } else {
+            
+            return 0
+        }
+
     }
 
     
@@ -44,8 +111,14 @@ class DailyScheduleTableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "dailyScheduleCell", for: indexPath) as! DailyScheduleTableViewCell
 
-        // Configure the cell...
-
+        let currentDailySchedule = self.dailySchedules[indexPath.section]?[indexPath.row]
+        
+        cell.startTimeLabel.text = currentDailySchedule?.startTime
+        
+        cell.endTimeLabel.text = currentDailySchedule?.endTime
+        
+        cell.locationNameButton.setTitle(currentDailySchedule?.locationName, for: .normal)
+        
         return cell
     }
     
@@ -54,50 +127,40 @@ class DailyScheduleTableViewController: UITableViewController {
         return "Day \(section + 1)" // 0-based
         
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.dailySchedulesTableView.frame.width, height: 40))
+        
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.dailySchedulesTableView.frame.width, height: 40))
+        
+        button.setTitle("Add new daily schedule for day\(section + 1)...", for: .normal)
+        
+        button.backgroundColor = .black
+        
+        button.tag = section
+        
+        button.addTarget(self, action: #selector(createNewDailySchedule), for: .touchUpInside)
+        
+        footerView.addSubview(button)
+        
+        return footerView
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        
+        return 40
+        
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    
+    func createNewDailySchedule(sender: UIButton) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        
+        let nextViewController = storyboard.instantiateViewController(withIdentifier: "CreateDailyScheduleViewController")
+        
+        self.navigationController?.present(nextViewController, animated: true, completion: nil)
+        
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }

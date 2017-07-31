@@ -353,15 +353,49 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="100.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5LY-m5-nrB">
-                                            <rect key="frame" x="143" y="29" width="42" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3RE-b5-5vu">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="100.5"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="UQZ-oa-LaK">
+                                                    <rect key="frame" x="0.0" y="0.0" width="80" height="100.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bnn-K5-oeQ">
+                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="50.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dX6-UK-QfQ">
+                                                            <rect key="frame" x="0.0" y="50.5" width="80" height="50"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="80" id="7DX-Di-DQL"/>
+                                                    </constraints>
+                                                </stackView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xkl-Re-4ms">
+                                                    <rect key="frame" x="80" y="0.0" width="295" height="100.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                    <state key="normal" title="Button"/>
+                                                </button>
+                                            </subviews>
+                                        </stackView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="3RE-b5-5vu" secondAttribute="trailing" id="Ize-9a-VSy"/>
+                                        <constraint firstItem="3RE-b5-5vu" firstAttribute="top" secondItem="C3k-qk-OZh" secondAttribute="top" id="T4f-Nz-8vS"/>
+                                        <constraint firstItem="3RE-b5-5vu" firstAttribute="leading" secondItem="C3k-qk-OZh" secondAttribute="leading" id="mrr-Le-OQ7"/>
+                                        <constraint firstAttribute="bottom" secondItem="3RE-b5-5vu" secondAttribute="bottom" id="ro0-GF-sPJ"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="endTimeLabel" destination="dX6-UK-QfQ" id="y20-S0-tnS"/>
+                                    <outlet property="locationNameButton" destination="xkl-Re-4ms" id="oPo-lf-9sE"/>
+                                    <outlet property="startTimeLabel" destination="Bnn-K5-oeQ" id="JXi-O7-pP7"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -370,10 +404,61 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Daily Schedule" id="Kbb-Jg-I2t"/>
+                    <connections>
+                        <outlet property="dailySchedulesTableView" destination="uFK-ab-xkv" id="gNW-kA-NZ9"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bFC-bY-a7G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3189.5999999999999" y="1519.7901049475263"/>
+        </scene>
+        <!--Create Daily Schedule View Controller-->
+        <scene sceneID="blQ-EH-trx">
+            <objects>
+                <viewController storyboardIdentifier="CreateDailyScheduleViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="isH-V8-snC" customClass="CreateDailyScheduleViewController" customModule="LittleTrip" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3O5-2u-4un"/>
+                        <viewControllerLayoutGuide type="bottom" id="MHp-6u-XZK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rOq-aN-mHy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cf0-2T-j3m">
+                                <rect key="frame" x="166" y="189" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ge2-GZ-88o">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Title" id="zi4-fw-Agf">
+                                        <barButtonItem key="leftBarButtonItem" title="Item" id="ZOB-9e-Rlu"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Item" id="R6k-ho-fsI"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="mi5-aK-Rbs" id="IRB-Ge-qqa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="G0y-GF-KQl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="mi5-aK-Rbs">
+                    <connections>
+                        <outlet property="delegate" destination="isH-V8-snC" id="wrN-G0-6cb"/>
+                        <outlet property="searchContentsController" destination="isH-V8-snC" id="9Cg-ko-WiP"/>
+                        <outlet property="searchResultsDataSource" destination="isH-V8-snC" id="Ope-FR-vUL"/>
+                        <outlet property="searchResultsDelegate" destination="isH-V8-snC" id="hTa-ep-Ru3"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="4159" y="1520"/>
         </scene>
         <!--New Schedule-->
         <scene sceneID="rBu-Lu-lf0">
@@ -488,6 +573,7 @@
                 <tabBarController storyboardIdentifier="DailyTabBarViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bkv-Eq-tin" customClass="DailyTabBarViewController" customModule="LittleTrip" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="JpA-Gj-j7v">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>

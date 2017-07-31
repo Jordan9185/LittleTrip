@@ -1,0 +1,56 @@
+{
+  "schedule" : {
+    "-Kq2zhx_eFfSkUlS1VqG" : {
+      "createdDate" : "2017-07-27",
+      "days" : 3,
+      "imageURL" : "https://firebasestorage.googleapis.com/v0/b/littletrip-58892.appspot.com/o/ScheduleImage%2F-Kq2zhx_eFfSkUlS1VqG.jpg?alt=media&token=6bb5c3f1-2896-4947-ba0c-8e3d88f7f86c",
+      "title" : "appworks school ",
+      "uid" : "fqzFLDGxhSUL13XwkswPl9QnY402"
+    },
+    "-Kq3-mdKsEpLDnTLSHlR" : {
+      "createdDate" : "2017-07-29",
+      "days" : 1,
+      "imageURL" : "https://firebasestorage.googleapis.com/v0/b/littletrip-58892.appspot.com/o/ScheduleImage%2F-Kq3-mdKsEpLDnTLSHlR.jpg?alt=media&token=54a31495-99e8-4800-8a8a-cb5e57e1104e",
+      "title" : "苗栗一日遊",
+      "uid" : "fqzFLDGxhSUL13XwkswPl9QnY402"
+    }
+  },
+  "dailySchedule" : {
+  	"-Kq2zhx_eFfSkUlS1VqG" : {
+  		"0" : [
+  			{
+  				"startTime" : "08:00",
+  				"endTime" : "09:00",
+  				"locationName" : "烏石漁港0",
+  				"latitude" : "24.866710",
+  				"longitude" : "121.836982"
+  			},
+  			{
+  				"startTime" : "09:00",
+  				"endTime" : "10:00",
+  				"locationName" : "烏石漁港01",
+  				"latitude" : "24.866710",
+  				"longitude" : "121.836982"
+  			}
+  		],
+  		"1" : [
+  			{
+  				"startTime" : "08:00",
+  				"endTime" : "09:00",
+  				"locationName" : "烏石漁港1",
+  				"latitude" : "24.866710",
+  				"longitude" : "121.836982"
+  			}
+  		],
+  		"2" : [
+  			{
+  				"startTime" : "08:00",
+  				"endTime" : "09:00",
+  				"locationName" : "烏石漁港2",
+  				"latitude" : "24.866710",
+  				"longitude" : "121.836982"
+  			}
+  		]
+  	}
+  }
+}

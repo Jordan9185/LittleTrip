@@ -22,6 +22,7 @@
 		98FBC1E01F2B116800E2E70F /* BaggageListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FBC1DF1F2B116800E2E70F /* BaggageListViewController.swift */; };
 		98FBC1E21F2B12A500E2E70F /* DailyTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FBC1E11F2B12A500E2E70F /* DailyTabBarViewController.swift */; };
 		98FBC1E41F2B220100E2E70F /* DailyScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FBC1E31F2B220100E2E70F /* DailyScheduleTableViewCell.swift */; };
+		98FBC1E61F2ECB3900E2E70F /* CreateDailyScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FBC1E51F2ECB3900E2E70F /* CreateDailyScheduleViewController.swift */; };
 		DA0586470B0A67F6D9D3E96C /* Pods_LittleTrip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C927CC867582E8F80889C170 /* Pods_LittleTrip.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		98FBC1DF1F2B116800E2E70F /* BaggageListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggageListViewController.swift; sourceTree = "<group>"; };
 		98FBC1E11F2B12A500E2E70F /* DailyTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyTabBarViewController.swift; sourceTree = "<group>"; };
 		98FBC1E31F2B220100E2E70F /* DailyScheduleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyScheduleTableViewCell.swift; sourceTree = "<group>"; };
+		98FBC1E51F2ECB3900E2E70F /* CreateDailyScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateDailyScheduleViewController.swift; sourceTree = "<group>"; };
 		C927CC867582E8F80889C170 /* Pods_LittleTrip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LittleTrip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -194,6 +196,7 @@
 			children = (
 				98FBC1DB1F2B114400E2E70F /* DailyScheduleTableViewController.swift */,
 				98FBC1E31F2B220100E2E70F /* DailyScheduleTableViewCell.swift */,
+				98FBC1E51F2ECB3900E2E70F /* CreateDailyScheduleViewController.swift */,
 			);
 			name = TextMode;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 				98FBC1DC1F2B114400E2E70F /* DailyScheduleTableViewController.swift in Sources */,
 				98FBC1E21F2B12A500E2E70F /* DailyTabBarViewController.swift in Sources */,
 				9821C5071F28245A0024B9D4 /* SignUpViewController.swift in Sources */,
+				98FBC1E61F2ECB3900E2E70F /* CreateDailyScheduleViewController.swift in Sources */,
 				98D11F561F2972C600A157BF /* ScheduleMainTableViewController.swift in Sources */,
 				98FBC1E01F2B116800E2E70F /* BaggageListViewController.swift in Sources */,
 				986438E11F27349A001DABC6 /* SignInViewController.swift in Sources */,

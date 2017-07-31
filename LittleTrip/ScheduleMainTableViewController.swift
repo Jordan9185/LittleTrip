@@ -31,6 +31,8 @@ struct Schedule {
     
     let imageUrl: String
     
+    let scheduleId: String
+    
 }
 
 class ScheduleMainTableViewController: UITableViewController {
@@ -72,7 +74,8 @@ class ScheduleMainTableViewController: UITableViewController {
                             days: value["days"] as! Int,
                             createdDate: value["createdDate"] as! String,
                             uid: value["uid"] as! String,
-                            imageUrl: value["imageURL"] as! String
+                            imageUrl: value["imageURL"] as! String,
+                            scheduleId: schedule.key
                         )
                         
                     )
