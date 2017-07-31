@@ -136,6 +136,10 @@ class DailyScheduleTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
+        let myTabBarViewController = self.tabBarController as! DailyTabBarViewController
+        
+        myTabBarViewController.dailySchedules = self.dailySchedules
+        
         return "Day \(section + 1)" // 0-based
         
     }
