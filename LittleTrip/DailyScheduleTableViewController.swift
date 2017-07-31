@@ -165,6 +165,25 @@ class DailyScheduleTableViewController: UITableViewController {
         
     }
     
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let currentDailyScheduleRef = self.dailyScheduleRef?.child("\(indexPath.section)").child("\(indexPath.row)")
+        
+        let editLocationAction = UITableViewRowAction(style: .normal, title: "Location") { (action, indexPath) in
+            
+            self.pickLocationButtonTapped(indexPath)
+        }
+        
+        let deleteRowAction = UITableViewRowAction(style: .default, title: "Delete") { (action, indexPath) in
+            
+            currentDailyScheduleRef?.removeValue()
+            
+        }
+        
+        return [deleteRowAction, editLocationAction]
+        
+    }
+    
     func createNewDailySchedule(sender: UIButton) {
         
         let updateDic: [String:Any] = {
@@ -189,9 +208,9 @@ class DailyScheduleTableViewController: UITableViewController {
         
     }
     
-    @IBAction func pickLocationButtonTapped(_ sender: UIButton) {
+    func pickLocationButtonTapped(_ indexPath: IndexPath) {
         
-        let indexPath = IndexPath(row: sender.tag % 1000, section: sender.tag / 1000)
+        let indexPath = indexPath
         
         var currentDailySchedule = self.dailySchedules[indexPath.section]?[indexPath.row]
         
