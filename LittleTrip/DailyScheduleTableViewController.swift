@@ -8,24 +8,17 @@
 
 import UIKit
 import FirebaseDatabase
+import GooglePlacePicker
 
 struct DailySchedule {
     
-    let locationName: String
+    var locationName: String
     
-    let startTime: String
+    var startTime: String
     
-    let endTime: String
+    var endTime: String
     
-    let latitude: String
-    
-    let longitude: String
-    
-}
-
-enum DailyScheduleError: Error {
-    
-    case dailyDataOfSectionError
+    var coordinate: CLLocationCoordinate2D
     
 }
 
@@ -34,6 +27,8 @@ class DailyScheduleTableViewController: UITableViewController {
     var currentSchedule: Schedule!
     
     var dailySchedules: [Int: [DailySchedule]] = [:]
+    
+    var dailyScheduleRef: DatabaseReference?
     
     @IBOutlet var dailySchedulesTableView: UITableView!
     
@@ -51,9 +46,9 @@ class DailyScheduleTableViewController: UITableViewController {
     
     func catchDailySchedules() {
         
-        let dailyScheduleRef = Database.database().reference().child("dailySchedule").child(currentSchedule.scheduleId)
-        
-        dailyScheduleRef.observeSingleEvent(of: .value, with: { (snapshot) in
+        self.dailyScheduleRef = Database.database().reference().child("dailySchedule").child(currentSchedule.scheduleId)
+
+        self.dailyScheduleRef?.observe(.value, with: { (snapshot) in
             
             if let snapshotValues = snapshot.value as? [[[String:Any]]] {
                 
@@ -63,12 +58,18 @@ class DailyScheduleTableViewController: UITableViewController {
                     
                     for snapshotValues in snapshotValues[index] {
                         
+                        let latitude = snapshotValues["latitude"] as! String
+                        
+                        let longitude = snapshotValues["longitude"] as! String
+                        
                         let newDailySchedule = DailySchedule(
                             locationName: snapshotValues["locationName"] as! String,
                             startTime: snapshotValues["startTime"] as! String,
                             endTime: snapshotValues["endTime"] as! String,
-                            latitude: snapshotValues["latitude"] as! String,
-                            longitude: snapshotValues["longitude"] as! String
+                            coordinate: CLLocationCoordinate2D(
+                                latitude: Double(latitude)!,
+                                longitude: Double(longitude)!
+                            )
                         )
                         
                         snapshotValuesArray.append(newDailySchedule)
@@ -83,6 +84,9 @@ class DailyScheduleTableViewController: UITableViewController {
                 
             }
             
+        }, withCancel: { (error) in
+            print("no ref")
+            print(error)
         })
     }
     
@@ -113,11 +117,19 @@ class DailyScheduleTableViewController: UITableViewController {
 
         let currentDailySchedule = self.dailySchedules[indexPath.section]?[indexPath.row]
         
-        cell.startTimeLabel.text = currentDailySchedule?.startTime
+        cell.startTimeTextField.text = currentDailySchedule?.startTime
         
-        cell.endTimeLabel.text = currentDailySchedule?.endTime
+        cell.endTimeTextField.text = currentDailySchedule?.endTime
         
         cell.locationNameButton.setTitle(currentDailySchedule?.locationName, for: .normal)
+        
+        cell.locationNameButton.tag = indexPath.section * 1000 + indexPath.row
+        
+        cell.startTimeTextField.tag = indexPath.section * 1000 + indexPath.row
+        
+        cell.endTimeTextField.tag = indexPath.section * 1000 + indexPath.row
+        
+        cell.dailyScheduleRef = self.dailyScheduleRef
         
         return cell
     }
@@ -153,14 +165,105 @@ class DailyScheduleTableViewController: UITableViewController {
         
     }
     
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let currentDailyScheduleRef = self.dailyScheduleRef?.child("\(indexPath.section)").child("\(indexPath.row)")
+        
+        let editLocationAction = UITableViewRowAction(style: .normal, title: "Location") { (action, indexPath) in
+            
+            self.pickLocationButtonTapped(indexPath)
+        }
+        
+        let deleteRowAction = UITableViewRowAction(style: .default, title: "Delete") { (action, indexPath) in
+            
+            currentDailyScheduleRef?.removeValue()
+            
+        }
+        
+        return [deleteRowAction, editLocationAction]
+        
+    }
+    
     func createNewDailySchedule(sender: UIButton) {
         
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let updateDic: [String:Any] = {
+            [
+                "endTime" : "09:00",
+                "latitude" : "21.0",
+                "locationName" : "尚未選擇",
+                "longitude" : "125.0",
+                "startTime" : "08:00"
+            ]
+        }()
         
-        let nextViewController = storyboard.instantiateViewController(withIdentifier: "CreateDailyScheduleViewController")
+        let currentSection = sender.tag
         
-        self.navigationController?.present(nextViewController, animated: true, completion: nil)
+        let newRow = (self.dailySchedules[currentSection]?.count)!
+        
+        let currentDailyScheduleRef = self.dailyScheduleRef?.child("\(currentSection)").child("\(newRow)")
+        
+        currentDailyScheduleRef?.updateChildValues(updateDic)
+        
+        self.dailySchedulesTableView.reloadData()
+        
+    }
+    
+    func pickLocationButtonTapped(_ indexPath: IndexPath) {
+        
+        let indexPath = indexPath
+        
+        var currentDailySchedule = self.dailySchedules[indexPath.section]?[indexPath.row]
+        
+        let config = GMSPlacePickerConfig(viewport: nil)
+        
+        let placePicker = GMSPlacePicker(config: config)
+        
+        placePicker.pickPlace(callback: { (place, error) -> Void in
+            if let error = error {
+                print("Pick Place error: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let place = place else {
+                print("No place selected")
+                return
+            }
+            
+            currentDailySchedule?.locationName = place.name
+
+            currentDailySchedule?.coordinate = place.coordinate
+            
+            self.dailySchedules[indexPath.section]?[indexPath.row] = currentDailySchedule!
+            
+            self.syncDailySchedulesfromLocal(
+                indexPath: indexPath,
+                placeName: place.name ,
+                placeCoordinate: place.coordinate
+            )
+            
+            self.dailySchedulesTableView.reloadData()
+            
+        })
+        
+    }
+    
+    func syncDailySchedulesfromLocal(indexPath: IndexPath, placeName: String, placeCoordinate: CLLocationCoordinate2D) {
+        
+        let updateDic: [String:Any] = {
+            [
+                "endTime" : "09:00",
+                "latitude" : "\(placeCoordinate.latitude)",
+                "locationName" : placeName,
+                "longitude" : "\(placeCoordinate.longitude)",
+                "startTime" : "08:00"
+            ]
+        }()
+        
+        let currentDailyScheduleRef = self.dailyScheduleRef?.child("\(indexPath.section)").child("\(indexPath.row)")
+        
+        currentDailyScheduleRef?.updateChildValues(updateDic)
         
     }
     
 }
+

@@ -8,23 +8,78 @@
 
 import UIKit
 
+import FirebaseDatabase
+
 class DailyScheduleTableViewCell: UITableViewCell {
 
-    @IBOutlet var startTimeLabel: UILabel!
+    @IBOutlet var startTimeTextField: UITextField!
     
-    @IBOutlet var endTimeLabel: UILabel!
+    @IBOutlet var endTimeTextField: UITextField!
     
     @IBOutlet var locationNameButton: UIButton!
     
+    var dailyScheduleRef: DatabaseReference?
+    
     override func awakeFromNib() {
+        
         super.awakeFromNib()
-        // Initialization code
+
+        self.startTimeTextField.delegate = self
+        
+        self.endTimeTextField.delegate = self
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
+        
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
 
+}
+
+extension DailyScheduleTableViewCell: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        let indexPath = IndexPath(row: textField.tag % 1000, section: textField.tag / 1000)
+        
+        switch textField {
+            
+        case self.startTimeTextField:
+
+            let updateDic: [String:Any] = {
+                [
+                    "startTime" : textField.text ?? "08:00"
+                ]
+            }()
+            
+            let currentDailyScheduleRef = self.dailyScheduleRef?.child("\(indexPath.section)").child("\(indexPath.row)")
+            
+            currentDailyScheduleRef?.updateChildValues(updateDic)
+            
+        case self.endTimeTextField:
+            
+            let updateDic: [String:Any] = {
+                [
+                    "endTime" : textField.text ?? "08:00"
+                ]
+            }()
+            
+            let currentDailyScheduleRef = self.dailyScheduleRef?.child("\(indexPath.section)").child("\(indexPath.row)")
+            
+            currentDailyScheduleRef?.updateChildValues(updateDic)
+            
+        default:
+            
+            print("unknowTextfield: \(textField)")
+            
+        }
+        
+        textField.resignFirstResponder()
+        
+        return true
+        
+    }
+    
 }
