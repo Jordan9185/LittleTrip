@@ -31,6 +31,8 @@ struct Schedule {
     
     let imageUrl: String
     
+    let scheduleId: String
+    
 }
 
 class ScheduleMainTableViewController: UITableViewController {
@@ -72,7 +74,8 @@ class ScheduleMainTableViewController: UITableViewController {
                             days: value["days"] as! Int,
                             createdDate: value["createdDate"] as! String,
                             uid: value["uid"] as! String,
-                            imageUrl: value["imageURL"] as! String
+                            imageUrl: value["imageURL"] as! String,
+                            scheduleId: schedule.key
                         )
                         
                     )
@@ -119,6 +122,8 @@ class ScheduleMainTableViewController: UITableViewController {
         
         cell.backgroundImageView.sd_setImage(with: URL(string: schedules[indexPath.row].imageUrl))
         
+        cell.tag = indexPath.row
+        
         return cell
         
     }
@@ -132,6 +137,20 @@ class ScheduleMainTableViewController: UITableViewController {
         case scheduleSection.iAmJoining.rawValue : return "I am joining"
         
         default: return ""
+            
+        }
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "moveToDailyTabBarController" {
+            
+            let cell = sender as! ScheduleMainTableViewCell
+            
+            let nextViewController = segue.destination as! DailyTabBarViewController
+            
+            nextViewController.schedule = schedules[cell.tag]
             
         }
         
