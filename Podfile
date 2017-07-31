@@ -15,5 +15,6 @@ target 'LittleTrip' do
 	pod 'SwiftLint'
 	pod 'GoogleMaps'
   	pod 'GooglePlaces'
+  	pod 'GooglePlacePicker'
   	
 end

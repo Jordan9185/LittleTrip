@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let googleProjectApiKey = "AIzaSyBF5_QyFXAgL9vYzLSrAPbHxGxH1c9wynE"
         
+        let googlePlacesApiKey = "AIzaSyADccF3vuF1U0x3x0BSRqOJTz3rmUqmksc"
         GMSServices.provideAPIKey(googleProjectApiKey)
         
         GMSPlacesClient.provideAPIKey(googleProjectApiKey)
