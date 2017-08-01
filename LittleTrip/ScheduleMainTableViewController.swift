@@ -39,6 +39,8 @@ class ScheduleMainTableViewController: UITableViewController {
 
     var schedules: [Schedule] = []
     
+    var scheduleRef: DatabaseReference?
+    
     @IBOutlet var schedulesTableView: UITableView!
     
     override func viewDidLoad() {
@@ -50,14 +52,10 @@ class ScheduleMainTableViewController: UITableViewController {
     }
 
     func getScheduleDataOnServer() {
-    
-        var scheduleRef: DatabaseReference!
         
-
+        self.scheduleRef = Database.database().reference().child("schedule")
         
-        scheduleRef = Database.database().reference().child("schedule")
-        
-        scheduleRef.observe(DataEventType.value, with: { (snapshot) in
+        self.scheduleRef?.observe(DataEventType.value, with: { (snapshot) in
 
             var localSchedules: [Schedule] = []
             
@@ -142,6 +140,23 @@ class ScheduleMainTableViewController: UITableViewController {
         
     }
     
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        switch editingStyle {
+            
+        case .delete :
+            
+            let currentRef = self.scheduleRef?.child(self.schedules[indexPath.row].scheduleId)
+            
+            currentRef?.removeValue()
+            
+        default :
+            
+            print("unknow style")
+            
+        }
+    }
+        
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "moveToDailyTabBarController" {
