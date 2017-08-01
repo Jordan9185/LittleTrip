@@ -12,9 +12,9 @@ import FirebaseDatabase
 
 struct BaggageItem {
     
-    let itemName: String
+    var itemName: String
     
-    let isSelected: Bool
+    var isSelected: Bool
     
 }
 
@@ -56,11 +56,13 @@ class BaggageListTableViewController: UITableViewController {
         
         BaggageRef?.observe(.value, with: { (snapshot) in
             
+            var baggageitems: [BaggageItem] = []
+            
             if let items = snapshot.value as? [[String:Any]] {
                 
                 for item in items {
                     
-                    self.baggageItems.append(
+                    baggageitems.append(
                         BaggageItem(
                             itemName: item["itemName"] as! String,
                             isSelected: item["isSelected"] as! Bool
@@ -68,6 +70,8 @@ class BaggageListTableViewController: UITableViewController {
                     )
                     
                 }
+                
+                self.baggageItems = baggageitems
                 
                 self.tableView.reloadData()
             }
@@ -91,6 +95,10 @@ class BaggageListTableViewController: UITableViewController {
         let currentItem = self.baggageItems[indexPath.row]
         
         cell.itemNameTextField.text = currentItem.itemName
+        
+        cell.itemNameTextField.delegate = self
+        
+        cell.itemNameTextField.tag = indexPath.row
         
         if currentItem.isSelected {
             
@@ -128,4 +136,54 @@ class BaggageListTableViewController: UITableViewController {
         
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if self.baggageItems[indexPath.row].isSelected == true {
+            
+            self.baggageItems[indexPath.row].isSelected = false
+            
+        } else {
+            
+            self.baggageItems[indexPath.row].isSelected = true
+        }
+        
+        tableView.reloadData()
+    }
+    
+    @IBAction func saveItemsToServerTapped(_ sender: UIBarButtonItem) {
+        
+        for (index, item) in self.baggageItems.enumerated() {
+         
+            let ref = self.BaggageRef?.child("\(index)")
+            
+            let updateDic: [String:Any] = [
+                    "isSelected": item.isSelected,
+                    "itemName": item.itemName
+            ]
+            
+            ref?.updateChildValues(updateDic)
+            
+        }
+        
+    }
+    
+}
+
+extension BaggageListTableViewController: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        let currentRow = textField.tag
+        
+        self.baggageItems[currentRow].itemName = textField.text!
+        
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        
+        return true
+        
+    }
 }
