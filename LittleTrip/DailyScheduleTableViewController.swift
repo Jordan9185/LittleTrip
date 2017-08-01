@@ -32,6 +32,14 @@ class DailyScheduleTableViewController: UITableViewController {
     
     @IBOutlet var dailySchedulesTableView: UITableView!
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(true)
+        
+        catchDailySchedules()
+        
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -39,8 +47,6 @@ class DailyScheduleTableViewController: UITableViewController {
         let myTabBarViewController = self.tabBarController as! DailyTabBarViewController
         
         currentSchedule = myTabBarViewController.schedule!
-        
-        catchDailySchedules()
 
     }
     
@@ -281,5 +287,12 @@ class DailyScheduleTableViewController: UITableViewController {
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        super.viewWillDisappear(true)
+        
+        dailyScheduleRef?.removeAllObservers()
+        
+    }
 }
 
