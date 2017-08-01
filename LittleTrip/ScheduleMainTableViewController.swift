@@ -146,9 +146,15 @@ class ScheduleMainTableViewController: UITableViewController {
             
         case .delete :
             
-            let currentRef = self.scheduleRef?.child(self.schedules[indexPath.row].scheduleId)
+            let currentScheduleID = self.schedules[indexPath.row].scheduleId
+            
+            let currentRef = self.scheduleRef?.child(currentScheduleID)
+            
+            let currentDailyRef = Database.database().reference().child("dailySchedule").child(currentScheduleID)
             
             currentRef?.removeValue()
+            
+            currentDailyRef.removeValue()
             
         default :
             

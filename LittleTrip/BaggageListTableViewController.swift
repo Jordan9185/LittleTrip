@@ -8,16 +8,40 @@
 
 import UIKit
 
+import FirebaseDatabase
+
+struct BaggageItem {
+    
+    let itemName: String
+    
+    let isSelected: Bool
+    
+}
+
 class BaggageListTableViewController: UITableViewController {
+    
+    var currentSchedule: Schedule!
+    
+    var BaggageRef: DatabaseReference?
+    
+    var baggageItems: [BaggageItem] = []
 
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-
+        
+        let myTabBarViewController = self.tabBarController as! DailyTabBarViewController
+        
+        currentSchedule = myTabBarViewController.schedule!
+        
+        getBaggageListFromServer()
+        
     }
 
     override func didReceiveMemoryWarning() {
+        
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+
     }
 
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
@@ -26,11 +50,37 @@ class BaggageListTableViewController: UITableViewController {
         
     }
     
+    func getBaggageListFromServer() {
+        
+        BaggageRef = Database.database().reference().child("baggageList").child(currentSchedule.scheduleId)
+        
+        BaggageRef?.observe(.value, with: { (snapshot) in
+            
+            if let items = snapshot.value as? [[String:Any]] {
+                
+                for item in items {
+                    
+                    self.baggageItems.append(
+                        BaggageItem(
+                            itemName: item["itemName"] as! String,
+                            isSelected: item["isSelected"] as! Bool
+                        )
+                    )
+                    
+                }
+                
+                self.tableView.reloadData()
+            }
+            
+        })
+        
+    }
+    
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return 1
+        return self.baggageItems.count
         
     }
 
@@ -38,6 +88,20 @@ class BaggageListTableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "baggageCell", for: indexPath) as! BaggageListTableViewCell
 
+        let currentItem = self.baggageItems[indexPath.row]
+        
+        cell.itemNameTextField.text = currentItem.itemName
+        
+        if currentItem.isSelected {
+            
+            cell.checkboxImageView.image = #imageLiteral(resourceName: "check-box")
+            
+        } else {
+            
+            cell.checkboxImageView.image = #imageLiteral(resourceName: "check-box-empty")
+            
+        }
+        
         return cell
         
     }
