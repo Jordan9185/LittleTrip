@@ -16,7 +16,7 @@ class DailyScheduleTableViewCell: UITableViewCell {
     
     @IBOutlet var endTimeTextField: UITextField!
     
-    @IBOutlet var locationNameButton: UIButton!
+    @IBOutlet var locationNameLabel: UILabel!
     
     var dailyScheduleRef: DatabaseReference?
     

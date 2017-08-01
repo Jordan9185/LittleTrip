@@ -85,7 +85,7 @@ class DailyScheduleTableViewController: UITableViewController {
             }
             
         }, withCancel: { (error) in
-            print("no ref")
+            
             print(error)
         })
     }
@@ -121,9 +121,7 @@ class DailyScheduleTableViewController: UITableViewController {
         
         cell.endTimeTextField.text = currentDailySchedule?.endTime
         
-        cell.locationNameButton.setTitle(currentDailySchedule?.locationName, for: .normal)
-        
-        cell.locationNameButton.tag = indexPath.section * 1000 + indexPath.row
+        cell.locationNameLabel.text = currentDailySchedule?.locationName
         
         cell.startTimeTextField.tag = indexPath.section * 1000 + indexPath.row
         
@@ -173,19 +171,20 @@ class DailyScheduleTableViewController: UITableViewController {
         
         let currentDailyScheduleRef = self.dailyScheduleRef?.child("\(indexPath.section)").child("\(indexPath.row)")
         
-        let editLocationAction = UITableViewRowAction(style: .normal, title: "Location") { (action, indexPath) in
-            
-            self.pickLocationButtonTapped(indexPath)
-        }
-        
         let deleteRowAction = UITableViewRowAction(style: .default, title: "Delete") { (action, indexPath) in
             
             currentDailyScheduleRef?.removeValue()
             
         }
         
-        return [deleteRowAction, editLocationAction]
+        return [deleteRowAction]
         
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        self.pickLocationButtonTapped(indexPath)
+
     }
     
     func createNewDailySchedule(sender: UIButton) {
@@ -193,9 +192,9 @@ class DailyScheduleTableViewController: UITableViewController {
         let updateDic: [String:Any] = {
             [
                 "endTime" : "09:00",
-                "latitude" : "21.0",
+                "latitude" : "0",
                 "locationName" : "尚未選擇",
-                "longitude" : "125.0",
+                "longitude" : "0",
                 "startTime" : "08:00"
             ]
         }()
@@ -223,6 +222,7 @@ class DailyScheduleTableViewController: UITableViewController {
         let placePicker = GMSPlacePicker(config: config)
         
         placePicker.pickPlace(callback: { (place, error) -> Void in
+            
             if let error = error {
                 print("Pick Place error: \(error.localizedDescription)")
                 return
@@ -255,17 +255,23 @@ class DailyScheduleTableViewController: UITableViewController {
         
         let updateDic: [String:Any] = {
             [
-                "endTime" : "09:00",
                 "latitude" : "\(placeCoordinate.latitude)",
                 "locationName" : placeName,
-                "longitude" : "\(placeCoordinate.longitude)",
-                "startTime" : "08:00"
+                "longitude" : "\(placeCoordinate.longitude)"
             ]
         }()
         
         let currentDailyScheduleRef = self.dailyScheduleRef?.child("\(indexPath.section)").child("\(indexPath.row)")
         
         currentDailyScheduleRef?.updateChildValues(updateDic)
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        
+        super.viewDidDisappear(true)
+        
+        self.dailyScheduleRef?.removeAllObservers()
         
     }
     
