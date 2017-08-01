@@ -10,6 +10,10 @@ import UIKit
 
 class BaggageListTableViewCell: UITableViewCell {
 
+    @IBOutlet var checkboxImageView: UIImageView!
+    
+    @IBOutlet var itemNameTextField: UITextField!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
