@@ -122,11 +122,26 @@ class BaggageListTableViewController: UITableViewController {
         
         button.setTitle("+ Add item ...", for: .normal)
         
+        button.addTarget(self, action: #selector(addEmptyRowAction), for: .touchUpInside)
+        
         footerView.addSubview(button)
         
         footerView.backgroundColor = .brown
         
         return footerView
+        
+    }
+    
+    func addEmptyRowAction(_ sender: UIButton) {
+        
+        self.baggageItems.append(
+            BaggageItem(
+                itemName: "New item",
+                isSelected: false
+            )
+        )
+        
+        self.tableView.reloadData()
         
     }
     
