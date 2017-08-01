@@ -13,6 +13,7 @@
 		980C56081F27324B007B4810 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 980C56061F27324B007B4810 /* LaunchScreen.storyboard */; };
 		9821C5071F28245A0024B9D4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9821C5061F28245A0024B9D4 /* SignUpViewController.swift */; };
 		984E4AAC1F304F0A007766C7 /* BaggageListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984E4AAB1F304F0A007766C7 /* BaggageListTableViewController.swift */; };
+		984E4AAE1F305D73007766C7 /* BaggageListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984E4AAD1F305D73007766C7 /* BaggageListTableViewCell.swift */; };
 		986438E11F27349A001DABC6 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986438E01F27349A001DABC6 /* SignInViewController.swift */; };
 		986438E91F28207A001DABC6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 986438E81F28207A001DABC6 /* GoogleService-Info.plist */; };
 		98D11F561F2972C600A157BF /* ScheduleMainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D11F551F2972C600A157BF /* ScheduleMainTableViewController.swift */; };
@@ -36,6 +37,7 @@
 		980C56091F27324B007B4810 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9821C5061F28245A0024B9D4 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		984E4AAB1F304F0A007766C7 /* BaggageListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggageListTableViewController.swift; sourceTree = "<group>"; };
+		984E4AAD1F305D73007766C7 /* BaggageListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggageListTableViewCell.swift; sourceTree = "<group>"; };
 		986438E01F27349A001DABC6 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		986438E81F28207A001DABC6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		98D11F551F2972C600A157BF /* ScheduleMainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleMainTableViewController.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				984E4AAB1F304F0A007766C7 /* BaggageListTableViewController.swift */,
+				984E4AAD1F305D73007766C7 /* BaggageListTableViewCell.swift */,
 			);
 			name = BaggageList;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 				984E4AAC1F304F0A007766C7 /* BaggageListTableViewController.swift in Sources */,
 				98D11F581F2974E500A157BF /* ScheduleMainTableViewCell.swift in Sources */,
 				980C55FE1F27324B007B4810 /* AppDelegate.swift in Sources */,
+				984E4AAE1F305D73007766C7 /* BaggageListTableViewCell.swift in Sources */,
 				98FBC1DE1F2B115800E2E70F /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
