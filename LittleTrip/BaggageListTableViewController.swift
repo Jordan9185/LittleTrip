@@ -162,10 +162,26 @@ class BaggageListTableViewController: UITableViewController {
             self.baggageItems[indexPath.row].isSelected = true
         }
         
+        self.saveItemsToServerTapped()
+        
         tableView.reloadData()
     }
     
-    @IBAction func saveItemsToServerTapped(_ sender: UIBarButtonItem) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            
+            let ref = self.BaggageRef?.child("\(indexPath.row)")
+            
+            ref?.removeValue()
+            
+            self.tableView.reloadData()
+            
+        }
+        
+    }
+    
+    func saveItemsToServerTapped() {
         
         for (index, item) in self.baggageItems.enumerated() {
          
@@ -191,6 +207,8 @@ extension BaggageListTableViewController: UITextFieldDelegate {
         let currentRow = textField.tag
         
         self.baggageItems[currentRow].itemName = textField.text!
+        
+        self.saveItemsToServerTapped()
         
     }
     
