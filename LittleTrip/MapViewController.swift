@@ -35,7 +35,7 @@ class MapViewController: UIViewController{
         
         let longitude = location?.longitude
 
-        let camera = GMSCameraPosition.camera(withLatitude: latitude!, longitude: longitude!, zoom: 6.0)
+        let camera = GMSCameraPosition.camera(withLatitude: latitude!, longitude: longitude!, zoom: 7.0)
         
         let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         
@@ -44,6 +44,8 @@ class MapViewController: UIViewController{
         view = mapView
         
         let days = self.dailySchedules.count
+        
+        let colors: [UIColor] = [.red, .blue, .green, .yellow, .brown]
         
         for day in 0..<days {
             
@@ -57,6 +59,12 @@ class MapViewController: UIViewController{
                 
                 let maker = GMSMarker(position: dailySchedule.coordinate)
                 
+                maker.title = "Day\(day + 1) \(dailySchedule.locationName)"
+                
+                maker.snippet = "\(dailySchedule.startTime) to \(dailySchedule.endTime)"
+                
+                maker.icon = GMSMarker.markerImage(with: colors[day % 5])
+                    
                 maker.map = mapView
                 
             }
@@ -64,6 +72,5 @@ class MapViewController: UIViewController{
         }
         
     }
-
 
 }
