@@ -222,6 +222,7 @@ class DailyScheduleTableViewController: UITableViewController {
         let placePicker = GMSPlacePicker(config: config)
         
         placePicker.pickPlace(callback: { (place, error) -> Void in
+            
             if let error = error {
                 print("Pick Place error: \(error.localizedDescription)")
                 return
@@ -263,6 +264,14 @@ class DailyScheduleTableViewController: UITableViewController {
         let currentDailyScheduleRef = self.dailyScheduleRef?.child("\(indexPath.section)").child("\(indexPath.row)")
         
         currentDailyScheduleRef?.updateChildValues(updateDic)
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        
+        super.viewDidDisappear(true)
+        
+        self.dailyScheduleRef?.removeAllObservers()
         
     }
     
