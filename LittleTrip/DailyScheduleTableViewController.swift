@@ -192,9 +192,9 @@ class DailyScheduleTableViewController: UITableViewController {
         let updateDic: [String:Any] = {
             [
                 "endTime" : "09:00",
-                "latitude" : "21.0",
+                "latitude" : "0",
                 "locationName" : "尚未選擇",
-                "longitude" : "125.0",
+                "longitude" : "0",
                 "startTime" : "08:00"
             ]
         }()

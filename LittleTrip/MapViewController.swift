@@ -49,6 +49,12 @@ class MapViewController: UIViewController{
             
             for dailySchedule in self.dailySchedules[day]! {
                 
+                if (dailySchedule.coordinate.latitude == 0) && (dailySchedule.coordinate.longitude == 0) {
+                    
+                    continue
+                    
+                }
+                
                 let maker = GMSMarker(position: dailySchedule.coordinate)
                 
                 maker.map = mapView

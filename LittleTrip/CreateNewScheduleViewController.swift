@@ -131,9 +131,9 @@ class CreateNewScheduleViewController: UIViewController, UIImagePickerController
                     
                     let newDailyScheduleDic = [
                         "endTime" : "09:00",
-                        "latitude" : "24.866710",
+                        "latitude" : "0",
                         "locationName" : "尚未選擇",
-                        "longitude" : "121.836982",
+                        "longitude" : "0",
                         "startTime" : "08:00"
                         ] as [String : Any]
                     
