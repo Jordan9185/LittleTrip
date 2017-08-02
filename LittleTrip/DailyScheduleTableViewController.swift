@@ -137,6 +137,8 @@ class DailyScheduleTableViewController: UITableViewController {
         
         cell.dailyScheduleRef = self.dailyScheduleRef
         
+        cell.travelTimeLabel.text = ""
+        
         let userLocation = CLLocationCoordinate2D(latitude: 25, longitude: 121)
         
         self.requestTravelTime(origin: userLocation, destination: (currentDailySchedule?.coordinate)!, indexPath: indexPath)
@@ -201,19 +203,29 @@ class DailyScheduleTableViewController: UITableViewController {
     
     func createNewDailySchedule(sender: UIButton) {
         
-        let updateDic: [String:Any] = {
-            [
-                "endTime" : "09:00",
-                "latitude" : "0",
-                "locationName" : "尚未選擇",
-                "longitude" : "0",
-                "startTime" : "08:00"
-            ]
-        }()
-        
         let currentSection = sender.tag
         
         let newRow = (self.dailySchedules[currentSection]?.count)!
+        
+        var previousScheduleEndTime = ""
+        
+        if (newRow - 1) > -1 {
+            
+            previousScheduleEndTime = (self.dailySchedules[currentSection]?[newRow - 1].endTime)!
+            
+        } else {
+            previousScheduleEndTime = "08:00"
+        }
+        
+        let updateDic: [String:Any] = {
+            [
+                "endTime" : "",
+                "latitude" : "0",
+                "locationName" : "尚未選擇",
+                "longitude" : "0",
+                "startTime" : previousScheduleEndTime
+            ]
+        }()
         
         let currentDailyScheduleRef = self.dailyScheduleRef?.child("\(currentSection)").child("\(newRow)")
         
@@ -321,14 +333,41 @@ class DailyScheduleTableViewController: UITableViewController {
                     {
                         
                         self.dailySchedules[indexPath.section]?[indexPath.row].travelTime = (duration["text"] as? String)!
-                                
-                        DispatchQueue.main.async {
-                                                                    
-                            let cell = self.dailySchedulesTableView.cellForRow(at: indexPath) as? DailyScheduleTableViewCell
-                                
-                            cell?.travelTimeLabel.text = (duration["text"] as? String)!
-                        }
                         
+                        if let travelTime = duration["value"] as? Int {
+                            
+                            let hours = travelTime / 3600
+                            
+                            let minutes = (travelTime % 3600) / 60
+                            
+                            let dateFormatter = DateFormatter()
+                            
+                            dateFormatter.dateFormat = "HH:mm"
+                            
+                            print(self.dailySchedules[indexPath.section]?[indexPath.row].startTime)
+                            
+                            let date = dateFormatter.date(from: (self.dailySchedules[indexPath.section]?[indexPath.row].startTime)!)
+                            
+                            let calendar = Calendar.current
+                            
+                            let hour = calendar.component(.hour, from: date!) + hours
+                        
+                            let min = calendar.component(.minute, from: date!) + minutes
+                            
+                            self.dailySchedules[indexPath.section]?[indexPath.row].endTime = "\(hour):\(min)"
+                            
+                            DispatchQueue.main.async {
+                                
+                                let cell = self.dailySchedulesTableView.cellForRow(at: indexPath) as? DailyScheduleTableViewCell
+                                
+                                cell?.endTimeTextField.text = self.dailySchedules[indexPath.section]?[indexPath.row].endTime
+                                
+                                cell?.travelTimeLabel.text = (duration["text"] as? String)!
+                                
+                            }
+                            
+                        }
+                    
                     }
                     
                 }
