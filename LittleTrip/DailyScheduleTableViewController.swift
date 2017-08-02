@@ -217,11 +217,31 @@ class DailyScheduleTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
-        let currentDailyScheduleRef = self.dailyScheduleRef?.child("\(indexPath.section)").child("\(indexPath.row)")
+        let section = indexPath.section
+        
+        let currentDailyScheduleRef = self.dailyScheduleRef
         
         let deleteRowAction = UITableViewRowAction(style: .default, title: "Delete") { (action, indexPath) in
             
-            currentDailyScheduleRef?.removeValue()
+            self.dailySchedules[indexPath.section]?.remove(at: indexPath.row)
+            
+            var updateDics: [[String:Any]] = []
+            
+            for dailySchedule in self.dailySchedules[section]! {
+                
+                let updateDic: [String:Any] = [
+                    "endTime": "\(dailySchedule.endTime)",
+                    "latitude": "\(dailySchedule.coordinate.latitude)",
+                    "locationName": "\(dailySchedule.locationName)",
+                    "longitude": "\(dailySchedule.coordinate.longitude)",
+                    "startTime": "\(dailySchedule.startTime)"
+                ]
+                
+                updateDics.append(updateDic)
+                
+            }
+
+            currentDailyScheduleRef?.updateChildValues(["\(section)": updateDics])
             
         }
         

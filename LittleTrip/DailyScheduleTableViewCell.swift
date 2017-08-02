@@ -30,12 +30,80 @@ class DailyScheduleTableViewCell: UITableViewCell {
         
         self.endTimeTextField.delegate = self
         
+        let startTimePicker = UIDatePicker()
+        
+        let endTimePicker = UIDatePicker()
+        
+        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 40))
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
+        
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        
+        toolbar.items = [ flexibleSpace, doneButton ]
+
+        startTimePicker.datePickerMode = .time
+        
+        endTimePicker.datePickerMode = .time
+        
+        self.startTimeTextField.inputView = startTimePicker
+        
+        self.endTimeTextField.inputView = endTimePicker
+        
+        self.startTimeTextField.inputAccessoryView = toolbar
+        
+        self.endTimeTextField.inputAccessoryView = toolbar
+        
+        startTimePicker.addTarget(self, action: #selector(startTimeChange), for: .valueChanged)
+        
+        endTimePicker.addTarget(self, action: #selector(endTimeChange), for: .valueChanged)
+        
     }
 
+    func doneButtonTapped() {
+        
+        textFieldShouldReturn(self.startTimeTextField)
+        
+        textFieldShouldReturn(self.endTimeTextField)
+        
+        self.startTimeTextField.resignFirstResponder()
+        
+        self.endTimeTextField.resignFirstResponder()
+        
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         
         super.setSelected(selected, animated: animated)
 
+    }
+    
+    func startTimeChange(_ sender: UIDatePicker) {
+        
+        print(sender.date)
+        
+        let calender = Calendar.current
+        
+        let hour = calender.component(.hour, from: sender.date)
+        
+        let min = calender.component(.minute, from: sender.date)
+        
+        self.startTimeTextField.text = "\(hour):\(min)"
+        
+    }
+    
+    func endTimeChange(_ sender: UIDatePicker) {
+        
+        print(sender.date)
+        
+        let calender = Calendar.current
+        
+        let hour = calender.component(.hour, from: sender.date)
+        
+        let min = calender.component(.minute, from: sender.date)
+        
+        self.endTimeTextField.text = "\(hour):\(min)"
+        
     }
 
 }
