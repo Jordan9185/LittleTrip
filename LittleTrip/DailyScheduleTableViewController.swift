@@ -315,33 +315,26 @@ class DailyScheduleTableViewController: UITableViewController {
                 
                 if let jsonValue = try? JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? [String:Any] {
                     
-                    if let rows = jsonValue?["rows"] as? [[String:Any]] {
-                    
-                        if let elements = rows[0]["elements"] as? [[String:Any]] {
-                            
-                            if let duration = elements[0]["duration"] as? [String:Any] {
+                    if let rows = jsonValue?["rows"] as? [[String:Any]],
+                        let elements = rows[0]["elements"] as? [[String:Any]],
+                        let duration = elements[0]["duration"] as? [String:Any]
+                    {
+                        
+                        self.dailySchedules[indexPath.section]?[indexPath.row].travelTime = (duration["text"] as? String)!
                                 
-                                self.dailySchedules[indexPath.section]?[indexPath.row].travelTime = (duration["text"] as? String)!
-                                
-                                DispatchQueue.main.async {
+                        DispatchQueue.main.async {
                                                                     
-                                let cell = self.dailySchedulesTableView.cellForRow(at: indexPath) as? DailyScheduleTableViewCell
+                            let cell = self.dailySchedulesTableView.cellForRow(at: indexPath) as? DailyScheduleTableViewCell
                                 
-                                    cell?.travelTimeLabel.text = (duration["text"] as? String)!
-                                }
-                                
-                            }
+                            cell?.travelTimeLabel.text = (duration["text"] as? String)!
                         }
                         
                     }
                     
                 }
                 
-            } catch(let error) {
-                
-                print(error)
-                
             }
+            
         }
         
         task.resume()
