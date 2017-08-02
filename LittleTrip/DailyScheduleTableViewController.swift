@@ -287,12 +287,5 @@ class DailyScheduleTableViewController: UITableViewController {
         
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        
-        super.viewWillDisappear(true)
-        
-        dailyScheduleRef?.removeAllObservers()
-        
-    }
 }
 
