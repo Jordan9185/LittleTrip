@@ -139,9 +139,15 @@ class DailyScheduleTableViewController: UITableViewController {
         
         cell.travelTimeLabel.text = ""
         
-        let userLocation = CLLocationCoordinate2D(latitude: 25, longitude: 121)
+        var userLocation = CLLocationCoordinate2D(latitude: 25, longitude: 121)
         
-        self.requestTravelTime(origin: userLocation, destination: (currentDailySchedule?.coordinate)!, indexPath: indexPath)
+        if indexPath.row != 0 {
+            
+            userLocation = (self.dailySchedules[indexPath.section]?[indexPath.row - 1].coordinate)!
+            
+            self.requestTravelTime(origin: userLocation, destination: (currentDailySchedule?.coordinate)!, indexPath: indexPath)
+            
+        }
         
         return cell
     }
@@ -219,7 +225,7 @@ class DailyScheduleTableViewController: UITableViewController {
         
         let updateDic: [String:Any] = {
             [
-                "endTime" : "",
+                "endTime" : "08:00",
                 "latitude" : "0",
                 "locationName" : "尚未選擇",
                 "longitude" : "0",
@@ -334,38 +340,12 @@ class DailyScheduleTableViewController: UITableViewController {
                         
                         self.dailySchedules[indexPath.section]?[indexPath.row].travelTime = (duration["text"] as? String)!
                         
-                        if let travelTime = duration["value"] as? Int {
-                            
-                            let hours = travelTime / 3600
-                            
-                            let minutes = (travelTime % 3600) / 60
-                            
-                            let dateFormatter = DateFormatter()
-                            
-                            dateFormatter.dateFormat = "HH:mm"
-                            
-                            print(self.dailySchedules[indexPath.section]?[indexPath.row].startTime)
-                            
-                            let date = dateFormatter.date(from: (self.dailySchedules[indexPath.section]?[indexPath.row].startTime)!)
-                            
-                            let calendar = Calendar.current
-                            
-                            let hour = calendar.component(.hour, from: date!) + hours
-                        
-                            let min = calendar.component(.minute, from: date!) + minutes
-                            
-                            self.dailySchedules[indexPath.section]?[indexPath.row].endTime = "\(hour):\(min)"
-                            
-                            DispatchQueue.main.async {
+                        DispatchQueue.main.async {
                                 
-                                let cell = self.dailySchedulesTableView.cellForRow(at: indexPath) as? DailyScheduleTableViewCell
+                            let cell = self.dailySchedulesTableView.cellForRow(at: indexPath) as? DailyScheduleTableViewCell
                                 
-                                cell?.endTimeTextField.text = self.dailySchedules[indexPath.section]?[indexPath.row].endTime
+                            cell?.travelTimeLabel.text = (duration["text"] as? String)!
                                 
-                                cell?.travelTimeLabel.text = (duration["text"] as? String)!
-                                
-                            }
-                            
                         }
                     
                     }
