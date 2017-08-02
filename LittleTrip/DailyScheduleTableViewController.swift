@@ -20,6 +20,8 @@ struct DailySchedule {
     
     var coordinate: CLLocationCoordinate2D
     
+    var travelTime: String
+    
 }
 
 class DailyScheduleTableViewController: UITableViewController {
@@ -75,7 +77,8 @@ class DailyScheduleTableViewController: UITableViewController {
                             coordinate: CLLocationCoordinate2D(
                                 latitude: Double(latitude)!,
                                 longitude: Double(longitude)!
-                            )
+                            ),
+                            travelTime: ""
                         )
                         
                         snapshotValuesArray.append(newDailySchedule)
@@ -116,7 +119,6 @@ class DailyScheduleTableViewController: UITableViewController {
 
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "dailyScheduleCell", for: indexPath) as! DailyScheduleTableViewCell
@@ -135,16 +137,46 @@ class DailyScheduleTableViewController: UITableViewController {
         
         cell.dailyScheduleRef = self.dailyScheduleRef
         
+        cell.travelTimeLabel.text = ""
+        
+        var userLocation = CLLocationCoordinate2D(latitude: 25, longitude: 121)
+        
+        if indexPath.row != 0 {
+            
+            userLocation = (self.dailySchedules[indexPath.section]?[indexPath.row - 1].coordinate)!
+            
+            self.requestTravelTime(origin: userLocation, destination: (currentDailySchedule?.coordinate)!, indexPath: indexPath)
+            
+        }
+        
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let myTabBarViewController = self.tabBarController as! DailyTabBarViewController
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
         
-        myTabBarViewController.dailySchedules = self.dailySchedules
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
         
-        return "Day \(section + 1)" // 0-based
+        label.textAlignment = .center
+        
+        label.textColor = .brown
+        
+        label.text = "Day \(section + 1)"
+        
+        label.font = UIFont(name: "AvenirNext-Bold", size: 16)
+        
+        headerView.backgroundColor = UIColor(red: 1, green: 235/255, blue: 205/255, alpha: 0.7)
+        
+        headerView.addSubview(label)
+        
+        return headerView
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        return 40
         
     }
     
@@ -156,7 +188,13 @@ class DailyScheduleTableViewController: UITableViewController {
         
         button.setTitle("Add new daily schedule for day\(section + 1)...", for: .normal)
         
-        button.backgroundColor = .black
+        button.titleLabel?.textAlignment = .center
+        
+        button.setTitleColor(.brown, for: .normal)
+        
+        button.titleLabel?.font = UIFont(name: "AvenirNext", size: 14)
+        
+        button.backgroundColor =  .white
         
         button.tag = section
         
@@ -195,19 +233,29 @@ class DailyScheduleTableViewController: UITableViewController {
     
     func createNewDailySchedule(sender: UIButton) {
         
-        let updateDic: [String:Any] = {
-            [
-                "endTime" : "09:00",
-                "latitude" : "0",
-                "locationName" : "尚未選擇",
-                "longitude" : "0",
-                "startTime" : "08:00"
-            ]
-        }()
-        
         let currentSection = sender.tag
         
         let newRow = (self.dailySchedules[currentSection]?.count)!
+        
+        var previousScheduleEndTime = ""
+        
+        if (newRow - 1) > -1 {
+            
+            previousScheduleEndTime = (self.dailySchedules[currentSection]?[newRow - 1].endTime)!
+            
+        } else {
+            previousScheduleEndTime = "08:00"
+        }
+        
+        let updateDic: [String:Any] = {
+            [
+                "endTime" : "08:00",
+                "latitude" : "0",
+                "locationName" : "尚未選擇",
+                "longitude" : "0",
+                "startTime" : previousScheduleEndTime
+            ]
+        }()
         
         let currentDailyScheduleRef = self.dailyScheduleRef?.child("\(currentSection)").child("\(newRow)")
         
@@ -287,12 +335,53 @@ class DailyScheduleTableViewController: UITableViewController {
         
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    func requestTravelTime(origin:CLLocationCoordinate2D, destination: CLLocationCoordinate2D, indexPath:IndexPath) {
         
-        super.viewWillDisappear(true)
+        let originFormat = "\(origin.latitude),\(origin.longitude)"
         
-        dailyScheduleRef?.removeAllObservers()
+        let destinationFormat = "\(destination.latitude),\(destination.longitude)"
+
+        let url = URL(string: "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=\(originFormat)&destinations=\(destinationFormat)&key=\(googleProjectApiKey)")
         
+        let urlRequest = URLRequest(url: url!)
+        
+        let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            
+            if let error = error {
+                
+                return
+                
+            }
+            
+            do {
+                
+                if let jsonValue = try? JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? [String:Any] {
+                    
+                    if let rows = jsonValue?["rows"] as? [[String:Any]],
+                        let elements = rows[0]["elements"] as? [[String:Any]],
+                        let duration = elements[0]["duration"] as? [String:Any]
+                    {
+                        
+                        self.dailySchedules[indexPath.section]?[indexPath.row].travelTime = (duration["text"] as? String)!
+                        
+                        DispatchQueue.main.async {
+                                
+                            let cell = self.dailySchedulesTableView.cellForRow(at: indexPath) as? DailyScheduleTableViewCell
+                                
+                            cell?.travelTimeLabel.text = (duration["text"] as? String)!
+                                
+                        }
+                    
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        task.resume()
     }
+    
 }
 

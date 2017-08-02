@@ -94,7 +94,7 @@ class ScheduleMainTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
 
-        return 2
+        return 1
         
     }
 
@@ -126,18 +126,32 @@ class ScheduleMainTableViewController: UITableViewController {
         
     }
 
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        switch section {
-            
-        case scheduleSection.mySchedule.rawValue : return "My schedule"
-            
-        case scheduleSection.iAmJoining.rawValue : return "I am joining"
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
         
-        default: return ""
-            
-        }
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
         
+        label.textAlignment = .center
+        
+        label.textColor = .brown
+        
+        label.text = "My Schedule"
+        
+        label.font = UIFont(name: "AvenirNext-Bold", size: 16)
+        
+        headerView.backgroundColor = UIColor(red: 1, green: 235/255, blue: 205/255, alpha: 0.7)
+        
+        headerView.addSubview(label)
+        
+        return headerView
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        return 40
+    
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
