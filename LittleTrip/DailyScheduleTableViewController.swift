@@ -147,6 +147,10 @@ class DailyScheduleTableViewController: UITableViewController {
             
             self.requestTravelTime(origin: userLocation, destination: (currentDailySchedule?.coordinate)!, indexPath: indexPath)
             
+        } else {
+            
+            cell.travelTimeLabel.text = "起點"
+            
         }
         
         return cell
@@ -324,6 +328,10 @@ class DailyScheduleTableViewController: UITableViewController {
     override func viewDidDisappear(_ animated: Bool) {
         
         super.viewDidDisappear(true)
+
+        let myTabBarViewController = self.tabBarController as! DailyTabBarViewController
+        
+        myTabBarViewController.dailySchedules = self.dailySchedules
         
         self.dailyScheduleRef?.removeAllObservers()
         
