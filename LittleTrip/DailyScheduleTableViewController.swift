@@ -20,6 +20,8 @@ struct DailySchedule {
     
     var coordinate: CLLocationCoordinate2D
     
+    var travelTime: String
+    
 }
 
 class DailyScheduleTableViewController: UITableViewController {
@@ -75,7 +77,8 @@ class DailyScheduleTableViewController: UITableViewController {
                             coordinate: CLLocationCoordinate2D(
                                 latitude: Double(latitude)!,
                                 longitude: Double(longitude)!
-                            )
+                            ),
+                            travelTime: ""
                         )
                         
                         snapshotValuesArray.append(newDailySchedule)
@@ -136,7 +139,7 @@ class DailyScheduleTableViewController: UITableViewController {
         
         let userLocation = CLLocationCoordinate2D(latitude: 25, longitude: 121)
         
-        self.requestTravelTime(origin: userLocation, destination: (currentDailySchedule?.coordinate)!)
+        self.requestTravelTime(origin: userLocation, destination: (currentDailySchedule?.coordinate)!, indexPath: indexPath)
         
         return cell
     }
@@ -290,7 +293,7 @@ class DailyScheduleTableViewController: UITableViewController {
         
     }
     
-    func requestTravelTime(origin:CLLocationCoordinate2D, destination: CLLocationCoordinate2D) {
+    func requestTravelTime(origin:CLLocationCoordinate2D, destination: CLLocationCoordinate2D, indexPath:IndexPath) {
         
         let originFormat = "\(origin.latitude),\(origin.longitude)"
         
@@ -317,7 +320,16 @@ class DailyScheduleTableViewController: UITableViewController {
                         if let elements = rows[0]["elements"] as? [[String:Any]] {
                             
                             if let duration = elements[0]["duration"] as? [String:Any] {
-                                print(duration)
+                                
+                                self.dailySchedules[indexPath.section]?[indexPath.row].travelTime = (duration["text"] as? String)!
+                                
+                                DispatchQueue.main.async {
+                                                                    
+                                let cell = self.dailySchedulesTableView.cellForRow(at: indexPath) as? DailyScheduleTableViewCell
+                                
+                                    cell?.travelTimeLabel.text = (duration["text"] as? String)!
+                                }
+                                
                             }
                         }
                         

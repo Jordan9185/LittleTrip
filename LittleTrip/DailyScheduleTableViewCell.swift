@@ -18,6 +18,8 @@ class DailyScheduleTableViewCell: UITableViewCell {
     
     @IBOutlet var locationNameLabel: UILabel!
     
+    @IBOutlet var travelTimeLabel: UILabel!
+    
     var dailyScheduleRef: DatabaseReference?
     
     override func awakeFromNib() {
