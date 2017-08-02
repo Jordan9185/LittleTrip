@@ -13,7 +13,7 @@ class MapViewController: UIViewController{
 
     var locationManager = CLLocationManager()
     
-    var dailySchedules: [Int: [DailySchedule]] = [:]
+    var dailySchedules: [Int: [DailySchedule]]!
     
     override func viewDidLoad() {
         
@@ -21,7 +21,13 @@ class MapViewController: UIViewController{
         
         let myTabBarViewController = self.tabBarController as! DailyTabBarViewController
         
-        self.dailySchedules = myTabBarViewController.dailySchedules
+        let navigationController = myTabBarViewController.childViewControllers[0]
+        
+        let previousViewController = navigationController.childViewControllers[0] as! DailyScheduleTableViewController
+        
+        self.dailySchedules = previousViewController.dailySchedules
+        
+        print(self.dailySchedules)
         
         setGoogleMaps()
         
@@ -29,7 +35,7 @@ class MapViewController: UIViewController{
 
     func setGoogleMaps() {
         
-        let location = self.dailySchedules[0]?[0].coordinate
+        let location = self.dailySchedules?[0]?[0].coordinate
 
         let latitude = location?.latitude
         

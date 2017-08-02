@@ -12,7 +12,7 @@ class DailyTabBarViewController: UITabBarController {
 
     var schedule: Schedule?
     
-    var dailySchedules: [Int: [DailySchedule]] = [:]
+    var dailySchedules: [Int: [DailySchedule]]?
     
     override func viewDidLoad() {
         super.viewDidLoad()

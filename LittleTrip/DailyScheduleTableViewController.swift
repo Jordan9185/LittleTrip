@@ -137,7 +137,7 @@ class DailyScheduleTableViewController: UITableViewController {
         
         cell.dailyScheduleRef = self.dailyScheduleRef
         
-        cell.travelTimeLabel.text = ""
+        cell.travelTimeLabel.text = "起點"
         
         var userLocation = CLLocationCoordinate2D(latitude: 25, longitude: 121)
         
@@ -324,6 +324,10 @@ class DailyScheduleTableViewController: UITableViewController {
     override func viewDidDisappear(_ animated: Bool) {
         
         super.viewDidDisappear(true)
+
+        let myTabBarViewController = self.tabBarController as! DailyTabBarViewController
+        
+        myTabBarViewController.dailySchedules = self.dailySchedules
         
         self.dailyScheduleRef?.removeAllObservers()
         
