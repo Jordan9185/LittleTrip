@@ -116,7 +116,6 @@ class DailyScheduleTableViewController: UITableViewController {
 
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "dailyScheduleCell", for: indexPath) as! DailyScheduleTableViewCell
@@ -134,6 +133,10 @@ class DailyScheduleTableViewController: UITableViewController {
         cell.endTimeTextField.tag = indexPath.section * 1000 + indexPath.row
         
         cell.dailyScheduleRef = self.dailyScheduleRef
+        
+        let userLocation = CLLocationCoordinate2D(latitude: 25, longitude: 121)
+        
+        self.requestTravelTime(origin: userLocation, destination: (currentDailySchedule?.coordinate)!)
         
         return cell
     }
@@ -285,6 +288,51 @@ class DailyScheduleTableViewController: UITableViewController {
         
         dismiss(animated: true, completion: nil)
         
+    }
+    
+    func requestTravelTime(origin:CLLocationCoordinate2D, destination: CLLocationCoordinate2D) {
+        
+        let originFormat = "\(origin.latitude),\(origin.longitude)"
+        
+        let destinationFormat = "\(destination.latitude),\(destination.longitude)"
+
+        let url = URL(string: "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=\(originFormat)&destinations=\(destinationFormat)&key=\(googleProjectApiKey)")
+        
+        let urlRequest = URLRequest(url: url!)
+        
+        let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            
+            if let error = error {
+                
+                return
+                
+            }
+            
+            do {
+                
+                if let jsonValue = try? JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? [String:Any] {
+                    
+                    if let rows = jsonValue?["rows"] as? [[String:Any]] {
+                    
+                        if let elements = rows[0]["elements"] as? [[String:Any]] {
+                            
+                            if let duration = elements[0]["duration"] as? [String:Any] {
+                                print(duration)
+                            }
+                        }
+                        
+                    }
+                    
+                }
+                
+            } catch(let error) {
+                
+                print(error)
+                
+            }
+        }
+        
+        task.resume()
     }
     
 }
