@@ -152,13 +152,31 @@ class DailyScheduleTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let myTabBarViewController = self.tabBarController as! DailyTabBarViewController
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
         
-        myTabBarViewController.dailySchedules = self.dailySchedules
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
         
-        return "Day \(section + 1)" // 0-based
+        label.textAlignment = .center
+        
+        label.textColor = .brown
+        
+        label.text = "Day \(section + 1)"
+        
+        label.font = UIFont(name: "AvenirNext-Bold", size: 16)
+        
+        headerView.backgroundColor = UIColor(red: 1, green: 235/255, blue: 205/255, alpha: 0.7)
+        
+        headerView.addSubview(label)
+        
+        return headerView
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        return 40
         
     }
     
@@ -170,7 +188,13 @@ class DailyScheduleTableViewController: UITableViewController {
         
         button.setTitle("Add new daily schedule for day\(section + 1)...", for: .normal)
         
-        button.backgroundColor = .black
+        button.titleLabel?.textAlignment = .center
+        
+        button.setTitleColor(.brown, for: .normal)
+        
+        button.titleLabel?.font = UIFont(name: "AvenirNext", size: 14)
+        
+        button.backgroundColor =  .white
         
         button.tag = section
         
