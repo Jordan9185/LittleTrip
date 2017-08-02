@@ -137,7 +137,7 @@ class DailyScheduleTableViewController: UITableViewController {
         
         cell.dailyScheduleRef = self.dailyScheduleRef
         
-        cell.travelTimeLabel.text = "起點"
+        cell.travelTimeLabel.text = ""
         
         var userLocation = CLLocationCoordinate2D(latitude: 25, longitude: 121)
         
@@ -146,6 +146,10 @@ class DailyScheduleTableViewController: UITableViewController {
             userLocation = (self.dailySchedules[indexPath.section]?[indexPath.row - 1].coordinate)!
             
             self.requestTravelTime(origin: userLocation, destination: (currentDailySchedule?.coordinate)!, indexPath: indexPath)
+            
+        } else {
+            
+            cell.travelTimeLabel.text = "起點"
             
         }
         
