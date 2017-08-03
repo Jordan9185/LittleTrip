@@ -223,7 +223,25 @@ class DailyScheduleTableViewController: UITableViewController {
         
         let deleteRowAction = UITableViewRowAction(style: .default, title: "Delete") { (action, indexPath) in
             
-            self.dailySchedules[indexPath.section]?.remove(at: indexPath.row)
+            
+            if indexPath.row == 0 {
+                
+                self.dailySchedules[indexPath.section]?[indexPath.row] =
+                    
+                    DailySchedule(
+                        locationName: "尚未選擇",
+                        startTime: "08:00",
+                        endTime: "09:00",
+                        coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0),
+                        travelTime: "起點"
+                        
+                )
+                
+            } else {
+                
+                self.dailySchedules[indexPath.section]?.remove(at: indexPath.row)
+                
+            }
             
             var updateDics: [[String:Any]] = []
             
