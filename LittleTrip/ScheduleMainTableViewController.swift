@@ -43,14 +43,30 @@ class ScheduleMainTableViewController: UITableViewController {
     
     @IBOutlet var schedulesTableView: UITableView!
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(true)
+        
+        print("appear")
+        
+        getScheduleDataOnServer()
+        
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-        getScheduleDataOnServer()
 
     }
-
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        super.viewWillDisappear(true)
+        
+        self.scheduleRef?.removeAllObservers()
+        
+    }
+    
     func getScheduleDataOnServer() {
         
         self.scheduleRef = Database.database().reference().child("schedule")
@@ -166,9 +182,34 @@ class ScheduleMainTableViewController: UITableViewController {
             
             let currentDailyRef = Database.database().reference().child("dailySchedule").child(currentScheduleID)
             
+            let currentBaggageListRef = Database.database().reference().child("baggageList").child(currentScheduleID)
+            
+            let imageRef = Storage.storage().reference().child("ScheduleImage/\(currentScheduleID).jpg")
+            
             currentRef?.removeValue()
             
             currentDailyRef.removeValue()
+            
+            currentBaggageListRef.removeValue()
+            
+            self.schedules.remove(at: indexPath.row)
+            
+            // Delete the file
+            imageRef.delete { error in
+                
+                if let error = error {
+                    
+                    print("Delete ScheduleImage/\(currentScheduleID).jpg is failed.")
+                    
+                } else {
+                    
+                    print("Delete ScheduleImage/\(currentScheduleID).jpg is successful.")
+                    
+                }
+                
+            }
+            
+            self.tableView.reloadData()
             
         default :
             
