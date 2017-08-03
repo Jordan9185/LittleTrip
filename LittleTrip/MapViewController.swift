@@ -15,9 +15,9 @@ class MapViewController: UIViewController{
     
     var dailySchedules: [Int: [DailySchedule]]!
     
-    override func viewDidLoad() {
+    override func viewWillAppear(_ animated: Bool) {
         
-        super.viewDidLoad()
+        super.viewWillAppear(true)
         
         let myTabBarViewController = self.tabBarController as! DailyTabBarViewController
         
@@ -30,6 +30,12 @@ class MapViewController: UIViewController{
         print(self.dailySchedules)
         
         setGoogleMaps()
+        
+    }
+    
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
         
     }
 
