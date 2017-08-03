@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
 import SDWebImage
@@ -80,6 +81,12 @@ class ScheduleMainTableViewController: UITableViewController {
                 for schedule in schedules {
                     
                     let value = schedule.value as! [String:Any]
+                    
+                    if Auth.auth().currentUser?.uid != value["uid"] as! String {
+                        
+                        continue
+                        
+                    }
                     
                     localSchedules.append(
                         
