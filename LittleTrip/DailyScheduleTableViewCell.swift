@@ -20,6 +20,10 @@ class DailyScheduleTableViewCell: UITableViewCell {
     
     @IBOutlet var travelTimeLabel: UILabel!
     
+    @IBOutlet var headerImageView: UIImageView!
+    
+    @IBOutlet var toLabel: UILabel!
+    
     var dailyScheduleRef: DatabaseReference?
     
     override func awakeFromNib() {

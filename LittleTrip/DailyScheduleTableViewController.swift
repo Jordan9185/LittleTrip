@@ -147,9 +147,27 @@ class DailyScheduleTableViewController: UITableViewController {
             
             self.requestTravelTime(origin: userLocation, destination: (currentDailySchedule?.coordinate)!, indexPath: indexPath)
             
+            cell.startTimeTextField.isHidden = false
+            
+            //cell.endTimeTextField.isHidden = true
+            
+            cell.toLabel.isHidden = false
+            
+            cell.headerImageView.isHidden = true
+            
         } else {
             
             cell.travelTimeLabel.text = "起點"
+            
+            cell.headerImageView.image = #imageLiteral(resourceName: "start")
+            
+            cell.startTimeTextField.isHidden = true
+            
+            //cell.endTimeTextField.isHidden = true
+            
+            cell.toLabel.isHidden = true
+            
+            cell.headerImageView.isHidden = false
             
         }
         
@@ -410,12 +428,57 @@ class DailyScheduleTableViewController: UITableViewController {
                         
                         self.dailySchedules[indexPath.section]?[indexPath.row].travelTime = (duration["text"] as? String)!
                         
+                        //test
+                        
+                        if let totalTimeValue = duration["value"] as? Int {
+                            
+                            var hour = totalTimeValue / 3600
+                            
+                            var min = (totalTimeValue % 3600) / 60
+                            
+                            let dateFormatter = DateFormatter()
+                            
+                            dateFormatter.dateFormat = "HH:mm"
+                            
+                            let date = dateFormatter.date(from: (self.dailySchedules[indexPath.section]?[indexPath.row-1].endTime)!)
+                            
+                            let calendar = Calendar(identifier: .chinese)
+                            
+                            hour += calendar.component(.hour, from: date!)
+                            
+                            min += calendar.component(.minute, from: date!)
+                            
+                            if min >= 60 {
+                                
+                                hour += min / 60
+                                
+                                min = min % 60
+                                
+                            }
+                            
+                            if hour >= 24 {
+                                
+                                hour = hour % 24
+                                
+                            }
+                            
+                            self.dailySchedules[indexPath.section]?[indexPath.row].startTime = "\(hour):\(min)"
+                        }
+                        
+                        //test
+                        
                         DispatchQueue.main.async {
                                 
                             let cell = self.dailySchedulesTableView.cellForRow(at: indexPath) as? DailyScheduleTableViewCell
+                            
+                            if let travelTime = duration["text"] as? String {
+                            
+                             cell?.travelTimeLabel.text = "預估路程約 \(travelTime)"
                                 
-                            cell?.travelTimeLabel.text = (duration["text"] as? String)!
-                                
+                            }
+                            
+                            cell?.startTimeTextField.text = self.dailySchedules[indexPath.section]?[indexPath.row].startTime
+                            
                         }
                     
                     }
