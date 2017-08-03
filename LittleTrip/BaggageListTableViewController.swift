@@ -116,17 +116,21 @@ class BaggageListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
         
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
         
         button.setTitle("+ Add item ...", for: .normal)
         
+        button.setTitleColor(.brown, for: .normal)
+        
         button.addTarget(self, action: #selector(addEmptyRowAction), for: .touchUpInside)
+        
+        button.titleLabel?.font = UIFont(name: "AvenirNext-Bold", size: 16)
         
         footerView.addSubview(button)
         
-        footerView.backgroundColor = .brown
+        footerView.backgroundColor = UIColor(red: 1, green: 235/255, blue: 205/255, alpha: 0.7)
         
         return footerView
         
@@ -147,7 +151,7 @@ class BaggageListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         
-        return 50
+        return 40
         
     }
     
