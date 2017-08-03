@@ -147,9 +147,27 @@ class DailyScheduleTableViewController: UITableViewController {
             
             self.requestTravelTime(origin: userLocation, destination: (currentDailySchedule?.coordinate)!, indexPath: indexPath)
             
+            cell.startTimeTextField.isHidden = false
+            
+            //cell.endTimeTextField.isHidden = true
+            
+            cell.toLabel.isHidden = false
+            
+            cell.headerImageView.isHidden = true
+            
         } else {
             
             cell.travelTimeLabel.text = "起點"
+            
+            cell.headerImageView.image = #imageLiteral(resourceName: "start")
+            
+            cell.startTimeTextField.isHidden = true
+            
+            //cell.endTimeTextField.isHidden = true
+            
+            cell.toLabel.isHidden = true
+            
+            cell.headerImageView.isHidden = false
             
         }
         

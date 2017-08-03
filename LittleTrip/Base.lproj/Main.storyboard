@@ -360,20 +360,23 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="UQZ-oa-LaK">
                                                     <rect key="frame" x="0.0" y="0.0" width="80" height="69.5"/>
                                                     <subviews>
+                                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Os3-rq-Maz">
+                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="13.5"/>
+                                                        </imageView>
                                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cB7-vH-1dI">
-                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="20"/>
+                                                            <rect key="frame" x="0.0" y="18.5" width="80" height="14"/>
                                                             <color key="textColor" red="0.20784313730000001" green="0.72156862749999995" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                             <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                         </textField>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oue-6H-zYw">
-                                                            <rect key="frame" x="0.0" y="25" width="80" height="19.5"/>
+                                                            <rect key="frame" x="0.0" y="37.5" width="80" height="13.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" red="0.20784313730000001" green="0.72156862749999995" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tj8-6J-9rE">
-                                                            <rect key="frame" x="0.0" y="49.5" width="80" height="20"/>
+                                                            <rect key="frame" x="0.0" y="56" width="80" height="13.5"/>
                                                             <color key="textColor" red="0.20784313730000001" green="0.72156862749999995" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                             <textInputTraits key="textInputTraits" returnKeyType="done"/>
@@ -419,8 +422,10 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="endTimeTextField" destination="tj8-6J-9rE" id="sva-4a-ya2"/>
+                                    <outlet property="headerImageView" destination="Os3-rq-Maz" id="Es4-A9-wEI"/>
                                     <outlet property="locationNameLabel" destination="0v1-eT-kbK" id="Wsr-vj-FXA"/>
                                     <outlet property="startTimeTextField" destination="cB7-vH-1dI" id="yz9-yZ-f87"/>
+                                    <outlet property="toLabel" destination="Oue-6H-zYw" id="VZa-yn-0S2"/>
                                     <outlet property="travelTimeLabel" destination="Mep-ht-PuS" id="O8o-sl-cSi"/>
                                 </connections>
                             </tableViewCell>
