@@ -25,6 +25,28 @@ class MenuViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func profileButtonTapped(_ sender: UIButton) {
+        
+        if let controller = self.storyboard?.instantiateViewController(withIdentifier: "ProfilePage") {
+            
+            self.slideMenuController()?.mainViewController = controller
+            
+            self.slideMenuController()?.closeLeft()
+        }
+    
+    }
+    
+    @IBAction func mainPageButtonTapped(_ sender: UIButton) {
+        
+        if let controller = self.storyboard?.instantiateViewController(withIdentifier: "MainFlow") {
+            
+            self.slideMenuController()?.mainViewController = controller
+            
+            self.slideMenuController()?.closeLeft()
+        }
+        
+    }
+
     @IBAction func SignOutActionTapped(_ sender: UIButton) {
         
         do {

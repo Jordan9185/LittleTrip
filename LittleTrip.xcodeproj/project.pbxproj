@@ -14,6 +14,7 @@
 		9821C5071F28245A0024B9D4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9821C5061F28245A0024B9D4 /* SignUpViewController.swift */; };
 		9827F8251F38340700A50043 /* SlideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9827F8241F38340700A50043 /* SlideMenuViewController.swift */; };
 		9827F8271F3837E600A50043 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9827F8261F3837E600A50043 /* MenuViewController.swift */; };
+		9827F82A1F384BDD00A50043 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9827F8291F384BDD00A50043 /* ProfileViewController.swift */; };
 		984E4AAC1F304F0A007766C7 /* BaggageListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984E4AAB1F304F0A007766C7 /* BaggageListTableViewController.swift */; };
 		984E4AAE1F305D73007766C7 /* BaggageListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984E4AAD1F305D73007766C7 /* BaggageListTableViewCell.swift */; };
 		986438E11F27349A001DABC6 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986438E01F27349A001DABC6 /* SignInViewController.swift */; };
@@ -40,6 +41,7 @@
 		9821C5061F28245A0024B9D4 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		9827F8241F38340700A50043 /* SlideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuViewController.swift; sourceTree = "<group>"; };
 		9827F8261F3837E600A50043 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		9827F8291F384BDD00A50043 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		984E4AAB1F304F0A007766C7 /* BaggageListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggageListTableViewController.swift; sourceTree = "<group>"; };
 		984E4AAD1F305D73007766C7 /* BaggageListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggageListTableViewCell.swift; sourceTree = "<group>"; };
 		986438E01F27349A001DABC6 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -104,14 +106,15 @@
 		980C55FC1F27324A007B4810 /* LittleTrip */ = {
 			isa = PBXGroup;
 			children = (
-				9827F8231F3833C800A50043 /* SlideMenu */,
 				9821C5011F2821AB0024B9D4 /* AppDelegate */,
 				98D11F591F29D27500A157BF /* CreateNewSchedule */,
 				98FBC1D71F2B0E3900E2E70F /* DailySchedule */,
 				986438DE1F273455001DABC6 /* SignIn */,
 				9821C5051F2824320024B9D4 /* SignUp */,
+				9827F8231F3833C800A50043 /* SlideMenu */,
 				98D11F541F29726100A157BF /* ScheduleMain */,
 				9821C5031F2822250024B9D4 /* Storyboard */,
+				9827F8281F384ACE00A50043 /* Profile */,
 				9821C5041F2822360024B9D4 /* Plist */,
 				9821C5021F2822140024B9D4 /* Assets */,
 			);
@@ -167,6 +170,14 @@
 				9827F8261F3837E600A50043 /* MenuViewController.swift */,
 			);
 			name = SlideMenu;
+			sourceTree = "<group>";
+		};
+		9827F8281F384ACE00A50043 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				9827F8291F384BDD00A50043 /* ProfileViewController.swift */,
+			);
+			name = Profile;
 			sourceTree = "<group>";
 		};
 		986438DE1F273455001DABC6 /* SignIn */ = {
@@ -368,6 +379,7 @@
 				984E4AAC1F304F0A007766C7 /* BaggageListTableViewController.swift in Sources */,
 				98D11F581F2974E500A157BF /* ScheduleMainTableViewCell.swift in Sources */,
 				980C55FE1F27324B007B4810 /* AppDelegate.swift in Sources */,
+				9827F82A1F384BDD00A50043 /* ProfileViewController.swift in Sources */,
 				984E4AAE1F305D73007766C7 /* BaggageListTableViewCell.swift in Sources */,
 				98FBC1DE1F2B115800E2E70F /* MapViewController.swift in Sources */,
 			);
