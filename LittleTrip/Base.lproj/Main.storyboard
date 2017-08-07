@@ -284,15 +284,15 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="TcJ-LY-l6N">
                                         <rect key="frame" x="0.0" y="250" width="375" height="417"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="test" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Man-ox-wVo">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v0c-BM-SJr">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="VvB-xP-Xf9"/>
+                                                    <constraint firstAttribute="height" constant="50" id="RYg-ar-bUV"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                 <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                            </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5d8-rt-4CY">
                                                 <rect key="frame" x="0.0" y="55" width="375" height="50"/>
                                                 <constraints>
@@ -342,7 +342,7 @@
                     </view>
                     <connections>
                         <outlet property="userImageView" destination="FDj-LI-6pk" id="zuO-oi-hQZ"/>
-                        <outlet property="userNameLabel" destination="Man-ox-wVo" id="Pgr-Zr-hLE"/>
+                        <outlet property="userNameTextField" destination="v0c-BM-SJr" id="5Nt-TL-rlE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2fA-0b-LH7" userLabel="First Responder" sceneMemberID="firstResponder"/>
