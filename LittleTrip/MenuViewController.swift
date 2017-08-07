@@ -15,8 +15,8 @@ import FirebaseDatabase
 class MenuViewController: UIViewController {
 
     @IBOutlet var userImageView: UIImageView!
-
-    @IBOutlet var userNameLabel: UILabel!
+    
+    @IBOutlet var userNameTextField: UITextField!
     
     var userRef: DatabaseReference?
     
@@ -25,6 +25,8 @@ class MenuViewController: UIViewController {
         super.viewDidLoad()
 
         catchUserData()
+        
+        userNameTextField.delegate = self
         
         userImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(changeUserPicture)))
         
@@ -49,6 +51,17 @@ class MenuViewController: UIViewController {
         
     }
 
+    @IBAction func friendListButtonTapped(_ sender: UIButton) {
+        
+        if let controller = self.storyboard?.instantiateViewController(withIdentifier: "FriendList") {
+            
+            self.slideMenuController()?.mainViewController = controller
+            
+            self.slideMenuController()?.closeLeft()
+        }
+        
+    }
+    
     @IBAction func SignOutActionTapped(_ sender: UIButton) {
         
         do {
@@ -85,11 +98,11 @@ class MenuViewController: UIViewController {
                     
                     if let userName = userData["name"] as? String {
                     
-                        self.userNameLabel.text = userName
+                        self.userNameTextField.text = userName
                         
                     } else {
                         
-                        self.userNameLabel.text = (user?.email)!
+                        self.userNameTextField.text = (user?.email)!
                         
                     }
                     
@@ -99,6 +112,42 @@ class MenuViewController: UIViewController {
         }
         
     }
+}
+
+extension MenuViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        
+        return true
+        
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        if textField == self.userNameTextField {
+            
+            updateUserName()
+            
+        }
+        
+    }
+    
+    func updateUserName() {
+        
+        let uid = (Auth.auth().currentUser?.uid)!
+        
+        let userRef = Database.database().reference().child("user").child(uid)
+        
+        let updateDic = [
+            "name" : (self.userNameTextField.text)!
+        ]
+        
+        userRef.updateChildValues(updateDic)
+        
+    }
+    
 }
 
 extension MenuViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
