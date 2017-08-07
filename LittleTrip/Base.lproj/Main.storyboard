@@ -311,6 +311,9 @@
                                                     <constraint firstAttribute="height" constant="50" id="xS3-xE-4m7"/>
                                                 </constraints>
                                                 <state key="normal" title="Sign out"/>
+                                                <connections>
+                                                    <action selector="SignOutActionTapped:" destination="0qI-e5-B2B" eventType="touchUpInside" id="Exf-dT-sEA"/>
+                                                </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xGJ-uI-f3e">
                                                 <rect key="frame" x="0.0" y="200" width="320" height="154.5"/>
