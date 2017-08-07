@@ -225,6 +225,12 @@ class ScheduleMainTableViewController: UITableViewController {
         }
     }
         
+    @IBAction func openMenuAction(_ sender: Any) {
+        
+        self.slideMenuController()?.openLeft()
+        
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "moveToDailyTabBarController" {

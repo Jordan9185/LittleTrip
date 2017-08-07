@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import GoogleMaps
 import GooglePlaces
+import SlideMenuControllerSwift
 
 let googleProjectApiKey = "AIzaSyBF5_QyFXAgL9vYzLSrAPbHxGxH1c9wynE"
 
@@ -37,9 +38,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             if let user = user {
                 
-                let nextViewController = storyboard.instantiateViewController(withIdentifier: "MainFlow")
+                let mainViewController = storyboard.instantiateViewController(withIdentifier: "MainFlow")
                 
-                self.window?.rootViewController = nextViewController
+                let leftViewController = storyboard.instantiateViewController(withIdentifier: "Left")
+                
+                let rightMenuViewController = UIViewController()
+                
+                let slideMenuController = SlideMenuController(mainViewController: mainViewController, leftMenuViewController: leftViewController, rightMenuViewController: rightMenuViewController)
+                
+                self.window?.rootViewController = slideMenuController
                 
             } else {
                 
