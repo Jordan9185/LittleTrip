@@ -10,21 +10,45 @@ import UIKit
 import SlideMenuControllerSwift
 import FirebaseStorage
 import FirebaseAuth
+import FirebaseDatabase
 
 class MenuViewController: UIViewController {
 
+    @IBOutlet var userImageView: UIImageView!
+
+    @IBOutlet var userNameLabel: UILabel!
+    
+    var userRef: DatabaseReference?
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
 
-        print(SlideMenuOptions.leftViewWidth)
+        catchUserData()
+        
+        userImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(changeUserPicture)))
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        
+        super.viewDidDisappear(true)
+        
+        userRef?.removeAllObservers()
+        
+    }
+    
+    @IBAction func mainPageButtonTapped(_ sender: UIButton) {
+        
+        if let controller = self.storyboard?.instantiateViewController(withIdentifier: "MainFlow") {
+            
+            self.slideMenuController()?.mainViewController = controller
+            
+            self.slideMenuController()?.closeLeft()
+        }
         
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     @IBAction func SignOutActionTapped(_ sender: UIButton) {
         
         do {
@@ -39,4 +63,145 @@ class MenuViewController: UIViewController {
         
     }
 
+    func catchUserData() {
+        
+        let user = Auth.auth().currentUser
+        
+        if let userID = user?.uid {
+        
+            userRef = Database.database().reference().child("user").child(userID)
+        
+            userRef?.observe(.value, with: { (snapshot) in
+            
+                if  let userData = snapshot.value as? [String:Any]{
+                    
+                    if let userImageURL = userData["imageURL"] as? String {
+                        
+                        self.userImageView.sd_setImage(with: URL(string: userImageURL))
+                        
+                        self.userImageView.contentMode = .scaleAspectFill
+                        
+                    }
+                    
+                    if let userName = userData["name"] as? String {
+                    
+                        self.userNameLabel.text = userName
+                        
+                    } else {
+                        
+                        self.userNameLabel.text = (user?.email)!
+                        
+                    }
+                    
+                }
+            
+            })
+        }
+        
+    }
+}
+
+extension MenuViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func changeUserPicture() {
+        
+        let imagePicker = UIImagePickerController()
+        
+        imagePicker.delegate = self
+        
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        if UIImagePickerController.isSourceTypeAvailable(.camera)
+        {
+            let openCamera = UIAlertAction(title: "Open camera", style: .default) { action in
+                
+                imagePicker.sourceType = .camera
+                
+                self.present(imagePicker, animated: true, completion: nil)
+                
+            }
+            
+            actionSheet.addAction(openCamera)
+            
+        }
+        
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary)
+        {
+            let openPhotoAlbum = UIAlertAction(title: "Open album", style: .default) { action in
+                
+                imagePicker.sourceType = .photoLibrary
+                
+                self.present(imagePicker, animated: true, completion: nil)
+                
+            }
+            
+            actionSheet.addAction(openPhotoAlbum)
+            
+        }
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        actionSheet.addAction(cancel)
+        
+        present(actionSheet, animated: true, completion: nil)
+        
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            
+            self.userImageView.image = image
+            
+            self.userImageView.contentMode = .scaleAspectFill
+            
+            updateUserImage(image)
+            
+        } else {
+            
+            print("pick image fail")
+            
+        }
+        
+        self.dismiss(animated: true, completion: nil)
+        
+    }
+    
+    func updateUserImage(_ image: UIImage) {
+        
+        let uid = (Auth.auth().currentUser?.uid)!
+        
+        if let imageData = UIImageJPEGRepresentation(image, 0.7) {
+            
+            let metaData = StorageMetadata()
+            
+            metaData.contentType = "image/jpeg"
+            
+            let imageRef = Storage.storage().reference().child("UserPic/\(uid).jpg")
+            
+            imageRef.putData(imageData, metadata: metaData, completion: { (metadata, error) in
+                
+                if let error = error {
+                    
+                    print("Upload Image fail: \(error)")
+                    
+                    return
+                    
+                }
+                
+                let imageURLString = (metadata?.downloadURL()?.absoluteString)!
+                
+                let userRef = Database.database().reference().child("user").child(uid)
+                
+                let updateDic = [
+                    "imageURL" : imageURLString
+                ]
+                
+                userRef.updateChildValues(updateDic)
+                
+            })
+        }
+        
+    }
+    
 }
