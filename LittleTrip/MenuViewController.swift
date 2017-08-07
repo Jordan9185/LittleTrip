@@ -51,6 +51,17 @@ class MenuViewController: UIViewController {
         
     }
 
+    @IBAction func friendListButtonTapped(_ sender: UIButton) {
+        
+        if let controller = self.storyboard?.instantiateViewController(withIdentifier: "FriendList") {
+            
+            self.slideMenuController()?.mainViewController = controller
+            
+            self.slideMenuController()?.closeLeft()
+        }
+        
+    }
+    
     @IBAction func SignOutActionTapped(_ sender: UIButton) {
         
         do {

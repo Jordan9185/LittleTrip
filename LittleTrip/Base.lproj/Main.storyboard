@@ -311,6 +311,9 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <state key="normal" title="Friend list"/>
+                                                <connections>
+                                                    <action selector="friendListButtonTapped:" destination="0qI-e5-B2B" eventType="touchUpInside" id="nKT-50-fcW"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jJy-VT-nY9">
                                                 <rect key="frame" x="0.0" y="165" width="375" height="50"/>
@@ -348,6 +351,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2fA-0b-LH7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1536" y="1693"/>
+        </scene>
+        <!--Friend Table View Controller-->
+        <scene sceneID="a2F-iC-f3S">
+            <objects>
+                <tableViewController storyboardIdentifier="FriendList" id="Egf-Sn-Gaq" customClass="FriendTableViewController" customModule="LittleTrip" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" id="Tdu-iK-fNQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FriendCell" rowHeight="80" id="6yr-PN-yfm" customClass="FriendTableViewCell" customModule="LittleTrip" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="80"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6yr-PN-yfm" id="fax-Yo-fIq">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Egf-Sn-Gaq" id="Lbv-AC-neo"/>
+                            <outlet property="delegate" destination="Egf-Sn-Gaq" id="N9R-l5-D1e"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g72-Vh-Wpk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1538.4000000000001" y="2424.7376311844082"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3Ku-aS-KR6">
