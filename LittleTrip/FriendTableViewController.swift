@@ -170,13 +170,25 @@ class FriendTableViewController: UITableViewController {
         
             let labelView = UILabel(frame: CGRect(x: 0 , y: 0, width: self.view.frame.width, height: 84))
         
+            let button = UIButton(frame: CGRect(x: self.view.frame.width - 110, y: 21, width: 100, height: 42))
+            
+            button.setTitle("Add Friend", for: .normal)
+            
+            button.backgroundColor = .black
+            
+            button.setTitleColor(.white, for: .normal)
+            
+            button.addTarget(self, action: #selector(addFriendAction), for: .touchUpInside)
+            
             labelView.text = "Friend List"
         
             labelView.textAlignment = .center
         
             labelView.backgroundColor = UIColor.yellow
-        
+            
             headerView.addSubview(labelView)
+            
+            headerView.addSubview(button)
         
             return headerView
         
@@ -201,6 +213,32 @@ class FriendTableViewController: UITableViewController {
             return 40
             
         }
+        
+    }
+    
+    func addFriendAction(_ sender: UIButton) {
+        
+        let alertController = UIAlertController(title: "Add Friend", message: "Enter your friend UID", preferredStyle: .alert)
+        
+        alertController.addTextField(configurationHandler: {(_ textField: UITextField) -> Void in
+            textField.placeholder = "Current password"
+            textField.isSecureTextEntry = true
+        })
+        
+        let confirmAction = UIAlertAction(title: "OK", style: .default, handler: {(_ action: UIAlertAction) -> Void in
+            print("Current password \(String(describing: alertController.textFields?[0].text))")
+            //compare the current password and do action here
+        })
+        
+        alertController.addAction(confirmAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {(_ action: UIAlertAction) -> Void in
+            print("Canelled")
+        })
+        
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: { _ in })
         
     }
     
