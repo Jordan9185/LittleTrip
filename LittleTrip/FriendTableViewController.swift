@@ -7,34 +7,92 @@
 //
 
 import UIKit
+import FirebaseDatabase
+import FirebaseAuth
+
+struct User {
+    
+    let uid: String
+    
+    let name: String
+    
+    let pictureURL: String
+    
+}
 
 class FriendTableViewController: UITableViewController {
 
+    var userListRef: DatabaseReference?
+    
+    let uid = (Auth.auth().currentUser?.uid)!
+    
+    var friends:[User] = []
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        catchFriendList()
+        
     }
 
     override func didReceiveMemoryWarning() {
+        
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        userListRef?.removeAllObservers()
+        
+    }
+    
+    func catchFriendList() {
+        
+        self.userListRef = Database.database().reference().child("user")
+        
+        self.userListRef?.child(uid).child("friendList").observe(.value, with: { (snapshot) in
+            
+            if let friendIDs = snapshot.value as? [String] {
+                
+                for friendID in friendIDs {
+                    
+                    self.userListRef?.child(friendID).observeSingleEvent(of: .value, with: { (snapshot) in
+
+                        if let values = snapshot.value as? [String:Any],
+                            let name = values["name"] as? String,
+                            let imageURL = values["imageURL"] as? String
+                        {
+                            
+                            let friend = User(
+                                uid: friendID,
+                                name: name,
+                                pictureURL: imageURL
+                            )
+                            
+                            self.friends.append(friend)
+                            
+                            self.tableView.reloadData()
+                            
+                        }
+                        
+                    })
+                    
+                }
+                
+            }
+            
+        })
+        
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 3
+
+        return self.friends.count
     }
 
     
@@ -42,55 +100,37 @@ class FriendTableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "FriendCell", for: indexPath) as! FriendTableViewCell
 
+        cell.friendNameLabel.text = self.friends[indexPath.row].name
         
-
+        cell.userImageView.sd_setImage(with: URL(string: self.friends[indexPath.row].pictureURL))
+        
         return cell
     }
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let viewWidth = self.view.frame.width
+        
+        let headerView = UIView(frame: CGRect(x: 0 , y: 0, width: self.view.frame.width, height: 84))
+        
+        let labelView = UILabel(frame: CGRect(x: 0 , y: 0, width: self.view.frame.width, height: 84))
+        
+        labelView.text = "Friend List"
+        
+        labelView.textAlignment = .center
+        
+        labelView.backgroundColor = UIColor.yellow
+        
+        headerView.addSubview(labelView)
+        
+        return headerView
+        
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        return 84
+        
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }
