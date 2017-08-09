@@ -64,37 +64,43 @@ class FriendTableViewController: UITableViewController {
             
             if let friendIDs = snapshot.value as? [String] {
                 
-                for friendID in friendIDs {
+                friendIDs.map({ friendID in
                     
-                    self.userListRef?.child(friendID).observeSingleEvent(of: .value, with: { (snapshot) in
+                    self.getFriendData(friendID)
 
-                        if let values = snapshot.value as? [String:Any],
-                            let name = values["name"] as? String,
-                            let imageURL = values["imageURL"] as? String
-                        {
-                            
-                            let friend = User(
-                                uid: friendID,
-                                name: name,
-                                pictureURL: imageURL
-                            )
-                            
-                            self.friends.append(friend)
-                            
-                            self.tableView.reloadData()
-                            
-                        }
-                        
-                    })
-                    
-                }
-                
+                })
+
             }
             
         })
         
     }
 
+    func getFriendData(_ friendID: String) {
+        
+        self.userListRef?.child(friendID).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            if let values = snapshot.value as? [String:Any],
+                let name = values["name"] as? String,
+                let imageURL = values["imageURL"] as? String
+            {
+                
+                let friend = User(
+                    uid: friendID,
+                    name: name,
+                    pictureURL: imageURL
+                )
+                
+                self.friends.append(friend)
+                
+                self.tableView.reloadData()
+                
+            }
+            
+        })
+        
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -221,25 +227,34 @@ class FriendTableViewController: UITableViewController {
         let alertController = UIAlertController(title: "Add Friend", message: "Enter your friend UID", preferredStyle: .alert)
         
         alertController.addTextField(configurationHandler: {(_ textField: UITextField) -> Void in
-            textField.placeholder = "Current password"
-            textField.isSecureTextEntry = true
+            
+            textField.placeholder = "Your friend UID"
+            
         })
         
         let confirmAction = UIAlertAction(title: "OK", style: .default, handler: {(_ action: UIAlertAction) -> Void in
-            print("Current password \(String(describing: alertController.textFields?[0].text))")
-            //compare the current password and do action here
+            
+            guard let friendID = alertController.textFields?.first?.text else {
+                return
+            }
+            
+            self.updateFriendList(who: self.uid, friendID: friendID)
+            
         })
         
         alertController.addAction(confirmAction)
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {(_ action: UIAlertAction) -> Void in
-            print("Canelled")
-        })
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
         alertController.addAction(cancelAction)
         
-        present(alertController, animated: true, completion: { _ in })
+        present(alertController, animated: true, completion: nil)
         
     }
     
+    func updateFriendList(who uid:String, friendID:String) {
+        
+        print(friendID)
+        
+    }
 }
