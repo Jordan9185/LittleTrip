@@ -42,9 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 let leftViewController = storyboard.instantiateViewController(withIdentifier: "Left")
                 
-                let rightMenuViewController = UIViewController()
-                
-                let slideMenuController = SlideMenuController(mainViewController: mainViewController, leftMenuViewController: leftViewController, rightMenuViewController: rightMenuViewController)
+                let slideMenuController = SlideMenuController(mainViewController: mainViewController, leftMenuViewController: leftViewController)
                 
                 self.window?.rootViewController = slideMenuController
                 
