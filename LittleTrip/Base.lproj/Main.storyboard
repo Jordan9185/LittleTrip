@@ -743,6 +743,7 @@
                         <segue destination="NJa-gb-grj" kind="relationship" relationship="viewControllers" id="r8C-QL-qna"/>
                         <segue destination="WEI-i3-E2x" kind="relationship" relationship="viewControllers" id="uah-nX-dhs"/>
                         <segue destination="MSH-Ij-ULG" kind="relationship" relationship="viewControllers" id="06Y-eP-Q9D"/>
+                        <segue destination="E0t-h2-AjG" kind="relationship" relationship="viewControllers" id="dJ4-ig-Q6S"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V9K-rd-VHG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -850,7 +851,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="86"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pJQ-aL-UJ9" id="euN-P6-gtB">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="86"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E4C-Di-Crk">
@@ -909,6 +910,55 @@
             </objects>
             <point key="canvasLocation" x="3189.5999999999999" y="2847.5262368815593"/>
         </scene>
+        <!--Parner Board-->
+        <scene sceneID="biT-c3-YKU">
+            <objects>
+                <tableViewController id="mhu-S9-ZOX" customClass="ParnerBoardTableViewController" customModule="LittleTrip" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="AI2-YI-fHf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ParnerCell" id="lYe-4B-cca" customClass="ParnerBoardTableViewCell" customModule="LittleTrip" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lYe-4B-cca" id="Num-uA-hGh">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="mhu-S9-ZOX" id="z55-w3-UVU"/>
+                            <outlet property="delegate" destination="mhu-S9-ZOX" id="g9Z-A7-4zz"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Parner Board" id="KvN-B7-9Nm"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eoW-bI-2eO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3190" y="3653"/>
+        </scene>
+        <!--Parner Board-->
+        <scene sceneID="NU1-Ac-LRR">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="E0t-h2-AjG" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Parner Board" image="parner" id="0C8-1W-7gX"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="YrI-Rb-dVM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.20784313730000001" green="0.72156862749999995" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="mhu-S9-ZOX" kind="relationship" relationship="rootViewController" id="Zi8-od-tk4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Iyr-JB-LXF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2105" y="3653"/>
+        </scene>
     </scenes>
     <resources>
         <image name="back" width="32" height="32"/>
@@ -920,6 +970,7 @@
         <image name="landing" width="960" height="639"/>
         <image name="map" width="32" height="32"/>
         <image name="menu" width="32" height="32"/>
+        <image name="parner" width="32" height="32"/>
         <image name="placeholder" width="640" height="640"/>
         <image name="profile" width="128" height="128"/>
         <image name="signup" width="640" height="423"/>
