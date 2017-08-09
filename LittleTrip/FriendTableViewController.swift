@@ -224,6 +224,31 @@ class FriendTableViewController: UITableViewController {
         
     }
     
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        switch editingStyle {
+            
+        case .delete:
+            
+            self.friends.remove(at: indexPath.row)
+
+            var friendList: [String] = []
+            
+            self.friends.map({ (friend) in
+                
+                friendList.append(friend.uid)
+                
+            })
+            
+            self.userListRef?.child(uid).child("friendList").setValue(friendList)
+            
+        default:
+            print("nothing happend")
+            
+        }
+        
+    }
+    
     func addFriendAction(_ sender: UIButton) {
         
         let alertController = UIAlertController(title: "Add Friend", message: "Enter your friend UID", preferredStyle: .alert)
