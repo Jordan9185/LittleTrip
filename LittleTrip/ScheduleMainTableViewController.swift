@@ -42,22 +42,16 @@ class ScheduleMainTableViewController: UITableViewController {
     
     var scheduleRef: DatabaseReference?
     
+    let mainViewSections: [scheduleSection] = [ .mySchedule, .iAmJoining]
+    
     @IBOutlet var schedulesTableView: UITableView!
     
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(true)
         
-        print("appear")
-        
         getScheduleDataOnServer()
         
-    }
-    
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
-
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -72,7 +66,11 @@ class ScheduleMainTableViewController: UITableViewController {
         
         self.scheduleRef = Database.database().reference().child("schedule")
         
-        self.scheduleRef?.observe(DataEventType.value, with: { (snapshot) in
+        let uid = (Auth.auth().currentUser?.uid)!
+        
+        let ref = self.scheduleRef?.queryOrdered(byChild: "uid").queryEqual(toValue: uid)
+        
+        ref?.observe(.value, with: { (snapshot) in
 
             var localSchedules: [Schedule] = []
             
@@ -81,12 +79,6 @@ class ScheduleMainTableViewController: UITableViewController {
                 for schedule in schedules {
                     
                     let value = schedule.value as! [String:Any]
-                    
-                    if Auth.auth().currentUser?.uid != value["uid"] as! String {
-                        
-                        continue
-                        
-                    }
                     
                     localSchedules.append(
                         
@@ -110,6 +102,7 @@ class ScheduleMainTableViewController: UITableViewController {
             }
             
         })
+ 
         
     }
     
@@ -117,57 +110,106 @@ class ScheduleMainTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
 
-        return 1
+        return 2
         
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if section == scheduleSection.mySchedule.rawValue {
+        switch mainViewSections[section] {
             
-            return schedules.count
+        case .mySchedule:
+            
+                return schedules.count
+            
+        case .iAmJoining:
+            
+                return 0
             
         }
-        
-        return 0
         
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "scheduleCell", for: indexPath) as! ScheduleMainTableViewCell
+        switch mainViewSections[indexPath.section] {
+            
+        case .mySchedule:
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "scheduleCell", for: indexPath) as! ScheduleMainTableViewCell
 
-        cell.titleLabel.text = schedules[indexPath.row].title
+            cell.titleLabel.text = schedules[indexPath.row].title
         
-        cell.backgroundImageView.contentMode = .scaleAspectFill
+            cell.backgroundImageView.contentMode = .scaleAspectFill
         
-        cell.backgroundImageView.sd_setImage(with: URL(string: schedules[indexPath.row].imageUrl))
+            cell.backgroundImageView.sd_setImage(with: URL(string: schedules[indexPath.row].imageUrl))
         
-        cell.tag = indexPath.row
+            cell.tag = indexPath.row
         
-        return cell
+            return cell
+        
+        case .iAmJoining:
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "scheduleCell", for: indexPath) as! ScheduleMainTableViewCell
+            
+            cell.titleLabel.text = schedules[indexPath.row].title
+            
+            cell.backgroundImageView.contentMode = .scaleAspectFill
+            
+            cell.backgroundImageView.sd_setImage(with: URL(string: schedules[indexPath.row].imageUrl))
+            
+            cell.tag = indexPath.row
+            
+            return cell
+            
+        }
         
     }
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
+        switch mainViewSections[section] {
+            
+        case .mySchedule:
+            
+            let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
         
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
         
-        label.textAlignment = .center
+            label.textAlignment = .center
         
-        label.textColor = .brown
+            label.textColor = .brown
         
-        label.text = "My Schedule"
+            label.text = "My Schedule"
         
-        label.font = UIFont(name: "AvenirNext-Bold", size: 16)
+            label.font = UIFont(name: "AvenirNext-Bold", size: 16)
         
-        headerView.backgroundColor = UIColor(red: 1, green: 235/255, blue: 205/255, alpha: 0.7)
+            headerView.backgroundColor = UIColor(red: 1, green: 235/255, blue: 205/255, alpha: 0.7)
         
-        headerView.addSubview(label)
+            headerView.addSubview(label)
         
-        return headerView
+            return headerView
+            
+        case .iAmJoining:
+            
+            let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
+            
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
+            
+            label.textAlignment = .center
+            
+            label.textColor = .brown
+            
+            label.text = "I am joing"
+            
+            label.font = UIFont(name: "AvenirNext-Bold", size: 16)
+            
+            headerView.backgroundColor = UIColor(red: 1, green: 235/255, blue: 205/255, alpha: 0.7)
+            
+            headerView.addSubview(label)
+            
+            return headerView
+        }
         
     }
     
