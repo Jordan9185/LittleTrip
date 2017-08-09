@@ -137,6 +137,8 @@ class FriendTableViewController: UITableViewController {
             
             cell.friendNameLabel.textAlignment = .center
             
+            cell.friendNameLabel.numberOfLines = 0
+            
             cell.userImageView.isHidden = true
             
         case .friendList:
@@ -254,7 +256,62 @@ class FriendTableViewController: UITableViewController {
     
     func updateFriendList(who uid:String, friendID:String) {
         
-        print(friendID)
+        if uid == friendID {
+            
+            showAlert(title: "Same as user", message: "UID is same as current user.")
+            
+            return
+            
+        }
+        
+        self.friends.map { (friend) in
+            
+            if friend.uid == friendID {
+                
+                showAlert(title: "User has already added", message: "\(friendID) has already added in list.")
+
+                return
+            }
+            
+        }
+        
+        self.userListRef?.child(friendID).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            if snapshot.exists() {
+                
+                var friendList: [String] = []
+                
+                self.friends.map({ (friend) in
+                    
+                    friendList.append(friend.uid)
+                    
+                })
+                
+                friendList.append(friendID)
+                
+                self.userListRef?.child(uid).child("friendList").setValue(friendList)
+
+                
+            } else {
+            
+                self.showAlert(title: "user isn't exist.", message: "user isn't exist.")
+            
+            }
+            
+        })
         
     }
+    
+    func showAlert(title: String, message: String) {
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let confirmAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        
+        alertController.addAction(confirmAction)
+        
+        present(alertController, animated: true, completion: nil)
+        
+    }
+    
 }
