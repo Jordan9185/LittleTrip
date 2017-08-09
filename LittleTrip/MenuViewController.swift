@@ -94,6 +94,12 @@ class MenuViewController: UIViewController {
                         
                         self.userImageView.contentMode = .scaleAspectFill
                         
+                        if userImageURL == defaultImageURLString {
+                           
+                            self.userImageView.contentMode = .center
+                            
+                        }
+                        
                     }
                     
                     if let userName = userData["name"] as? String {
