@@ -120,7 +120,7 @@ class ScheduleMainTableViewController: UITableViewController {
         
         let uid = (Auth.auth().currentUser?.uid)!
         
-        self.scheduleHadJoinedRef = Database.database().reference().child("scheduleHadJoined").child(uid).child("schedules")
+        self.scheduleHadJoinedRef = rootRef.child("scheduleHadJoined").child(uid).child("schedules")
         
         self.scheduleHadJoinedRef?.observe(.value, with: { (snapshot) in
             
@@ -289,40 +289,63 @@ class ScheduleMainTableViewController: UITableViewController {
             
         case .delete :
             
-            let currentScheduleID = self.schedules[indexPath.row].scheduleId
-            
-            let currentRef = self.scheduleRef?.child(currentScheduleID)
-            
-            let currentDailyRef = Database.database().reference().child("dailySchedule").child(currentScheduleID)
-            
-            let currentBaggageListRef = Database.database().reference().child("baggageList").child(currentScheduleID)
-            
-            let imageRef = Storage.storage().reference().child("ScheduleImage/\(currentScheduleID).jpg")
-            
-            currentRef?.removeValue()
-            
-            currentDailyRef.removeValue()
-            
-            currentBaggageListRef.removeValue()
-            
-            self.schedules.remove(at: indexPath.row)
-            
-            // Delete the file
-            imageRef.delete { error in
+            switch mainViewSections[indexPath.section] {
                 
-                if let error = error {
+            case .mySchedule:
+                
+                let currentScheduleID = self.schedules[indexPath.row].scheduleId
+                
+                let currentRef = self.scheduleRef?.child(currentScheduleID)
+                
+                let currentDailyRef = rootRef.child("dailySchedule").child(currentScheduleID)
+                
+                let currentBaggageListRef = rootRef.child("baggageList").child(currentScheduleID)
+                
+                let imageRef = Storage.storage().reference().child("ScheduleImage/\(currentScheduleID).jpg")
+                
+                currentRef?.removeValue()
+                
+                currentDailyRef.removeValue()
+                
+                currentBaggageListRef.removeValue()
+                
+                self.schedules.remove(at: indexPath.row)
+                
+                // Delete the file
+                imageRef.delete { error in
                     
-                    print("Delete ScheduleImage/\(currentScheduleID).jpg is failed.")
-                    
-                } else {
-                    
-                    print("Delete ScheduleImage/\(currentScheduleID).jpg is successful.")
+                    if let error = error {
+                        
+                        print("Delete ScheduleImage/\(currentScheduleID).jpg is failed.")
+                        
+                    } else {
+                        
+                        print("Delete ScheduleImage/\(currentScheduleID).jpg is successful.")
+                        
+                    }
                     
                 }
                 
+                self.tableView.reloadData()
+
+            case .iAmJoining:
+                
+                let uid = (Auth.auth().currentUser?.uid)!
+                
+                self.scheduleHadJoineds.remove(at: indexPath.row)
+                
+                var localSchedules: [String] = []
+                
+                self.scheduleHadJoineds.map({ (schedule) in
+                    
+                    localSchedules.append(schedule.scheduleId)
+                    
+                })
+                
+                self.scheduleHadJoinedRef?.setValue(localSchedules)
+                
             }
             
-            self.tableView.reloadData()
             
         default :
             
