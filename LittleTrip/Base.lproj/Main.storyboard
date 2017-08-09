@@ -918,9 +918,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <containerView key="tableHeaderView" opaque="NO" contentMode="scaleToFill" id="29C-CG-4EY">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="67"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <connections>
+                                <segue destination="3O4-Bb-jLf" kind="embed" id="TWA-aY-AYn"/>
+                            </connections>
+                        </containerView>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ParnerCell" id="lYe-4B-cca" customClass="ParnerBoardTableViewCell" customModule="LittleTrip" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="95" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lYe-4B-cca" id="Num-uA-hGh">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -933,11 +940,66 @@
                             <outlet property="delegate" destination="mhu-S9-ZOX" id="g9Z-A7-4zz"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Parner Board" id="KvN-B7-9Nm"/>
+                    <navigationItem key="navigationItem" title="Parner Board" id="KvN-B7-9Nm">
+                        <barButtonItem key="leftBarButtonItem" image="back" id="dBL-AR-MhG">
+                            <connections>
+                                <action selector="backButtonTapped:" destination="mhu-S9-ZOX" id="VeU-oy-bCb"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="add-contact" id="JbK-yv-spx"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eoW-bI-2eO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3190" y="3653"/>
+            <point key="canvasLocation" x="3189.5999999999999" y="3652.6236881559225"/>
+        </scene>
+        <!--Parner Collection View Controller-->
+        <scene sceneID="p3Q-Ui-on6">
+            <objects>
+                <collectionViewController id="3O4-Bb-jLf" customClass="ParnerCollectionViewController" customModule="LittleTrip" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="vvL-H1-nQf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="67"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="gRk-xH-aoa">
+                            <size key="itemSize" width="68" height="68"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ParnerPicCell" id="xgP-4S-u43" customClass="ParnerCollectionViewCell" customModule="LittleTrip" customModuleProvider="target">
+                                <rect key="frame" x="5" y="-0.5" width="68" height="68"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="68" height="68"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="9W1-4g-ZGx">
+                                            <rect key="frame" x="5" y="5" width="58" height="58"/>
+                                        </imageView>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="9W1-4g-ZGx" firstAttribute="leading" secondItem="xgP-4S-u43" secondAttribute="leading" constant="5" id="Hm1-tj-m2j"/>
+                                    <constraint firstAttribute="trailing" secondItem="9W1-4g-ZGx" secondAttribute="trailing" constant="5" id="JOw-Bi-VT8"/>
+                                    <constraint firstAttribute="bottom" secondItem="9W1-4g-ZGx" secondAttribute="bottom" constant="5" id="MeF-EW-943"/>
+                                    <constraint firstItem="9W1-4g-ZGx" firstAttribute="top" secondItem="xgP-4S-u43" secondAttribute="top" constant="5" id="o74-ve-Z3M"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="parnerPicImageView" destination="9W1-4g-ZGx" id="OJ9-gJ-7Pt"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="3O4-Bb-jLf" id="0Z9-Pr-XLU"/>
+                            <outlet property="delegate" destination="3O4-Bb-jLf" id="OJV-fs-RPY"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xzh-mK-6QA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3976.8000000000002" y="3439.4302848575717"/>
         </scene>
         <!--Parner Board-->
         <scene sceneID="NU1-Ac-LRR">
@@ -961,6 +1023,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="add-contact" width="32" height="32"/>
         <image name="back" width="32" height="32"/>
         <image name="baglist" width="32" height="32"/>
         <image name="baglist-selected" width="32" height="32"/>

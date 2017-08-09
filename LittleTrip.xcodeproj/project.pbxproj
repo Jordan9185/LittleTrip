@@ -18,6 +18,8 @@
 		9827F82F1F388FD100A50043 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9827F82E1F388FD100A50043 /* FriendTableViewCell.swift */; };
 		9827F8321F3AF96700A50043 /* ParnerBoardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9827F8311F3AF96700A50043 /* ParnerBoardTableViewController.swift */; };
 		9827F8341F3AF97500A50043 /* ParnerBoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9827F8331F3AF97500A50043 /* ParnerBoardTableViewCell.swift */; };
+		9827F8361F3B05D600A50043 /* ParnerCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9827F8351F3B05D600A50043 /* ParnerCollectionViewController.swift */; };
+		9827F8381F3B05E800A50043 /* ParnerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9827F8371F3B05E800A50043 /* ParnerCollectionViewCell.swift */; };
 		984E4AAC1F304F0A007766C7 /* BaggageListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984E4AAB1F304F0A007766C7 /* BaggageListTableViewController.swift */; };
 		984E4AAE1F305D73007766C7 /* BaggageListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984E4AAD1F305D73007766C7 /* BaggageListTableViewCell.swift */; };
 		986438E11F27349A001DABC6 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986438E01F27349A001DABC6 /* SignInViewController.swift */; };
@@ -48,6 +50,8 @@
 		9827F82E1F388FD100A50043 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
 		9827F8311F3AF96700A50043 /* ParnerBoardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParnerBoardTableViewController.swift; sourceTree = "<group>"; };
 		9827F8331F3AF97500A50043 /* ParnerBoardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParnerBoardTableViewCell.swift; sourceTree = "<group>"; };
+		9827F8351F3B05D600A50043 /* ParnerCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParnerCollectionViewController.swift; sourceTree = "<group>"; };
+		9827F8371F3B05E800A50043 /* ParnerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParnerCollectionViewCell.swift; sourceTree = "<group>"; };
 		984E4AAB1F304F0A007766C7 /* BaggageListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggageListTableViewController.swift; sourceTree = "<group>"; };
 		984E4AAD1F305D73007766C7 /* BaggageListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggageListTableViewCell.swift; sourceTree = "<group>"; };
 		986438E01F27349A001DABC6 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -192,6 +196,8 @@
 			children = (
 				9827F8311F3AF96700A50043 /* ParnerBoardTableViewController.swift */,
 				9827F8331F3AF97500A50043 /* ParnerBoardTableViewCell.swift */,
+				9827F8351F3B05D600A50043 /* ParnerCollectionViewController.swift */,
+				9827F8371F3B05E800A50043 /* ParnerCollectionViewCell.swift */,
 			);
 			name = ParnerBoard;
 			sourceTree = "<group>";
@@ -392,6 +398,7 @@
 				98FBC1DC1F2B114400E2E70F /* DailyScheduleTableViewController.swift in Sources */,
 				98FBC1E21F2B12A500E2E70F /* DailyTabBarViewController.swift in Sources */,
 				9821C5071F28245A0024B9D4 /* SignUpViewController.swift in Sources */,
+				9827F8381F3B05E800A50043 /* ParnerCollectionViewCell.swift in Sources */,
 				98D11F561F2972C600A157BF /* ScheduleMainTableViewController.swift in Sources */,
 				986438E11F27349A001DABC6 /* SignInViewController.swift in Sources */,
 				984E4AAC1F304F0A007766C7 /* BaggageListTableViewController.swift in Sources */,
@@ -399,6 +406,7 @@
 				9827F82D1F388F8700A50043 /* FriendTableViewController.swift in Sources */,
 				9827F8321F3AF96700A50043 /* ParnerBoardTableViewController.swift in Sources */,
 				980C55FE1F27324B007B4810 /* AppDelegate.swift in Sources */,
+				9827F8361F3B05D600A50043 /* ParnerCollectionViewController.swift in Sources */,
 				984E4AAE1F305D73007766C7 /* BaggageListTableViewCell.swift in Sources */,
 				98FBC1DE1F2B115800E2E70F /* MapViewController.swift in Sources */,
 				9827F82F1F388FD100A50043 /* FriendTableViewCell.swift in Sources */,
