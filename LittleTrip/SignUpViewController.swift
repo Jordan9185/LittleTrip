@@ -10,8 +10,11 @@ import UIKit
 
 import FirebaseAuth
 
+import FirebaseDatabase
+
+let defaultImageURLString = "https://firebasestorage.googleapis.com/v0/b/littletrip-58892.appspot.com/o/UserPic%2FprofileDefault.png?alt=media&token=849c5597-b7e2-44a1-9f23-30394636b8c8"
+
 class SignUpViewController: UIViewController, UITextFieldDelegate {
-    
     
     @IBOutlet var signUpButton: UIButton!
     
@@ -57,7 +60,17 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                 return
             }
             
-            print("\(user) has been created.")
+            let userRef = Database.database().reference().child("user")
+            
+            let updateDic = [
+                (user?.uid)! : [
+                    "friendList" : [],
+                    "imageURL" : defaultImageURLString,
+                    "name" : "user"
+                ]
+            ]
+            
+            userRef.updateChildValues(updateDic)
             
         }
         
