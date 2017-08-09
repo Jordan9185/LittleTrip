@@ -40,7 +40,13 @@ class ScheduleMainTableViewController: UITableViewController {
 
     var schedules: [Schedule] = []
     
+    var scheduleHadJoineds: [Schedule] = []
+    
+    var rootRef = Database.database().reference()
+    
     var scheduleRef: DatabaseReference?
+    
+    var scheduleHadJoinedRef: DatabaseReference?
     
     let mainViewSections: [scheduleSection] = [ .mySchedule, .iAmJoining]
     
@@ -52,6 +58,8 @@ class ScheduleMainTableViewController: UITableViewController {
         
         getScheduleDataOnServer()
         
+        getScheduleHadJoinedOnServer()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -60,11 +68,13 @@ class ScheduleMainTableViewController: UITableViewController {
         
         self.scheduleRef?.removeAllObservers()
         
+        self.scheduleHadJoinedRef?.removeAllObservers()
+        
     }
     
     func getScheduleDataOnServer() {
         
-        self.scheduleRef = Database.database().reference().child("schedule")
+        self.scheduleRef = rootRef.child("schedule")
         
         let uid = (Auth.auth().currentUser?.uid)!
         
@@ -106,6 +116,60 @@ class ScheduleMainTableViewController: UITableViewController {
         
     }
     
+    func getScheduleHadJoinedOnServer() {
+        
+        let uid = (Auth.auth().currentUser?.uid)!
+        
+        self.scheduleHadJoinedRef = Database.database().reference().child("scheduleHadJoined").child(uid).child("schedules")
+        
+        self.scheduleHadJoinedRef?.observe(.value, with: { (snapshot) in
+            
+            self.scheduleHadJoineds = []
+            
+            if let values = snapshot.value as? [String] {
+                
+                values.map({ (value) in
+                    
+                    self.getSingleScheduleDataOnServer(scheduleID: value)
+                    
+                })
+                
+            }
+            
+        })
+        
+    }
+    
+    func getSingleScheduleDataOnServer(scheduleID: String) {
+        
+        var schedule: Schedule!
+        
+        self.scheduleRef?.child(scheduleID).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            if let scheduleData = snapshot.value as? [String:Any] {
+                
+                guard
+                    let title = scheduleData["title"] as? String,
+                    let days = scheduleData["days"] as? Int,
+                    let createdDate = scheduleData["createdDate"] as? String,
+                    let uid = scheduleData["uid"] as? String,
+                    let imageURL = scheduleData["imageURL"] as? String
+                    else {
+                        return
+                }
+
+                schedule = Schedule(title: title, days: days, createdDate: createdDate, uid: uid, imageUrl: imageURL, scheduleId: scheduleID)
+                
+                self.scheduleHadJoineds.append(schedule)
+                
+                self.tableView.reloadData()
+                
+            }
+            
+        })
+        
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -124,7 +188,7 @@ class ScheduleMainTableViewController: UITableViewController {
             
         case .iAmJoining:
             
-                return 0
+                return scheduleHadJoineds.count
             
         }
         
@@ -144,7 +208,7 @@ class ScheduleMainTableViewController: UITableViewController {
         
             cell.backgroundImageView.sd_setImage(with: URL(string: schedules[indexPath.row].imageUrl))
         
-            cell.tag = indexPath.row
+            cell.tag = indexPath.section * 1000 + indexPath.row
         
             return cell
         
@@ -152,13 +216,13 @@ class ScheduleMainTableViewController: UITableViewController {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "scheduleCell", for: indexPath) as! ScheduleMainTableViewCell
             
-            cell.titleLabel.text = schedules[indexPath.row].title
+            cell.titleLabel.text = scheduleHadJoineds[indexPath.row].title
             
             cell.backgroundImageView.contentMode = .scaleAspectFill
             
-            cell.backgroundImageView.sd_setImage(with: URL(string: schedules[indexPath.row].imageUrl))
+            cell.backgroundImageView.sd_setImage(with: URL(string: scheduleHadJoineds[indexPath.row].imageUrl))
             
-            cell.tag = indexPath.row
+            cell.tag = indexPath.section * 1000 + indexPath.row
             
             return cell
             
@@ -279,9 +343,24 @@ class ScheduleMainTableViewController: UITableViewController {
             
             let cell = sender as! ScheduleMainTableViewCell
             
+            let section = cell.tag / 1000
+            
+            let row = cell.tag % 1000
+            
             let nextViewController = segue.destination as! DailyTabBarViewController
             
-            nextViewController.schedule = schedules[cell.tag]
+            switch mainViewSections[section] {
+                
+            case .mySchedule:
+                
+                nextViewController.schedule = schedules[row]
+                
+            case .iAmJoining:
+                
+                nextViewController.schedule = scheduleHadJoineds[row]
+                
+            }
+
             
         }
         
