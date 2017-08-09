@@ -40,7 +40,15 @@ class ScheduleMainTableViewController: UITableViewController {
 
     var schedules: [Schedule] = []
     
+    var scheduleHadJoineds: [Schedule] = []
+    
+    var rootRef = Database.database().reference()
+    
     var scheduleRef: DatabaseReference?
+    
+    var scheduleHadJoinedRef: DatabaseReference?
+    
+    let mainViewSections: [scheduleSection] = [ .mySchedule, .iAmJoining]
     
     @IBOutlet var schedulesTableView: UITableView!
     
@@ -48,16 +56,10 @@ class ScheduleMainTableViewController: UITableViewController {
         
         super.viewWillAppear(true)
         
-        print("appear")
-        
         getScheduleDataOnServer()
         
-    }
-    
-    override func viewDidLoad() {
+        getScheduleHadJoinedOnServer()
         
-        super.viewDidLoad()
-
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -66,13 +68,19 @@ class ScheduleMainTableViewController: UITableViewController {
         
         self.scheduleRef?.removeAllObservers()
         
+        self.scheduleHadJoinedRef?.removeAllObservers()
+        
     }
     
     func getScheduleDataOnServer() {
         
-        self.scheduleRef = Database.database().reference().child("schedule")
+        self.scheduleRef = rootRef.child("schedule")
         
-        self.scheduleRef?.observe(DataEventType.value, with: { (snapshot) in
+        let uid = (Auth.auth().currentUser?.uid)!
+        
+        let ref = self.scheduleRef?.queryOrdered(byChild: "uid").queryEqual(toValue: uid)
+        
+        ref?.observe(.value, with: { (snapshot) in
 
             var localSchedules: [Schedule] = []
             
@@ -81,12 +89,6 @@ class ScheduleMainTableViewController: UITableViewController {
                 for schedule in schedules {
                     
                     let value = schedule.value as! [String:Any]
-                    
-                    if Auth.auth().currentUser?.uid != value["uid"] as! String {
-                        
-                        continue
-                        
-                    }
                     
                     localSchedules.append(
                         
@@ -110,6 +112,61 @@ class ScheduleMainTableViewController: UITableViewController {
             }
             
         })
+ 
+        
+    }
+    
+    func getScheduleHadJoinedOnServer() {
+        
+        let uid = (Auth.auth().currentUser?.uid)!
+        
+        self.scheduleHadJoinedRef = rootRef.child("scheduleHadJoined").child(uid).child("schedules")
+        
+        self.scheduleHadJoinedRef?.observe(.value, with: { (snapshot) in
+            
+            self.scheduleHadJoineds = []
+            
+            if let values = snapshot.value as? [String] {
+                
+                values.map({ (value) in
+                    
+                    self.getSingleScheduleDataOnServer(scheduleID: value)
+                    
+                })
+                
+            }
+            
+        })
+        
+    }
+    
+    func getSingleScheduleDataOnServer(scheduleID: String) {
+        
+        var schedule: Schedule!
+        
+        self.scheduleRef?.child(scheduleID).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            if let scheduleData = snapshot.value as? [String:Any] {
+                
+                guard
+                    let title = scheduleData["title"] as? String,
+                    let days = scheduleData["days"] as? Int,
+                    let createdDate = scheduleData["createdDate"] as? String,
+                    let uid = scheduleData["uid"] as? String,
+                    let imageURL = scheduleData["imageURL"] as? String
+                    else {
+                        return
+                }
+
+                schedule = Schedule(title: title, days: days, createdDate: createdDate, uid: uid, imageUrl: imageURL, scheduleId: scheduleID)
+                
+                self.scheduleHadJoineds.append(schedule)
+                
+                self.tableView.reloadData()
+                
+            }
+            
+        })
         
     }
     
@@ -117,57 +174,106 @@ class ScheduleMainTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
 
-        return 1
+        return 2
         
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if section == scheduleSection.mySchedule.rawValue {
+        switch mainViewSections[section] {
             
-            return schedules.count
+        case .mySchedule:
+            
+                return schedules.count
+            
+        case .iAmJoining:
+            
+                return scheduleHadJoineds.count
             
         }
-        
-        return 0
         
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "scheduleCell", for: indexPath) as! ScheduleMainTableViewCell
+        switch mainViewSections[indexPath.section] {
+            
+        case .mySchedule:
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "scheduleCell", for: indexPath) as! ScheduleMainTableViewCell
 
-        cell.titleLabel.text = schedules[indexPath.row].title
+            cell.titleLabel.text = schedules[indexPath.row].title
         
-        cell.backgroundImageView.contentMode = .scaleAspectFill
+            cell.backgroundImageView.contentMode = .scaleAspectFill
         
-        cell.backgroundImageView.sd_setImage(with: URL(string: schedules[indexPath.row].imageUrl))
+            cell.backgroundImageView.sd_setImage(with: URL(string: schedules[indexPath.row].imageUrl))
         
-        cell.tag = indexPath.row
+            cell.tag = indexPath.section * 1000 + indexPath.row
         
-        return cell
+            return cell
+        
+        case .iAmJoining:
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "scheduleCell", for: indexPath) as! ScheduleMainTableViewCell
+            
+            cell.titleLabel.text = scheduleHadJoineds[indexPath.row].title
+            
+            cell.backgroundImageView.contentMode = .scaleAspectFill
+            
+            cell.backgroundImageView.sd_setImage(with: URL(string: scheduleHadJoineds[indexPath.row].imageUrl))
+            
+            cell.tag = indexPath.section * 1000 + indexPath.row
+            
+            return cell
+            
+        }
         
     }
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
+        switch mainViewSections[section] {
+            
+        case .mySchedule:
+            
+            let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
         
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
         
-        label.textAlignment = .center
+            label.textAlignment = .center
         
-        label.textColor = .brown
+            label.textColor = .brown
         
-        label.text = "My Schedule"
+            label.text = "My Schedule"
         
-        label.font = UIFont(name: "AvenirNext-Bold", size: 16)
+            label.font = UIFont(name: "AvenirNext-Bold", size: 16)
         
-        headerView.backgroundColor = UIColor(red: 1, green: 235/255, blue: 205/255, alpha: 0.7)
+            headerView.backgroundColor = UIColor(red: 1, green: 235/255, blue: 205/255, alpha: 0.7)
         
-        headerView.addSubview(label)
+            headerView.addSubview(label)
         
-        return headerView
+            return headerView
+            
+        case .iAmJoining:
+            
+            let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
+            
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
+            
+            label.textAlignment = .center
+            
+            label.textColor = .brown
+            
+            label.text = "I am joing"
+            
+            label.font = UIFont(name: "AvenirNext-Bold", size: 16)
+            
+            headerView.backgroundColor = UIColor(red: 1, green: 235/255, blue: 205/255, alpha: 0.7)
+            
+            headerView.addSubview(label)
+            
+            return headerView
+        }
         
     }
     
@@ -183,40 +289,63 @@ class ScheduleMainTableViewController: UITableViewController {
             
         case .delete :
             
-            let currentScheduleID = self.schedules[indexPath.row].scheduleId
-            
-            let currentRef = self.scheduleRef?.child(currentScheduleID)
-            
-            let currentDailyRef = Database.database().reference().child("dailySchedule").child(currentScheduleID)
-            
-            let currentBaggageListRef = Database.database().reference().child("baggageList").child(currentScheduleID)
-            
-            let imageRef = Storage.storage().reference().child("ScheduleImage/\(currentScheduleID).jpg")
-            
-            currentRef?.removeValue()
-            
-            currentDailyRef.removeValue()
-            
-            currentBaggageListRef.removeValue()
-            
-            self.schedules.remove(at: indexPath.row)
-            
-            // Delete the file
-            imageRef.delete { error in
+            switch mainViewSections[indexPath.section] {
                 
-                if let error = error {
+            case .mySchedule:
+                
+                let currentScheduleID = self.schedules[indexPath.row].scheduleId
+                
+                let currentRef = self.scheduleRef?.child(currentScheduleID)
+                
+                let currentDailyRef = rootRef.child("dailySchedule").child(currentScheduleID)
+                
+                let currentBaggageListRef = rootRef.child("baggageList").child(currentScheduleID)
+                
+                let imageRef = Storage.storage().reference().child("ScheduleImage/\(currentScheduleID).jpg")
+                
+                currentRef?.removeValue()
+                
+                currentDailyRef.removeValue()
+                
+                currentBaggageListRef.removeValue()
+                
+                self.schedules.remove(at: indexPath.row)
+                
+                // Delete the file
+                imageRef.delete { error in
                     
-                    print("Delete ScheduleImage/\(currentScheduleID).jpg is failed.")
-                    
-                } else {
-                    
-                    print("Delete ScheduleImage/\(currentScheduleID).jpg is successful.")
+                    if let error = error {
+                        
+                        print("Delete ScheduleImage/\(currentScheduleID).jpg is failed.")
+                        
+                    } else {
+                        
+                        print("Delete ScheduleImage/\(currentScheduleID).jpg is successful.")
+                        
+                    }
                     
                 }
                 
+                self.tableView.reloadData()
+
+            case .iAmJoining:
+                
+                let uid = (Auth.auth().currentUser?.uid)!
+                
+                self.scheduleHadJoineds.remove(at: indexPath.row)
+                
+                var localSchedules: [String] = []
+                
+                self.scheduleHadJoineds.map({ (schedule) in
+                    
+                    localSchedules.append(schedule.scheduleId)
+                    
+                })
+                
+                self.scheduleHadJoinedRef?.setValue(localSchedules)
+                
             }
             
-            self.tableView.reloadData()
             
         default :
             
@@ -237,9 +366,24 @@ class ScheduleMainTableViewController: UITableViewController {
             
             let cell = sender as! ScheduleMainTableViewCell
             
+            let section = cell.tag / 1000
+            
+            let row = cell.tag % 1000
+            
             let nextViewController = segue.destination as! DailyTabBarViewController
             
-            nextViewController.schedule = schedules[cell.tag]
+            switch mainViewSections[section] {
+                
+            case .mySchedule:
+                
+                nextViewController.schedule = schedules[row]
+                
+            case .iAmJoining:
+                
+                nextViewController.schedule = scheduleHadJoineds[row]
+                
+            }
+
             
         }
         
