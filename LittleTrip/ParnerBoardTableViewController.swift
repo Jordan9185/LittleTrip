@@ -55,13 +55,6 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 120))
-        
-        headerView.addSubview(collectionContainView)
-        
-        return headerView
-    }
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
         
         dismiss(animated: true, completion: nil)

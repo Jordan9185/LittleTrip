@@ -8,6 +8,14 @@
 
 import UIKit
 import FirebaseDatabase
+import FirebaseAuth
+
+enum CollectionViewSection {
+    
+    case host
+    
+    case parner
+}
 
 class ParnerCollectionViewController: UICollectionViewController {
     
@@ -18,6 +26,8 @@ class ParnerCollectionViewController: UICollectionViewController {
     let userRef = Database.database().reference().child("user")
     
     var currentSchedule: Schedule!
+    
+    let sections:[CollectionViewSection] = [.host, .parner]
     
     override func viewDidLoad() {
         
@@ -87,9 +97,25 @@ class ParnerCollectionViewController: UICollectionViewController {
     
     // MARK: UICollectionViewDataSource
 
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        
+        return sections.count
+        
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
-        return self.parnerLists.count
+        switch sections[section] {
+            
+        case .host:
+            
+            return 1
+            
+        case .parner:
+            
+            return self.parnerLists.count
+            
+        }
         
     }
 
@@ -97,11 +123,29 @@ class ParnerCollectionViewController: UICollectionViewController {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ParnerPicCell", for: indexPath) as! ParnerCollectionViewCell
         
-        cell.parnerPicImageView.sd_setImage(with: URL(string: self.parnerLists[indexPath.row].pictureURL))
-        
-        cell.parnerPicImageView.contentMode = .scaleAspectFill
-        
-        cell.userLabel.text = self.parnerLists[indexPath.row].name
+        switch sections[indexPath.section] {
+            
+        case .host:
+            
+            let hostName = UserDefaults.standard.string(forKey: "userName")
+            
+            let hostImageURL = UserDefaults.standard.url(forKey: "userImageURL")
+            
+            cell.parnerPicImageView.sd_setImage(with: hostImageURL)
+            
+            cell.parnerPicImageView.contentMode = .scaleAspectFill
+            
+            cell.userLabel.text = hostName
+            
+        case .parner:
+            
+            cell.parnerPicImageView.sd_setImage(with: URL(string: self.parnerLists[indexPath.row].pictureURL))
+            
+            cell.parnerPicImageView.contentMode = .scaleAspectFill
+            
+            cell.userLabel.text = self.parnerLists[indexPath.row].name
+            
+        }
         
         return cell
     }
