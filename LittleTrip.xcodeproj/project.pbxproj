@@ -20,6 +20,7 @@
 		9827F8341F3AF97500A50043 /* ParnerBoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9827F8331F3AF97500A50043 /* ParnerBoardTableViewCell.swift */; };
 		9827F8361F3B05D600A50043 /* ParnerCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9827F8351F3B05D600A50043 /* ParnerCollectionViewController.swift */; };
 		9827F8381F3B05E800A50043 /* ParnerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9827F8371F3B05E800A50043 /* ParnerCollectionViewCell.swift */; };
+		9827F83A1F3C61B300A50043 /* commonFuncton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9827F8391F3C61B300A50043 /* commonFuncton.swift */; };
 		984E4AAC1F304F0A007766C7 /* BaggageListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984E4AAB1F304F0A007766C7 /* BaggageListTableViewController.swift */; };
 		984E4AAE1F305D73007766C7 /* BaggageListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984E4AAD1F305D73007766C7 /* BaggageListTableViewCell.swift */; };
 		986438E11F27349A001DABC6 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986438E01F27349A001DABC6 /* SignInViewController.swift */; };
@@ -52,6 +53,7 @@
 		9827F8331F3AF97500A50043 /* ParnerBoardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParnerBoardTableViewCell.swift; sourceTree = "<group>"; };
 		9827F8351F3B05D600A50043 /* ParnerCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParnerCollectionViewController.swift; sourceTree = "<group>"; };
 		9827F8371F3B05E800A50043 /* ParnerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParnerCollectionViewCell.swift; sourceTree = "<group>"; };
+		9827F8391F3C61B300A50043 /* commonFuncton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = commonFuncton.swift; sourceTree = "<group>"; };
 		984E4AAB1F304F0A007766C7 /* BaggageListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggageListTableViewController.swift; sourceTree = "<group>"; };
 		984E4AAD1F305D73007766C7 /* BaggageListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggageListTableViewCell.swift; sourceTree = "<group>"; };
 		986438E01F27349A001DABC6 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 		980C55FC1F27324A007B4810 /* LittleTrip */ = {
 			isa = PBXGroup;
 			children = (
+				9827F8391F3C61B300A50043 /* commonFuncton.swift */,
 				9821C5011F2821AB0024B9D4 /* AppDelegate */,
 				98D11F591F29D27500A157BF /* CreateNewSchedule */,
 				98FBC1D71F2B0E3900E2E70F /* DailySchedule */,
@@ -401,6 +404,7 @@
 				9827F8381F3B05E800A50043 /* ParnerCollectionViewCell.swift in Sources */,
 				98D11F561F2972C600A157BF /* ScheduleMainTableViewController.swift in Sources */,
 				986438E11F27349A001DABC6 /* SignInViewController.swift in Sources */,
+				9827F83A1F3C61B300A50043 /* commonFuncton.swift in Sources */,
 				984E4AAC1F304F0A007766C7 /* BaggageListTableViewController.swift in Sources */,
 				98D11F581F2974E500A157BF /* ScheduleMainTableViewCell.swift in Sources */,
 				9827F82D1F388F8700A50043 /* FriendTableViewController.swift in Sources */,

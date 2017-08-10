@@ -63,6 +63,8 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         
         chatroomRef.child(currentSchedule.scheduleId).child("messages").observe(.value, with: { (snapshot) in
  
+            startLoading()
+            
             if let values = snapshot.value as? [[String:String]] {
                 
                 self.messages = []
@@ -87,6 +89,7 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
                 
                 self.tableView.reloadData()
                 
+                endLoading()
             }
             
         })
@@ -173,10 +176,8 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("prepare")
+
         if segue.identifier == "embedParnerListCollectionView" {
-            
-            print(segue.destination)
             
             let parnerCollectionViewController = segue.destination as! ParnerCollectionViewController
             

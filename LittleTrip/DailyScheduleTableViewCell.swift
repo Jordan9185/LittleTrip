@@ -84,8 +84,6 @@ class DailyScheduleTableViewCell: UITableViewCell {
     
     func startTimeChange(_ sender: UIDatePicker) {
         
-        print(sender.date)
-        
         let calender = Calendar.current
         
         let hour = calender.component(.hour, from: sender.date)
@@ -97,8 +95,6 @@ class DailyScheduleTableViewCell: UITableViewCell {
     }
     
     func endTimeChange(_ sender: UIDatePicker) {
-        
-        print(sender.date)
         
         let calender = Calendar.current
         

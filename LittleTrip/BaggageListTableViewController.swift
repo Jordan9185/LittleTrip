@@ -56,6 +56,8 @@ class BaggageListTableViewController: UITableViewController {
         
         BaggageRef?.observe(.value, with: { (snapshot) in
             
+            startLoading()
+            
             var baggageitems: [BaggageItem] = []
             
             if let items = snapshot.value as? [[String:Any]] {
@@ -74,7 +76,10 @@ class BaggageListTableViewController: UITableViewController {
                 self.baggageItems = baggageitems
                 
                 self.tableView.reloadData()
+                
             }
+            
+            endLoading()
             
         })
         

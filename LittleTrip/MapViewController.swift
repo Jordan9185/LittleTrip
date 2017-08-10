@@ -27,8 +27,6 @@ class MapViewController: UIViewController{
         
         self.dailySchedules = previousViewController.dailySchedules
         
-        print(self.dailySchedules)
-        
         setGoogleMaps()
         
     }

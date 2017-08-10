@@ -81,7 +81,9 @@ class ScheduleMainTableViewController: UITableViewController {
         let ref = self.scheduleRef?.queryOrdered(byChild: "uid").queryEqual(toValue: uid)
         
         ref?.observe(.value, with: { (snapshot) in
-
+            
+            startLoading()
+            
             var localSchedules: [Schedule] = []
             
             if let schedules = snapshot.value as? [String:Any] {
@@ -111,6 +113,8 @@ class ScheduleMainTableViewController: UITableViewController {
                 
             }
             
+            endLoading()
+            
         })
  
         
@@ -124,6 +128,8 @@ class ScheduleMainTableViewController: UITableViewController {
         
         self.scheduleHadJoinedRef?.observe(.value, with: { (snapshot) in
             
+            startLoading()
+            
             self.scheduleHadJoineds = []
             
             if let values = snapshot.value as? [String] {
@@ -136,6 +142,8 @@ class ScheduleMainTableViewController: UITableViewController {
                 
             }
             
+            endLoading()
+            
         })
         
     }
@@ -145,6 +153,8 @@ class ScheduleMainTableViewController: UITableViewController {
         var schedule: Schedule!
         
         self.scheduleRef?.child(scheduleID).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            startLoading()
             
             if let scheduleData = snapshot.value as? [String:Any] {
                 
@@ -166,6 +176,7 @@ class ScheduleMainTableViewController: UITableViewController {
                 
             }
             
+            endLoading()
         })
         
     }

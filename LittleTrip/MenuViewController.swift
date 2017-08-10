@@ -86,6 +86,8 @@ class MenuViewController: UIViewController {
         
             userRef?.observe(.value, with: { (snapshot) in
             
+                startLoading()
+                
                 if  let userData = snapshot.value as? [String:Any]{
                     
                     if let userImageURL = userData["imageURL"] as? String {
@@ -113,6 +115,8 @@ class MenuViewController: UIViewController {
                     }
                     
                 }
+                
+                endLoading()
             
             })
         }

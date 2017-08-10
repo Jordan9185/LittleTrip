@@ -17,5 +17,6 @@ target 'LittleTrip' do
   	pod 'GooglePlaces'
   	pod 'GooglePlacePicker'
   	pod 'SlideMenuControllerSwift', '~> 3.0'
+	pod 'SVProgressHUD'
   	
 end

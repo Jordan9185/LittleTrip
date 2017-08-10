@@ -51,6 +51,8 @@ class ParnerCollectionViewController: UICollectionViewController {
         
         parnerRef.child(currentSchedule.scheduleId).child("parners").observe(.value, with: { (snapshot) in
             
+            startLoading()
+            
             if let parners = snapshot.value as? [String] {
                 
                 var users: [User] = []
@@ -92,6 +94,8 @@ class ParnerCollectionViewController: UICollectionViewController {
                 })
 
             }
+            
+            endLoading()
             
         })
         
