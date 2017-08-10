@@ -10,8 +10,17 @@ import Foundation
 
 import SVProgressHUD
 
+var isLoading = false
 
 func startLoading() {
+    
+    if isLoading == true {
+        
+        return
+        
+    }
+    
+    isLoading = true
     
     SVProgressHUD.show(withStatus: "Loading")
     
@@ -20,6 +29,14 @@ func startLoading() {
 }
 
 func endLoading() {
+    
+    if isLoading == false {
+        
+        return
+        
+    }
+    
+    isLoading = false
     
     SVProgressHUD.dismiss()
     

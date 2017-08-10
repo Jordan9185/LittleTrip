@@ -206,12 +206,12 @@ class ScheduleMainTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        let cell = tableView.dequeueReusableCell(withIdentifier: "scheduleCell", for: indexPath) as! ScheduleMainTableViewCell
         
         switch mainViewSections[indexPath.section] {
             
         case .mySchedule:
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: "scheduleCell", for: indexPath) as! ScheduleMainTableViewCell
 
             cell.titleLabel.text = schedules[indexPath.row].title
         
@@ -225,7 +225,11 @@ class ScheduleMainTableViewController: UITableViewController {
         
         case .iAmJoining:
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: "scheduleCell", for: indexPath) as! ScheduleMainTableViewCell
+            if self.scheduleHadJoineds.count == 0 {
+                
+                return cell
+                
+            }
             
             cell.titleLabel.text = scheduleHadJoineds[indexPath.row].title
             
