@@ -8,13 +8,30 @@
 
 import UIKit
 
+import FirebaseDatabase
+
 class ParnerBoardTableViewController: UITableViewController {
+    
+    var currentSchedule: Schedule!
+    
+    @IBOutlet var collectionContainView: UIView!
+    
+    override func loadView() {
+        
+        super.loadView()
+        
+        let myTabBarViewController = self.tabBarController as! DailyTabBarViewController
+        
+        currentSchedule = myTabBarViewController.schedule!
+    }
 
     override func viewDidLoad() {
+        
         super.viewDidLoad()
 
     }
 
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -41,6 +58,20 @@ class ParnerBoardTableViewController: UITableViewController {
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
         
         dismiss(animated: true, completion: nil)
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("prepare")
+        if segue.identifier == "embedParnerListCollectionView" {
+            
+            print(segue.destination)
+            
+            let parnerCollectionViewController = segue.destination as! ParnerCollectionViewController
+            
+            parnerCollectionViewController.currentSchedule = self.currentSchedule
+            
+        }
         
     }
 

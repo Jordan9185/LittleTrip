@@ -11,4 +11,7 @@ import UIKit
 class ParnerCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var parnerPicImageView: UIImageView!
+    
+    @IBOutlet var userLabel: UILabel!
+    
 }
