@@ -141,7 +141,7 @@ class FriendTableViewController: UITableViewController {
             
         case .myUID:
         
-            cell.friendNameLabel.text = "My UID: \(uid)"
+            cell.friendNameLabel.text = "\(uid)"
             
             cell.friendNameLabel.textAlignment = .center
             
@@ -182,29 +182,18 @@ class FriendTableViewController: UITableViewController {
             
         case .myUID:
         
-            let headerView = UIView(frame: CGRect(x: 0 , y: 0, width: self.view.frame.width, height: 84))
+            let headerView = UIView(frame: CGRect(x: 0 , y: 0, width: self.view.frame.width, height: 40))
         
-            let labelView = UILabel(frame: CGRect(x: 0 , y: 0, width: self.view.frame.width, height: 84))
+            let labelView = UILabel(frame: CGRect(x: 0 , y: 0, width: self.view.frame.width, height: 40))
         
-            let button = UIButton(frame: CGRect(x: self.view.frame.width - 110, y: 21, width: 100, height: 42))
             
-            button.setTitle("Add Friend", for: .normal)
-            
-            button.backgroundColor = .black
-            
-            button.setTitleColor(.white, for: .normal)
-            
-            button.addTarget(self, action: #selector(addFriendAction), for: .touchUpInside)
-            
-            labelView.text = "Friend List"
+            labelView.text = "My UID"
         
             labelView.textAlignment = .center
         
             labelView.backgroundColor = UIColor.yellow
             
             headerView.addSubview(labelView)
-            
-            headerView.addSubview(button)
         
             return headerView
         
@@ -222,7 +211,7 @@ class FriendTableViewController: UITableViewController {
             
         case .myUID:
             
-            return 84
+            return 40
             
         case .friendList:
             
@@ -257,7 +246,7 @@ class FriendTableViewController: UITableViewController {
         
     }
     
-    func addFriendAction(_ sender: UIButton) {
+    @IBAction func addFriendActionTapped(_ sender: UIBarButtonItem) {
         
         let alertController = UIAlertController(title: "Add Friend", message: "Enter your friend UID", preferredStyle: .alert)
         
@@ -350,4 +339,9 @@ class FriendTableViewController: UITableViewController {
         
     }
     
+    @IBAction func openMenuTapped(_ sender: Any) {
+        
+        self.slideMenuController()?.openLeft()
+        
+    }
 }
