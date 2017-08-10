@@ -56,6 +56,8 @@ class FriendTableViewController: UITableViewController {
     
     func catchFriendList() {
         
+        startLoading()
+        
         self.userListRef = Database.database().reference().child("user")
         
         self.userListRef?.child(uid).child("friendList").observe(.value, with: { (snapshot) in
@@ -69,14 +71,18 @@ class FriendTableViewController: UITableViewController {
                     self.getFriendData(friendID)
 
                 })
-
+                
             }
+            
+            endLoading()
             
         })
         
     }
 
     func getFriendData(_ friendID: String) {
+        
+        startLoading()
         
         self.userListRef?.child(friendID).observeSingleEvent(of: .value, with: { (snapshot) in
             
@@ -96,6 +102,8 @@ class FriendTableViewController: UITableViewController {
                 self.tableView.reloadData()
                 
             }
+            
+            endLoading()
             
         })
         
@@ -300,6 +308,8 @@ class FriendTableViewController: UITableViewController {
             
         }
         
+        startLoading()
+        
         self.userListRef?.child(friendID).observeSingleEvent(of: .value, with: { (snapshot) in
             
             if snapshot.exists() {
@@ -316,12 +326,13 @@ class FriendTableViewController: UITableViewController {
                 
                 self.userListRef?.child(uid).child("friendList").setValue(friendList)
 
-                
             } else {
             
                 self.showAlert(title: "user isn't exist.", message: "user isn't exist.")
             
             }
+            
+            endLoading()
             
         })
         

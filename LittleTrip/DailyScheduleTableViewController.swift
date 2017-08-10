@@ -36,6 +36,7 @@ class DailyScheduleTableViewController: UITableViewController {
     
     @IBOutlet var dailySchedulesTableView: UITableView!
     
+
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(true)
@@ -57,6 +58,8 @@ class DailyScheduleTableViewController: UITableViewController {
     }
     
     func catchDailySchedules() {
+        
+        startLoading()
         
         self.dailyScheduleRef = Database.database().reference().child("dailySchedule").child(currentSchedule.scheduleId)
 
@@ -97,6 +100,8 @@ class DailyScheduleTableViewController: UITableViewController {
                 
             }
             
+            endLoading()
+            
         }, withCancel: { (error) in
             
             print(error)
@@ -105,6 +110,8 @@ class DailyScheduleTableViewController: UITableViewController {
     
     
     func catchScheduleHostData() {
+        
+        startLoading()
         
         userRef.child(currentSchedule.uid).observeSingleEvent(of: .value, with: { (snapshot) in
             
@@ -125,6 +132,8 @@ class DailyScheduleTableViewController: UITableViewController {
                 myTabBarViewController.scheduleHost = user
                 
             }
+            
+            endLoading()
             
         })
     }

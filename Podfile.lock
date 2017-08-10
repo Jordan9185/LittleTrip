@@ -79,6 +79,7 @@ PODS:
     - libwebp
     - SDWebImage/Core
   - SlideMenuControllerSwift (3.0.1)
+  - SVProgressHUD (2.1.2)
   - SwiftLint (0.20.0)
 
 DEPENDENCIES:
@@ -91,6 +92,7 @@ DEPENDENCIES:
   - GooglePlaces
   - SDWebImage/WebP
   - SlideMenuControllerSwift (~> 3.0)
+  - SVProgressHUD
   - SwiftLint
 
 SPEC CHECKSUMS:
@@ -109,8 +111,9 @@ SPEC CHECKSUMS:
   libwebp: 1d5a07c2eb97f9c31bd5f154bb82efc0ea67c6a2
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SlideMenuControllerSwift: 9a163b16d54afab734add42858cba7ef7c307755
+  SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   SwiftLint: 3f7543509c931d1291395335f34e245d3919b7f2
 
-PODFILE CHECKSUM: d477f0bf8a332e01b706e375d2e4d8c086438e1a
+PODFILE CHECKSUM: 3022a4305341687ccdf297f83a3493d64321dd4c
 
 COCOAPODS: 1.2.1

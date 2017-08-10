@@ -52,6 +52,8 @@ class BaggageListTableViewController: UITableViewController {
     
     func getBaggageListFromServer() {
         
+        startLoading()
+        
         BaggageRef = Database.database().reference().child("baggageList").child(currentSchedule.scheduleId)
         
         BaggageRef?.observe(.value, with: { (snapshot) in
@@ -74,7 +76,10 @@ class BaggageListTableViewController: UITableViewController {
                 self.baggageItems = baggageitems
                 
                 self.tableView.reloadData()
+                
             }
+            
+            endLoading()
             
         })
         
