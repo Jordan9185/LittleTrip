@@ -28,6 +28,8 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
     
     var messages: [Message] = []
     
+    @IBOutlet var willSendMsgTextField: UITextField!
+
     @IBOutlet var tableView: UITableView!
     
     override func loadView() {
@@ -43,6 +45,8 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         
         super.viewDidLoad()
 
+        willSendMsgTextField.delegate = self
+        
         catchChatroomMessage()
         
     }
@@ -56,7 +60,7 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
                 self.messages = []
                 
                 values.map({ (value) in
-                    
+
                     let poster = value["poster"]!
                     
                     let postTime = value["postTime"]!
@@ -81,6 +85,30 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         
     }
     
+    @IBAction func sendMessageActionTapped(_ sender: UIButton) {
+        
+        let userName = UserDefaults.standard.string(forKey: "userName")
+        
+        let dateFormatter = DateFormatter()
+        
+        let date = Date()
+        
+        dateFormatter.dateFormat = "yyyy/MM/dd HH:mm"
+        
+        let currentTime = dateFormatter.string(from: date)
+        
+        let message = (willSendMsgTextField.text)!
+        
+        let updateDic = [
+            "poster": userName,
+            "postTime": currentTime,
+            "contentText": message
+        ]
+        
+        chatroomRef.child(currentSchedule.scheduleId).child("messages").updateChildValues(["\(self.messages.count)": updateDic])
+        
+    }
+    
     // MARK: - Table view data source
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -98,7 +126,11 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ParnerCell", for: indexPath) as! ParnerBoardTableViewCell
 
-        cell.nameLabel.text = messages[indexPath.row].poster
+        let poster = messages[indexPath.row].poster
+        
+        let postTime = messages[indexPath.row].postTime
+        
+        cell.nameLabel.text = "\(poster) \(postTime)"
         
         cell.messageLabel.text = messages[indexPath.row].contentText
 
@@ -126,4 +158,15 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         
     }
 
+}
+
+extension ParnerBoardTableViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        
+        return true
+        
+    }
 }
