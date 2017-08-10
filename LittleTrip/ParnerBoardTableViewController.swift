@@ -10,11 +10,25 @@ import UIKit
 
 import FirebaseDatabase
 
+struct Message {
+    
+    let poster: String
+    
+    let postTime: String
+    
+    let contentText: String
+    
+}
+
 class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var currentSchedule: Schedule!
     
-    @IBOutlet var collectionContainView: UIView!
+    var chatroomRef = Database.database().reference().child("scheduleChatroom")
+    
+    var messages: [Message] = []
+    
+    @IBOutlet var tableView: UITableView!
     
     override func loadView() {
         
@@ -29,8 +43,43 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         
         super.viewDidLoad()
 
+        catchChatroomMessage()
+        
     }
 
+    func catchChatroomMessage() {
+        
+        chatroomRef.child(currentSchedule.scheduleId).child("messages").observe(.value, with: { (snapshot) in
+ 
+            if let values = snapshot.value as? [[String:String]] {
+                
+                self.messages = []
+                
+                values.map({ (value) in
+                    
+                    let poster = value["poster"]!
+                    
+                    let postTime = value["postTime"]!
+                    
+                    let contentText = value["contentText"]!
+                    
+                    let message = Message(
+                        poster: poster,
+                        postTime: postTime,
+                        contentText: contentText
+                    )
+                    
+                    self.messages.append(message)
+                    
+                })
+                
+                self.tableView.reloadData()
+                
+            }
+            
+        })
+        
+    }
     
     // MARK: - Table view data source
 
@@ -41,7 +90,7 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return 1
+        return self.messages.count
         
     }
 
@@ -49,7 +98,9 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ParnerCell", for: indexPath) as! ParnerBoardTableViewCell
 
-
+        cell.nameLabel.text = messages[indexPath.row].poster
+        
+        cell.messageLabel.text = messages[indexPath.row].contentText
 
         return cell
         
