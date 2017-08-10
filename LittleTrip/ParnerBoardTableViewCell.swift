@@ -10,6 +10,10 @@ import UIKit
 
 class ParnerBoardTableViewCell: UITableViewCell {
 
+    @IBOutlet var nameLabel: UILabel!
+    
+    @IBOutlet var messageLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

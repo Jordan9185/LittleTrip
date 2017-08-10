@@ -100,15 +100,15 @@ class MenuViewController: UIViewController {
                             
                         }
                         
+                        UserDefaults.standard.set(URL(string: userImageURL), forKey: "userImageURL")
+
                     }
                     
                     if let userName = userData["name"] as? String {
                     
                         self.userNameTextField.text = userName
                         
-                    } else {
-                        
-                        self.userNameTextField.text = (user?.email)!
+                        UserDefaults.standard.set(userName, forKey: "userName")
                         
                     }
                     

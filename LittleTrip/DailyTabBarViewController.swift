@@ -14,6 +14,8 @@ class DailyTabBarViewController: UITabBarController {
     
     var dailySchedules: [Int: [DailySchedule]]?
     
+    var scheduleHost: User?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
