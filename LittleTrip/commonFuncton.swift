@@ -13,7 +13,7 @@ import SVProgressHUD
 
 func startLoading() {
     
-    SVProgressHUD.show()
+    SVProgressHUD.show(withStatus: "Loading")
     
     UIApplication.shared.beginIgnoringInteractionEvents()
     

@@ -59,11 +59,11 @@ class DailyScheduleTableViewController: UITableViewController {
     
     func catchDailySchedules() {
         
+        startLoading()
+        
         self.dailyScheduleRef = Database.database().reference().child("dailySchedule").child(currentSchedule.scheduleId)
 
         self.dailyScheduleRef?.observe(.value, with: { (snapshot) in
-            
-            startLoading()
             
             if let snapshotValues = snapshot.value as? [[[String:Any]]] {
                 
@@ -111,9 +111,9 @@ class DailyScheduleTableViewController: UITableViewController {
     
     func catchScheduleHostData() {
         
+        startLoading()
+        
         userRef.child(currentSchedule.uid).observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            startLoading()
             
             if let values = snapshot.value as? [String:Any] {
                 

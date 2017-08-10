@@ -56,11 +56,11 @@ class FriendTableViewController: UITableViewController {
     
     func catchFriendList() {
         
+        startLoading()
+        
         self.userListRef = Database.database().reference().child("user")
         
         self.userListRef?.child(uid).child("friendList").observe(.value, with: { (snapshot) in
-            
-            startLoading()
             
             self.friends = []
             
@@ -82,9 +82,9 @@ class FriendTableViewController: UITableViewController {
 
     func getFriendData(_ friendID: String) {
         
+        startLoading()
+        
         self.userListRef?.child(friendID).observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            startLoading()
             
             if let values = snapshot.value as? [String:Any],
                 let name = values["name"] as? String,
@@ -308,9 +308,9 @@ class FriendTableViewController: UITableViewController {
             
         }
         
+        startLoading()
+        
         self.userListRef?.child(friendID).observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            startLoading()
             
             if snapshot.exists() {
                 

@@ -80,9 +80,9 @@ class ScheduleMainTableViewController: UITableViewController {
         
         let ref = self.scheduleRef?.queryOrdered(byChild: "uid").queryEqual(toValue: uid)
         
+        startLoading()
+        
         ref?.observe(.value, with: { (snapshot) in
-            
-            startLoading()
             
             var localSchedules: [Schedule] = []
             
@@ -122,13 +122,13 @@ class ScheduleMainTableViewController: UITableViewController {
     
     func getScheduleHadJoinedOnServer() {
         
+        startLoading()
+        
         let uid = (Auth.auth().currentUser?.uid)!
         
         self.scheduleHadJoinedRef = rootRef.child("scheduleHadJoined").child(uid).child("schedules")
         
         self.scheduleHadJoinedRef?.observe(.value, with: { (snapshot) in
-            
-            startLoading()
             
             self.scheduleHadJoineds = []
             
@@ -150,11 +150,11 @@ class ScheduleMainTableViewController: UITableViewController {
     
     func getSingleScheduleDataOnServer(scheduleID: String) {
         
+        startLoading()
+        
         var schedule: Schedule!
         
         self.scheduleRef?.child(scheduleID).observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            startLoading()
             
             if let scheduleData = snapshot.value as? [String:Any] {
                 

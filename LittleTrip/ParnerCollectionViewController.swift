@@ -49,15 +49,17 @@ class ParnerCollectionViewController: UICollectionViewController {
     
     func catchParnerList() {
         
+        startLoading()
+        
         parnerRef.child(currentSchedule.scheduleId).child("parners").observe(.value, with: { (snapshot) in
-            
-            startLoading()
             
             if let parners = snapshot.value as? [String] {
                 
                 var users: [User] = []
                 
                 parners.map({ (parnerString) in
+                    
+                    startLoading()
                     
                     self.userRef.child(parnerString).observeSingleEvent(of: .value, with: { (snap) in
                         
@@ -89,6 +91,7 @@ class ParnerCollectionViewController: UICollectionViewController {
                         
                         self.collectionView?.reloadData()
                         
+                        endLoading()
                     })
                     
                 })

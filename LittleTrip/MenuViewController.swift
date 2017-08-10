@@ -78,6 +78,8 @@ class MenuViewController: UIViewController {
 
     func catchUserData() {
         
+        startLoading()
+        
         let user = Auth.auth().currentUser
         
         if let userID = user?.uid {
@@ -85,8 +87,6 @@ class MenuViewController: UIViewController {
             userRef = Database.database().reference().child("user").child(userID)
         
             userRef?.observe(.value, with: { (snapshot) in
-            
-                startLoading()
                 
                 if  let userData = snapshot.value as? [String:Any]{
                     
