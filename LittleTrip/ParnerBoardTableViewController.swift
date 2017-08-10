@@ -28,6 +28,8 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
     
     var messages: [Message] = []
     
+    var scheduleHost: User!
+    
     @IBOutlet var willSendMsgTextField: UITextField!
 
     @IBOutlet var tableView: UITableView!
@@ -39,6 +41,8 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         let myTabBarViewController = self.tabBarController as! DailyTabBarViewController
         
         currentSchedule = myTabBarViewController.schedule!
+        
+        scheduleHost = myTabBarViewController.scheduleHost
     }
 
     override func viewDidLoad() {
@@ -46,6 +50,10 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         super.viewDidLoad()
 
         willSendMsgTextField.delegate = self
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
+        tableView.estimatedRowHeight = 200
         
         catchChatroomMessage()
         
@@ -107,6 +115,8 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         
         chatroomRef.child(currentSchedule.scheduleId).child("messages").updateChildValues(["\(self.messages.count)": updateDic])
         
+        willSendMsgTextField.text = ""
+
     }
     
     // MARK: - Table view data source
@@ -130,10 +140,28 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         
         let postTime = messages[indexPath.row].postTime
         
-        cell.nameLabel.text = "\(poster) \(postTime)"
+        let userName = UserDefaults.standard.string(forKey: "userName")
         
         cell.messageLabel.text = messages[indexPath.row].contentText
 
+        if messages[indexPath.row].poster == userName {
+            
+            cell.nameLabel.text = "\(postTime) \(poster) "
+            
+            cell.nameLabel.textAlignment = .right
+            
+            cell.messageLabel.textAlignment = .right
+            
+        } else {
+            
+            cell.nameLabel.text = "\(poster) \(postTime)"
+            
+            cell.nameLabel.textAlignment = .left
+            
+            cell.messageLabel.textAlignment = .left
+            
+        }
+        
         return cell
         
     }
@@ -153,6 +181,8 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
             let parnerCollectionViewController = segue.destination as! ParnerCollectionViewController
             
             parnerCollectionViewController.currentSchedule = self.currentSchedule
+            
+            parnerCollectionViewController.scheduleHost = self.scheduleHost
             
         }
         

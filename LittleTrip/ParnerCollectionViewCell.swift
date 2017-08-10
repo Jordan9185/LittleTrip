@@ -14,4 +14,18 @@ class ParnerCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var userLabel: UILabel!
     
+    override func awakeFromNib() {
+        
+        super.awakeFromNib()
+        
+        setCellConfig()
+        
+    }
+    
+    func setCellConfig() {
+        
+        parnerPicImageView.layer.cornerRadius = self.frame.width/2
+        
+    }
+    
 }

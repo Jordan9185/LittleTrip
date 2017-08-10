@@ -29,6 +29,8 @@ class ParnerCollectionViewController: UICollectionViewController {
     
     let sections:[CollectionViewSection] = [.host, .parner]
     
+    var scheduleHost: User!
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -94,7 +96,7 @@ class ParnerCollectionViewController: UICollectionViewController {
         })
         
     }
-    
+
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -127,9 +129,9 @@ class ParnerCollectionViewController: UICollectionViewController {
             
         case .host:
             
-            let hostName = UserDefaults.standard.string(forKey: "userName")
+            let hostName = scheduleHost?.name
             
-            let hostImageURL = UserDefaults.standard.url(forKey: "userImageURL")
+            let hostImageURL = URL(string: (scheduleHost?.pictureURL)!)
             
             cell.parnerPicImageView.sd_setImage(with: hostImageURL)
             
