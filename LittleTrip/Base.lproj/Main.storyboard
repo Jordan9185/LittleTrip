@@ -910,57 +910,11 @@
             </objects>
             <point key="canvasLocation" x="3189.5999999999999" y="2847.5262368815593"/>
         </scene>
-        <!--Parner Board-->
-        <scene sceneID="biT-c3-YKU">
-            <objects>
-                <tableViewController id="mhu-S9-ZOX" customClass="ParnerBoardTableViewController" customModule="LittleTrip" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="AI2-YI-fHf">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <containerView key="tableHeaderView" opaque="NO" contentMode="scaleToFill" id="29C-CG-4EY">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                            <connections>
-                                <segue destination="3O4-Bb-jLf" kind="embed" identifier="embedParnerListCollectionView" id="TWA-aY-AYn"/>
-                            </connections>
-                        </containerView>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ParnerCell" id="lYe-4B-cca" customClass="ParnerBoardTableViewCell" customModule="LittleTrip" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="148" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lYe-4B-cca" id="Num-uA-hGh">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="mhu-S9-ZOX" id="z55-w3-UVU"/>
-                            <outlet property="delegate" destination="mhu-S9-ZOX" id="g9Z-A7-4zz"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Parner Board" id="KvN-B7-9Nm">
-                        <barButtonItem key="leftBarButtonItem" image="back" id="dBL-AR-MhG">
-                            <connections>
-                                <action selector="backButtonTapped:" destination="mhu-S9-ZOX" id="VeU-oy-bCb"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="add-contact" id="JbK-yv-spx"/>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="collectionContainView" destination="29C-CG-4EY" id="RK7-rn-wVW"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eoW-bI-2eO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3189.5999999999999" y="3652.6236881559225"/>
-        </scene>
         <!--Parner Collection View Controller-->
         <scene sceneID="p3Q-Ui-on6">
             <objects>
                 <collectionViewController automaticallyAdjustsScrollViewInsets="NO" id="3O4-Bb-jLf" customClass="ParnerCollectionViewController" customModule="LittleTrip" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="vvL-H1-nQf">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="vvL-H1-nQf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1017,7 +971,80 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xzh-mK-6QA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3976.8000000000002" y="3438.9805097451276"/>
+            <point key="canvasLocation" x="3959" y="3462"/>
+        </scene>
+        <!--Parner board-->
+        <scene sceneID="kdl-wI-OWj">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="lhg-xd-FMi" customClass="ParnerBoardTableViewController" customModule="LittleTrip" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fgO-YW-agM"/>
+                        <viewControllerLayoutGuide type="bottom" id="dzs-YO-lGd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OzI-QK-mG5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="nby-ki-E8t">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <subviews>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FDS-5B-Ee3">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="120" id="peE-sn-caP"/>
+                                        </constraints>
+                                        <connections>
+                                            <segue destination="3O4-Bb-jLf" kind="embed" identifier="embedParnerListCollectionView" id="DDT-XW-DTT"/>
+                                        </connections>
+                                    </containerView>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9Ti-oF-GSt">
+                                        <rect key="frame" x="0.0" y="120" width="375" height="374"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ParnerCell" id="IaD-gO-Tkq" customClass="ParnerBoardTableViewCell" customModule="LittleTrip" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IaD-gO-Tkq" id="Pfg-PW-8w2">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="lhg-xd-FMi" id="Mg4-uP-aAU"/>
+                                            <outlet property="delegate" destination="lhg-xd-FMi" id="t5B-qx-ZmJ"/>
+                                        </connections>
+                                    </tableView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UFE-cS-osy">
+                                        <rect key="frame" x="0.0" y="494" width="375" height="60"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="nD9-Iw-iyP"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="nby-ki-E8t" firstAttribute="top" secondItem="fgO-YW-agM" secondAttribute="bottom" id="1w4-v7-ARX"/>
+                            <constraint firstItem="dzs-YO-lGd" firstAttribute="top" secondItem="nby-ki-E8t" secondAttribute="bottom" id="rb9-x0-6fs"/>
+                            <constraint firstItem="nby-ki-E8t" firstAttribute="leading" secondItem="OzI-QK-mG5" secondAttribute="leading" id="sbj-IZ-eEI"/>
+                            <constraint firstAttribute="trailing" secondItem="nby-ki-E8t" secondAttribute="trailing" id="xMw-Lg-1G9"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Parner board" id="phW-os-ZJ0">
+                        <barButtonItem key="leftBarButtonItem" image="back" id="kgv-25-l1h">
+                            <connections>
+                                <action selector="backButtonTapped:" destination="lhg-xd-FMi" id="5kV-bv-130"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="add-contact" id="dVg-Ow-J55"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hNu-dM-i1s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3174" y="3653"/>
         </scene>
         <!--Parner Board-->
         <scene sceneID="NU1-Ac-LRR">
@@ -1032,7 +1059,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="mhu-S9-ZOX" kind="relationship" relationship="rootViewController" id="Zi8-od-tk4"/>
+                        <segue destination="lhg-xd-FMi" kind="relationship" relationship="rootViewController" id="ief-M0-YlI"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iyr-JB-LXF" userLabel="First Responder" sceneMemberID="firstResponder"/>

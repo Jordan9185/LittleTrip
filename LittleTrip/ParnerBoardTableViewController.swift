@@ -10,7 +10,7 @@ import UIKit
 
 import FirebaseDatabase
 
-class ParnerBoardTableViewController: UITableViewController {
+class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var currentSchedule: Schedule!
     
@@ -34,18 +34,18 @@ class ParnerBoardTableViewController: UITableViewController {
     
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
 
         return 1
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         return 1
         
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ParnerCell", for: indexPath) as! ParnerBoardTableViewCell
 
@@ -55,6 +55,13 @@ class ParnerBoardTableViewController: UITableViewController {
         
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 120))
+        
+        headerView.addSubview(collectionContainView)
+        
+        return headerView
+    }
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
         
         dismiss(animated: true, completion: nil)
