@@ -30,6 +30,12 @@ enum sectionType {
 
 class FriendTableViewController: UITableViewController {
 
+    var currentSchedule: Schedule?
+    
+    var isAddFriendMode: Bool?
+    
+    var scheduleHost: User?
+    
     var userListRef: DatabaseReference?
     
     let uid = (Auth.auth().currentUser?.uid)!
@@ -41,6 +47,12 @@ class FriendTableViewController: UITableViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        if isAddFriendMode == nil {
+            
+            self.isAddFriendMode = false
+            
+        }
         
         catchFriendList()
         
@@ -140,6 +152,24 @@ class FriendTableViewController: UITableViewController {
         switch self.sections[indexPath.section] {
             
         case .myUID:
+            
+            if isAddFriendMode! {
+                
+                cell.friendNameLabel.text = "Add friend"
+                
+                cell.friendNameLabel.frame = CGRect(x: 0, y: 20, width: self.view.frame.width, height: 40)
+                
+                cell.friendNameLabel.textAlignment = .center
+                
+                cell.friendNameLabel.font.withSize(40)
+                
+                cell.userImageView.isHidden = true
+                
+                cell.disMissButton.isHidden = false
+                
+                return cell
+                
+            }
         
             cell.friendNameLabel.text = "\(uid)"
             
@@ -181,12 +211,17 @@ class FriendTableViewController: UITableViewController {
         switch self.sections[section] {
             
         case .myUID:
-        
+            
+            if isAddFriendMode! {
+                
+                return nil
+                
+            }
+            
             let headerView = UIView(frame: CGRect(x: 0 , y: 0, width: self.view.frame.width, height: 40))
         
             let labelView = UILabel(frame: CGRect(x: 0 , y: 0, width: self.view.frame.width, height: 40))
         
-            
             labelView.text = "My UID"
         
             labelView.textAlignment = .center
@@ -194,7 +229,7 @@ class FriendTableViewController: UITableViewController {
             labelView.backgroundColor = UIColor.yellow
             
             headerView.addSubview(labelView)
-        
+            
             return headerView
         
         case .friendList:
@@ -210,6 +245,12 @@ class FriendTableViewController: UITableViewController {
         switch self.sections[section] {
             
         case .myUID:
+            
+            if isAddFriendMode! {
+                
+                return 0
+                
+            }
             
             return 40
             
@@ -243,6 +284,89 @@ class FriendTableViewController: UITableViewController {
             print("nothing happend")
             
         }
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        switch self.sections[indexPath.section] {
+            
+        case .myUID:
+            
+            break
+            
+        case .friendList:
+            
+            if isAddFriendMode! {
+                
+                let confirmAction = UIAlertAction(title: "OK", style: .default, handler: {(_ action: UIAlertAction) -> Void in
+            
+                    let newUserID = self.friends[indexPath.row].uid
+                    
+                    let newUserName = self.friends[indexPath.row].name
+                    
+                    let scheduleID = (self.currentSchedule?.scheduleId)!
+                    
+                    let currentParnerRef = Database.database().reference().child("scheduleParners").child(scheduleID).child("parners")
+                    
+                    if newUserID == self.scheduleHost?.uid {
+                        
+                        showAlert(title: "重複好友", message: "此好友為行程主人", viewController: self, confirmAction: nil, cancelAction: nil)
+                        
+                        return
+                        
+                    }
+                    
+                    startLoading()
+                    
+                    currentParnerRef.observeSingleEvent(of: .value, with: { (snap) in
+                        
+                        var parnerIDs: [String] = []
+                        
+                        if let values = snap.value as? [String] {
+                            
+                            if values.contains(newUserID) {
+                                
+                                endLoading()
+                                
+                                showAlert(title: "重複好友", message: "此好友已在旅伴清單", viewController: self, confirmAction: nil, cancelAction: nil)
+                            
+                                return
+                            }
+                            
+                            parnerIDs = values
+
+                        }
+                        
+                        parnerIDs.append(newUserID)
+                        
+                        currentParnerRef.setValue(parnerIDs)
+                        
+                        showAlert(title: "加入成功", message: "此好友已加入旅伴清單", viewController: self, confirmAction: nil, cancelAction: nil)
+                        
+                        endLoading()
+
+                    })
+    
+                })
+        
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+                showAlert(
+                    title: "加入好友",
+                    message: "確定嗎?",
+                    viewController: self,
+                    confirmAction: confirmAction,
+                    cancelAction: cancelAction
+                )
+                
+            }
+        }
+    }
+    
+    @IBAction func dismissButtonTapped(_ sender: Any) {
+        
+        dismiss(animated: true, completion: nil)
         
     }
     
@@ -280,7 +404,7 @@ class FriendTableViewController: UITableViewController {
         
         if uid == friendID {
             
-            showAlert(title: "Same as user", message: "UID is same as current user.")
+            showAlert(title: "Same as user", message: "UID is same as current user.", viewController: self, confirmAction: nil, cancelAction: nil)
             
             return
             
@@ -290,7 +414,7 @@ class FriendTableViewController: UITableViewController {
             
             if friend.uid == friendID {
                 
-                showAlert(title: "User has already added", message: "\(friendID) has already added in list.")
+                showAlert(title: "User has already added", message: "\(friendID) has already added in list.", viewController: self, confirmAction: nil, cancelAction: nil)
 
                 return
             }
@@ -317,7 +441,7 @@ class FriendTableViewController: UITableViewController {
 
             } else {
             
-                self.showAlert(title: "user isn't exist.", message: "user isn't exist.")
+                showAlert(title: "user isn't exist.", message: "user isn't exist.", viewController: self, confirmAction: nil, cancelAction: nil)
             
             }
             
@@ -326,22 +450,11 @@ class FriendTableViewController: UITableViewController {
         })
         
     }
-    
-    func showAlert(title: String, message: String) {
-        
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        let confirmAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        
-        alertController.addAction(confirmAction)
-        
-        present(alertController, animated: true, completion: nil)
-        
-    }
-    
+
     @IBAction func openMenuTapped(_ sender: Any) {
         
         self.slideMenuController()?.openLeft()
         
     }
+    
 }

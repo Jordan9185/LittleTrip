@@ -187,6 +187,17 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
             
         }
         
+        if segue.identifier == "fromParnerBoard" {
+            
+            let friendTableViewController = segue.destination as! FriendTableViewController
+            
+            friendTableViewController.isAddFriendMode = true
+            
+            friendTableViewController.currentSchedule = self.currentSchedule
+            
+            friendTableViewController.scheduleHost = scheduleHost
+        }
+        
     }
 
 }
