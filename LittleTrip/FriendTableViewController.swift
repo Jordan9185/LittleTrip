@@ -317,6 +317,8 @@ class FriendTableViewController: UITableViewController {
                         
                     }
                     
+                    startLoading()
+                    
                     currentParnerRef.observeSingleEvent(of: .value, with: { (snap) in
                         
                         var parnerIDs: [String] = []
@@ -324,7 +326,9 @@ class FriendTableViewController: UITableViewController {
                         if let values = snap.value as? [String] {
                             
                             if values.contains(newUserID) {
-                            
+                                
+                                endLoading()
+                                
                                 showAlert(title: "重複好友", message: "此好友已在旅伴清單", viewController: self, confirmAction: nil, cancelAction: nil)
                             
                                 return
@@ -339,6 +343,8 @@ class FriendTableViewController: UITableViewController {
                         currentParnerRef.setValue(parnerIDs)
                         
                         showAlert(title: "加入成功", message: "此好友已加入旅伴清單", viewController: self, confirmAction: nil, cancelAction: nil)
+                        
+                        endLoading()
 
                     })
     
