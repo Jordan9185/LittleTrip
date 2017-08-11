@@ -253,7 +253,7 @@ class ScheduleMainTableViewController: UITableViewController {
         
         headerView.backgroundColor = UIColor(red: 214/255, green: 234/255, blue: 248/255, alpha: 0.3)
         
-        label.font = UIFont(name: ".TrebuchetMS-Bold", size: 15)
+        label.font = UIFont(name: "TrebuchetMS-Bold", size: 15)
         
         label.textAlignment = .center
         
