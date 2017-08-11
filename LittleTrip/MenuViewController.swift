@@ -19,7 +19,7 @@ class MenuViewController: UIViewController {
     @IBOutlet var userNameTextField: UITextField!
     
     var userRef: DatabaseReference?
-    
+
     override func viewDidLoad() {
         
         super.viewDidLoad()

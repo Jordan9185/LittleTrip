@@ -14,9 +14,13 @@ class ScheduleMainTableViewCell: UITableViewCell {
     
     @IBOutlet var titleLabel: UILabel!
     
+    @IBOutlet var textBackView: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        setBackgroundImageViewConfig()
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -24,5 +28,12 @@ class ScheduleMainTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    func setBackgroundImageViewConfig() {
+        
+        backgroundImageView.layer.cornerRadius = 10
+        
+    }
 
+    
 }
