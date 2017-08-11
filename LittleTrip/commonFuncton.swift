@@ -7,8 +7,8 @@
 //
 
 import Foundation
-
 import SVProgressHUD
+import UIKit
 
 var isLoading = false
 
@@ -43,4 +43,30 @@ func endLoading() {
     UIApplication.shared.endIgnoringInteractionEvents()
     
 }
+
+func showAlert(title: String, message: String, viewController: UIViewController, confirmAction: UIAlertAction?, cancelAction: UIAlertAction?) {
+
+    let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
     
+    if let confirmAction = confirmAction {
+            
+        alertController.addAction(confirmAction)
+        
+    } else {
+        
+        let justOKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        
+        alertController.addAction(justOKAction)
+        
+    }
+    
+    if let cancelAction = cancelAction {
+        
+        alertController.addAction(cancelAction)
+        
+    }
+    
+    viewController.present(alertController, animated: true, completion: nil)
+    
+}
+

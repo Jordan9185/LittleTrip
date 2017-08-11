@@ -14,6 +14,8 @@ class FriendTableViewCell: UITableViewCell {
     
     @IBOutlet var friendNameLabel: UILabel!
     
+    @IBOutlet var disMissButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

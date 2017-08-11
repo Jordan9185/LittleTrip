@@ -386,15 +386,28 @@
                                                 </label>
                                             </subviews>
                                         </stackView>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wYb-Ie-26k">
+                                            <rect key="frame" x="15" y="8" width="48" height="64"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <inset key="titleEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="0.0"/>
+                                            <state key="normal" title="Done"/>
+                                            <connections>
+                                                <action selector="dismissButtonTapped:" destination="Egf-Sn-Gaq" eventType="touchUpInside" id="GqQ-Ar-NQm"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="3Uw-0W-NRs" firstAttribute="top" secondItem="fax-Yo-fIq" secondAttribute="topMargin" id="2PF-CN-BL2"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="3Uw-0W-NRs" secondAttribute="trailing" id="5lT-dR-dfz"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="3Uw-0W-NRs" secondAttribute="bottom" id="Ehw-R1-ffo"/>
+                                        <constraint firstItem="wYb-Ie-26k" firstAttribute="leading" secondItem="fax-Yo-fIq" secondAttribute="leading" constant="15" id="FJs-nG-UCa"/>
+                                        <constraint firstAttribute="bottom" secondItem="wYb-Ie-26k" secondAttribute="bottom" constant="7.5" id="FXt-1v-yWM"/>
+                                        <constraint firstItem="wYb-Ie-26k" firstAttribute="top" secondItem="fax-Yo-fIq" secondAttribute="top" constant="8" id="KOc-MM-ti9"/>
                                         <constraint firstItem="3Uw-0W-NRs" firstAttribute="leading" secondItem="fax-Yo-fIq" secondAttribute="leadingMargin" id="Mab-hm-lQs"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="disMissButton" destination="wYb-Ie-26k" id="jLl-4v-XBa"/>
                                     <outlet property="friendNameLabel" destination="D0G-li-o2P" id="Y4d-Mk-uka"/>
                                     <outlet property="userImageView" destination="zYT-N5-sY2" id="n0k-O0-ovt"/>
                                 </connections>
@@ -420,7 +433,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g72-Vh-Wpk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="626" y="3406"/>
+            <point key="canvasLocation" x="624.79999999999995" y="3405.2473763118442"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3Ku-aS-KR6">
@@ -848,7 +861,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pd3-nS-R14" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3044" y="2848.4257871064469"/>
+            <point key="canvasLocation" x="2105" y="2876"/>
         </scene>
         <!--Baggage list-->
         <scene sceneID="aAk-qd-hlh">
@@ -920,7 +933,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qXV-HC-tCP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4128.8000000000002" y="2847.5262368815593"/>
+            <point key="canvasLocation" x="3190" y="2875"/>
         </scene>
         <!--Parner Collection View Controller-->
         <scene sceneID="p3Q-Ui-on6">
@@ -983,7 +996,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xzh-mK-6QA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4896.8000000000002" y="3461.4692653673164"/>
+            <point key="canvasLocation" x="3980" y="3447"/>
         </scene>
         <!--Parner board-->
         <scene sceneID="kdl-wI-OWj">
@@ -1017,7 +1030,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="375" height="73"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IaD-gO-Tkq" id="Pfg-PW-8w2">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="72.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="U8I-5A-aGh">
@@ -1111,7 +1124,12 @@
                                 <action selector="backButtonTapped:" destination="lhg-xd-FMi" id="5kV-bv-130"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="add-contact" id="dVg-Ow-J55"/>
+                        <barButtonItem key="rightBarButtonItem" image="add-contact" id="dVg-Ow-J55">
+                            <connections>
+                                <action selector="addParnerListActionTapped:" destination="lhg-xd-FMi" id="9dx-Lc-Hcn"/>
+                                <segue destination="Egf-Sn-Gaq" kind="presentation" identifier="fromParnerBoard" id="izd-dm-Etx"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="9Ti-oF-GSt" id="2bg-dH-gfW"/>
@@ -1120,7 +1138,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hNu-dM-i1s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4112.8000000000002" y="3652.6236881559225"/>
+            <point key="canvasLocation" x="3190" y="3653"/>
         </scene>
         <!--Parner Board-->
         <scene sceneID="NU1-Ac-LRR">
@@ -1140,7 +1158,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iyr-JB-LXF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3044" y="3652.6236881559225"/>
+            <point key="canvasLocation" x="2105" y="3653"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kbJ-IP-Rzs">
@@ -1178,4 +1196,7 @@
         <image name="profile" width="128" height="128"/>
         <image name="signup" width="640" height="423"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="izd-dm-Etx"/>
+    </inferredMetricsTieBreakers>
 </document>

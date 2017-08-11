@@ -279,7 +279,7 @@ class ScheduleMainTableViewController: UITableViewController {
             
             label.textColor = .brown
             
-            label.text = "I am joing"
+            label.text = "I am joining"
             
             label.font = UIFont(name: "AvenirNext-Bold", size: 16)
             
