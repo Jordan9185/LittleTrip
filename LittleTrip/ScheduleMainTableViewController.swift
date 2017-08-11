@@ -247,23 +247,23 @@ class ScheduleMainTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
+        
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
+        
+        headerView.backgroundColor = UIColor(red: 214/255, green: 234/255, blue: 248/255, alpha: 0.3)
+        
+        label.font = UIFont(name: "TrebuchetMS-Bold", size: 15)
+        
+        label.textAlignment = .center
+        
+        label.textColor = UIColor(red: 4/255, green: 107/255, blue: 149/255, alpha: 0.7)
+        
         switch mainViewSections[section] {
             
         case .mySchedule:
-            
-            let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
-        
-            let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
-        
-            label.textAlignment = .center
-        
-            label.textColor = .brown
         
             label.text = "My Schedule"
-        
-            label.font = UIFont(name: "AvenirNext-Bold", size: 16)
-        
-            headerView.backgroundColor = UIColor(red: 1, green: 235/255, blue: 205/255, alpha: 0.7)
         
             headerView.addSubview(label)
         
@@ -271,19 +271,7 @@ class ScheduleMainTableViewController: UITableViewController {
             
         case .iAmJoining:
             
-            let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
-            
-            let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
-            
-            label.textAlignment = .center
-            
-            label.textColor = .brown
-            
             label.text = "I am joining"
-            
-            label.font = UIFont(name: "AvenirNext-Bold", size: 16)
-            
-            headerView.backgroundColor = UIColor(red: 1, green: 235/255, blue: 205/255, alpha: 0.7)
             
             headerView.addSubview(label)
             
