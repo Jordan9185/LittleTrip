@@ -18,6 +18,8 @@ class MenuViewController: UIViewController {
     
     @IBOutlet var userNameTextField: UITextField!
     
+    @IBOutlet var backgroundImageView: UIImageView!
+    
     var userRef: DatabaseReference?
 
     override func viewDidLoad() {
@@ -28,8 +30,9 @@ class MenuViewController: UIViewController {
         
         userNameTextField.delegate = self
         
-        userImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(changeUserPicture)))
+        setBackGroundConfig()
         
+        setUserImageViewConfig()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -38,6 +41,25 @@ class MenuViewController: UIViewController {
         
         userRef?.removeAllObservers()
         
+    }
+    
+    func setBackGroundConfig() {
+        
+        let blurEffect = UIBlurEffect(style: .regular)
+        
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        
+        blurView.frame.size = self.backgroundImageView.frame.size
+        
+        self.backgroundImageView.addSubview(blurView)
+        
+    }
+    
+    func setUserImageViewConfig() {
+        
+        userImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(changeUserPicture)))
+        
+        userImageView.layer.cornerRadius = 20
     }
     
     @IBAction func mainPageButtonTapped(_ sender: UIButton) {
@@ -93,6 +115,8 @@ class MenuViewController: UIViewController {
                     if let userImageURL = userData["imageURL"] as? String {
                         
                         self.userImageView.sd_setImage(with: URL(string: userImageURL))
+                        
+                        self.backgroundImageView.sd_setImage(with: URL(string: userImageURL))
                         
                         self.userImageView.contentMode = .scaleAspectFill
                         
@@ -213,6 +237,8 @@ extension MenuViewController: UIImagePickerControllerDelegate, UINavigationContr
             self.userImageView.image = image
             
             self.userImageView.contentMode = .scaleAspectFill
+            
+            self.backgroundImageView.image = image
             
             updateUserImage(image)
             
