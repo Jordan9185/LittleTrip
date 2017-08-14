@@ -493,6 +493,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <inset key="separatorInset" minX="50" minY="0.0" maxX="50" maxY="0.0"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="scheduleCell" rowHeight="180" id="Uc1-0q-4y1" customClass="ScheduleMainTableViewCell" customModule="LittleTrip" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="180"/>
@@ -502,17 +503,17 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9z9-lL-Rls">
-                                            <rect key="frame" x="18" y="18" width="339" height="144"/>
+                                            <rect key="frame" x="18" y="8" width="339" height="164"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="XRF-hO-bKD">
-                                                    <rect key="frame" x="0.0" y="0.0" width="339" height="144"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="339" height="164"/>
                                                 </imageView>
                                                 <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yRC-NP-xei">
-                                                    <rect key="frame" x="0.0" y="80" width="339" height="46"/>
+                                                    <rect key="frame" x="0.0" y="80" width="339" height="66"/>
                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XYc-DE-KgA">
-                                                    <rect key="frame" x="10" y="80" width="319" height="45"/>
+                                                    <rect key="frame" x="10" y="80" width="319" height="65"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="29"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -537,8 +538,8 @@
                                     <constraints>
                                         <constraint firstAttribute="trailingMargin" secondItem="9z9-lL-Rls" secondAttribute="trailing" constant="10" id="G5g-8a-Npm"/>
                                         <constraint firstItem="9z9-lL-Rls" firstAttribute="leading" secondItem="ugb-qW-fJw" secondAttribute="leadingMargin" constant="10" id="IbC-fp-VK8"/>
-                                        <constraint firstItem="9z9-lL-Rls" firstAttribute="top" secondItem="ugb-qW-fJw" secondAttribute="topMargin" constant="10" id="Mkk-Xo-b4l"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="9z9-lL-Rls" secondAttribute="bottom" constant="10" id="PEF-cw-gBz"/>
+                                        <constraint firstItem="9z9-lL-Rls" firstAttribute="top" secondItem="ugb-qW-fJw" secondAttribute="topMargin" id="Mkk-Xo-b4l"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="9z9-lL-Rls" secondAttribute="bottom" id="PEF-cw-gBz"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>

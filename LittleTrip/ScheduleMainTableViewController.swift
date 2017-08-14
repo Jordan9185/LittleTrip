@@ -249,9 +249,15 @@ class ScheduleMainTableViewController: UITableViewController {
         
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
         
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width / 2, height: 30))
         
-        headerView.backgroundColor = UIColor(red: 214/255, green: 234/255, blue: 248/255, alpha: 0.3)
+        let contentView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width / 2, height: 30))
+        
+        contentView.backgroundColor = UIColor(red: 214/255, green: 234/255, blue: 248/255, alpha: 0.6)
+        
+        contentView.layer.cornerRadius = 15
+        
+        contentView.center = CGPoint(x: headerView.frame.width/2, y: headerView.frame.height/2 + 5)
         
         label.font = UIFont(name: "TrebuchetMS-Bold", size: 15)
         
@@ -259,13 +265,15 @@ class ScheduleMainTableViewController: UITableViewController {
         
         label.textColor = UIColor(red: 4/255, green: 107/255, blue: 149/255, alpha: 0.7)
         
+        contentView.addSubview(label)
+        
         switch mainViewSections[section] {
             
         case .mySchedule:
         
             label.text = "My Schedule"
         
-            headerView.addSubview(label)
+            headerView.addSubview(contentView)
         
             return headerView
             
@@ -273,7 +281,7 @@ class ScheduleMainTableViewController: UITableViewController {
             
             label.text = "I am joining"
             
-            headerView.addSubview(label)
+            headerView.addSubview(contentView)
             
             return headerView
         }
@@ -282,7 +290,7 @@ class ScheduleMainTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
-        return 40
+        return 50
     
     }
     
