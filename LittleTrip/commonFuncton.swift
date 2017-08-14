@@ -70,3 +70,32 @@ func showAlert(title: String, message: String, viewController: UIViewController,
     
 }
 
+func headerViewSetting(viewFrame:CGRect, text:String) -> UIView {
+    
+    let headerView = UIView(frame: CGRect(x: 0, y: 0, width: viewFrame.width, height: 40))
+    
+    let label = UILabel(frame: CGRect(x: 0, y: 0, width: viewFrame.width / 2, height: 30))
+    
+    let contentView = UIView(frame: CGRect(x: 0, y: 0, width: viewFrame.width / 2, height: 30))
+    
+    contentView.backgroundColor = UIColor(red: 214/255, green: 234/255, blue: 248/255, alpha: 0.8)
+    
+    contentView.layer.cornerRadius = 15
+    
+    contentView.center = CGPoint(x: headerView.frame.width/2, y: headerView.frame.height/2 + 5)
+    
+    label.textAlignment = .center
+    
+    label.textColor = UIColor(red: 4/255, green: 107/255, blue: 149/255, alpha: 0.7)
+    
+    label.text = text
+    
+    label.font = UIFont(name: "TrebuchetMS-Bold", size: 15)
+    
+    contentView.addSubview(label)
+    
+    headerView.addSubview(contentView)
+    
+    return headerView
+    
+}
