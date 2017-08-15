@@ -297,6 +297,8 @@ class FriendTableViewController: UITableViewController {
                     
                     let currentParnerRef = Database.database().reference().child("scheduleParners").child(scheduleID).child("parners")
                     
+                    let scheduleHadJoinedRef = Database.database().reference().child("scheduleHadJoined")
+                    
                     if newUserID == self.scheduleHost?.uid {
                         
                         showAlert(title: "重複好友", message: "此好友為行程主人", viewController: self, confirmAction: nil, cancelAction: nil)
@@ -329,6 +331,32 @@ class FriendTableViewController: UITableViewController {
                         parnerIDs.append(newUserID)
                         
                         currentParnerRef.setValue(parnerIDs)
+                        
+                        scheduleHadJoinedRef.child(newUserID).child("schedules").observeSingleEvent(of: .value, with: { (snap) in
+                            
+                            var updateSchedules: [String] = []
+                            
+                            if snap.exists() {
+                                
+                                if let values = snap.value as? [String] {
+                                
+                                    updateSchedules = values
+                                
+                                    updateSchedules.append((self.currentSchedule?.scheduleId)!)
+                                
+                                    scheduleHadJoinedRef.child(newUserID).child("schedules").setValue(updateSchedules)
+                                
+                                }
+                                
+                            } else {
+                                
+                                updateSchedules.append((self.currentSchedule?.scheduleId)!)
+                                
+                                scheduleHadJoinedRef.child(newUserID).child("schedules").setValue(updateSchedules)
+                                
+                            }
+                            
+                        })
                         
                         showAlert(title: "加入成功", message: "此好友已加入旅伴清單", viewController: self, confirmAction: nil, cancelAction: nil)
                         

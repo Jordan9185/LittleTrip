@@ -93,9 +93,11 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
                     
                 })
                 
-                self.tableView.reloadData()
-                
-                self.tableView.scrollToBottom(animated: false)
+                self.tableView.reloadData({
+                    
+                    self.tableView.scrollToBottom(animated: false)
+                    
+                })
                 
                 endLoading()
                 
