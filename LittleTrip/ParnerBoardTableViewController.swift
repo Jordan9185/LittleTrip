@@ -57,6 +57,8 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         
         catchChatroomMessage()
         
+        setTableViewBackgroundImage()
+
     }
 
     func catchChatroomMessage() {
@@ -93,6 +95,24 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
             }
             
         })
+        
+    }
+    
+    func setTableViewBackgroundImage() {
+        
+        let imageView = UIImageView(frame: tableView.frame)
+        
+        imageView.sd_setImage(with: URL(string: currentSchedule.imageUrl)!)
+        
+        let blurEffect = UIBlurEffect(style: .extraLight)
+        
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        
+        blurView.frame.size = tableView.frame.size
+        
+        imageView.addSubview(blurView)
+        
+        tableView.backgroundView = imageView
         
     }
     
@@ -146,7 +166,9 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         let userName = UserDefaults.standard.string(forKey: "userName")
         
         cell.messageLabel.text = messages[indexPath.row].contentText
-
+        
+        cell.backgroundColor = UIColor.clear
+        
         if messages[indexPath.row].poster == userName {
             
             cell.nameLabel.text = "\(postTime) \(poster) "

@@ -24,7 +24,7 @@ class ParnerCollectionViewCell: UICollectionViewCell {
     
     func setCellConfig() {
         
-        parnerPicImageView.layer.cornerRadius = self.frame.width/2
+        parnerPicImageView.layer.cornerRadius = parnerPicImageView.frame.width/2
         
     }
     
