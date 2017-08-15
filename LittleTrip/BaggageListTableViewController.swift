@@ -121,21 +121,29 @@ class BaggageListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 30))
         
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.view.frame.width / 2.2, height: 25))
         
-        button.setTitle("+ Add item ...", for: .normal)
+        button.center = CGPoint(x: footerView.frame.width/2, y: footerView.frame.height/2)
         
-        button.setTitleColor(.brown, for: .normal)
+        button.layer.cornerRadius = 10
+        
+        button.setTitle("New a item", for: .normal)
+        
+        button.titleLabel?.textAlignment = .center
+        
+        button.setTitleColor(.white, for: .normal)
+        
+        button.titleLabel?.font = UIFont(name: "AvenirNext", size: 10)
+        
+        button.backgroundColor = UIColor(red: 4/255, green: 107/255, blue: 149/255, alpha: 0.5)
+        
+        button.tag = section
         
         button.addTarget(self, action: #selector(addEmptyRowAction), for: .touchUpInside)
         
-        button.titleLabel?.font = UIFont(name: "AvenirNext-Bold", size: 16)
-        
         footerView.addSubview(button)
-        
-        footerView.backgroundColor = UIColor(red: 1, green: 235/255, blue: 205/255, alpha: 0.7)
         
         return footerView
         
@@ -180,11 +188,21 @@ class BaggageListTableViewController: UITableViewController {
         
         if editingStyle == .delete {
             
+            self.baggageItems.remove(at: indexPath.row)
+            
             let ref = self.BaggageRef?.child("\(indexPath.row)")
             
-            ref?.removeValue()
-            
-            self.tableView.reloadData()
+            ref?.observeSingleEvent(of: .value, with: { (snap) in
+                
+                if snap.exists() {
+                    
+                    ref?.removeValue()
+                    
+                }
+                
+                self.tableView.reloadData()
+                
+            })
             
         }
         
