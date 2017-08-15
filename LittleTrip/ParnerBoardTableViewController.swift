@@ -34,6 +34,8 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
 
     @IBOutlet var tableView: UITableView!
     
+    @IBOutlet var scrollView: UIScrollView!
+    
     override func loadView() {
         
         super.loadView()
@@ -237,4 +239,37 @@ extension ParnerBoardTableViewController: UITextFieldDelegate {
         return true
         
     }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        
+        let center = NotificationCenter.default
+        
+        center.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: .UIKeyboardWillShow,
+            object: nil
+        )
+        
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        scrollView.contentInset = UIEdgeInsets.zero
+        
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        
+        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
+        
+        let keyboardSize = (userInfo.object(forKey: UIKeyboardFrameEndUserInfoKey)! as AnyObject).cgRectValue.size
+        
+        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height - 43, right: 0)
+        
+        scrollView.contentInset = contentInsets
+        
+    }
+    
 }
