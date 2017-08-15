@@ -383,7 +383,7 @@
             <objects>
                 <tableViewController id="Egf-Sn-Gaq" customClass="FriendTableViewController" customModule="LittleTrip" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" id="Tdu-iK-fNQ">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -716,6 +716,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pZA-TQ-BMg">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <color key="backgroundColor" red="0.015686274510000001" green="0.41960784309999999" blue="0.58431372550000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="AsT-uQ-HGy"/>
+                                </constraints>
+                            </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4PZ-C8-tp6">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
@@ -835,9 +842,12 @@
                         <constraints>
                             <constraint firstItem="ZEa-0h-DeX" firstAttribute="width" secondItem="F5i-rZ-Rja" secondAttribute="width" id="2qg-po-pWE"/>
                             <constraint firstItem="ZEa-0h-DeX" firstAttribute="height" secondItem="F5i-rZ-Rja" secondAttribute="height" id="ByP-na-DfG"/>
+                            <constraint firstItem="pZA-TQ-BMg" firstAttribute="leading" secondItem="F5i-rZ-Rja" secondAttribute="leading" id="H7h-yY-oVR"/>
                             <constraint firstItem="4PZ-C8-tp6" firstAttribute="top" secondItem="Lu5-ys-ELc" secondAttribute="bottom" constant="64" id="L6c-pw-Yv3"/>
+                            <constraint firstAttribute="topMargin" secondItem="pZA-TQ-BMg" secondAttribute="top" id="g9g-qu-Agu"/>
                             <constraint firstItem="7yD-fN-YRj" firstAttribute="top" secondItem="4PZ-C8-tp6" secondAttribute="bottom" id="hja-ub-Ch8"/>
                             <constraint firstAttribute="trailing" secondItem="4PZ-C8-tp6" secondAttribute="trailing" id="odD-48-KMH"/>
+                            <constraint firstAttribute="trailing" secondItem="pZA-TQ-BMg" secondAttribute="trailing" id="rhc-EV-cgG"/>
                             <constraint firstItem="4PZ-C8-tp6" firstAttribute="leading" secondItem="F5i-rZ-Rja" secondAttribute="leading" id="ron-CN-tCJ"/>
                         </constraints>
                     </view>
@@ -1053,10 +1063,10 @@
         <scene sceneID="p3Q-Ui-on6">
             <objects>
                 <collectionViewController automaticallyAdjustsScrollViewInsets="NO" id="3O4-Bb-jLf" customClass="ParnerCollectionViewController" customModule="LittleTrip" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="vvL-H1-nQf">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.69999999999999996" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="vvL-H1-nQf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.77290740260000002" green="0.88070491790000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="5" id="gRk-xH-aoa">
                             <size key="itemSize" width="70" height="90"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -1148,10 +1158,10 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="U8I-5A-aGh">
-                                                            <rect key="frame" x="10" y="10" width="300" height="52"/>
+                                                            <rect key="frame" x="10" y="10" width="394" height="52"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vZu-AB-a99">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="394" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="20" id="wPZ-Bh-Noa"/>
                                                                     </constraints>
@@ -1160,7 +1170,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U62-gQ-nhj">
-                                                                    <rect key="frame" x="0.0" y="20" width="300" height="32"/>
+                                                                    <rect key="frame" x="0.0" y="20" width="394" height="32"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1323,6 +1333,6 @@
         <image name="signup" width="640" height="423"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Aqj-Ct-MYO"/>
+        <segue reference="izd-dm-Etx"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -455,8 +455,6 @@ class DailyScheduleTableViewController: UITableViewController {
                         
                         self.dailySchedules[indexPath.section]?[indexPath.row].travelTime = (duration["text"] as? String)!
                         
-                        //test
-                        
                         if let totalTimeValue = duration["value"] as? Int {
                             
                             var hour = totalTimeValue / 3600
@@ -491,8 +489,6 @@ class DailyScheduleTableViewController: UITableViewController {
                             
                             self.dailySchedules[indexPath.section]?[indexPath.row].startTime = "\(hour):\(min)"
                         }
-                        
-                        //test
                         
                         DispatchQueue.main.async {
                                 

@@ -192,41 +192,11 @@ extension MenuViewController: UIImagePickerControllerDelegate, UINavigationContr
         
         imagePicker.delegate = self
         
-        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        if UIImagePickerController.isSourceTypeAvailable(.camera)
-        {
-            let openCamera = UIAlertAction(title: "Open camera", style: .default) { action in
-                
-                imagePicker.sourceType = .camera
-                
-                self.present(imagePicker, animated: true, completion: nil)
-                
-            }
+        DispatchQueue.main.async {
             
-            actionSheet.addAction(openCamera)
+            openCameraOrImageLibrary(imagePicker: imagePicker, viewController: self)
             
         }
-        
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary)
-        {
-            let openPhotoAlbum = UIAlertAction(title: "Open album", style: .default) { action in
-                
-                imagePicker.sourceType = .photoLibrary
-                
-                self.present(imagePicker, animated: true, completion: nil)
-                
-            }
-            
-            actionSheet.addAction(openPhotoAlbum)
-            
-        }
-        
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        actionSheet.addAction(cancel)
-        
-        present(actionSheet, animated: true, completion: nil)
         
     }
     

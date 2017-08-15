@@ -99,3 +99,43 @@ func headerViewSetting(viewFrame:CGRect, text:String) -> UIView {
     return headerView
     
 }
+
+func openCameraOrImageLibrary(imagePicker: UIImagePickerController, viewController: UIViewController) {
+    
+    let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+    
+    if UIImagePickerController.isSourceTypeAvailable(.camera)
+    {
+        let openCamera = UIAlertAction(title: "Open camera", style: .default) { action in
+            
+            imagePicker.sourceType = .camera
+            
+            viewController.present(imagePicker, animated: true, completion: nil)
+            
+        }
+        
+        actionSheet.addAction(openCamera)
+        
+    }
+    
+    if UIImagePickerController.isSourceTypeAvailable(.photoLibrary)
+    {
+        let openPhotoAlbum = UIAlertAction(title: "Open album", style: .default) { action in
+            
+            imagePicker.sourceType = .photoLibrary
+            
+            viewController.present(imagePicker, animated: true, completion: nil)
+            
+        }
+        
+        actionSheet.addAction(openPhotoAlbum)
+        
+    }
+    
+    let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+    
+    actionSheet.addAction(cancel)
+    
+    viewController.present(actionSheet, animated: true, completion: nil)
+    
+}

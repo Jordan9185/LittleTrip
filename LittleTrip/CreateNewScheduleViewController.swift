@@ -161,12 +161,15 @@ class CreateNewScheduleViewController: UIViewController, UIImagePickerController
     @IBAction func pickImageButtomTapped(_ sender: UIButton) {
         
         let imagePicker = UIImagePickerController()
-    
-        imagePicker.sourceType = .photoLibrary
         
         imagePicker.delegate = self
         
-        self.present(imagePicker, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            
+            openCameraOrImageLibrary(imagePicker: imagePicker, viewController: self)
+            
+        }
+        
     }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
