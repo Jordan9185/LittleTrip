@@ -163,6 +163,12 @@ class FriendTableViewController: UITableViewController {
                 
                 cell.friendNameLabel.font.withSize(40)
                 
+                cell.friendNameLabel.font = UIFont(name: "TrebuchetMS-Bold", size: 20)
+                
+                cell.friendNameLabel.textColor = UIColor.white
+                
+                cell.backgroundColor = UIColor(red: 4/255, green: 107/255, blue: 149/255, alpha: 1)
+                
                 cell.userImageView.isHidden = true
                 
                 cell.disMissButton.isHidden = false

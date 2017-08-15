@@ -418,11 +418,11 @@
                                                 </label>
                                             </subviews>
                                         </stackView>
-                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wYb-Ie-26k">
-                                            <rect key="frame" x="15" y="8" width="48" height="64"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wYb-Ie-26k">
+                                            <rect key="frame" x="15" y="12" width="25" height="60"/>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <inset key="titleEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="0.0"/>
-                                            <state key="normal" title="Done"/>
+                                            <state key="normal" image="letter-x"/>
                                             <connections>
                                                 <action selector="dismissButtonTapped:" destination="Egf-Sn-Gaq" eventType="touchUpInside" id="GqQ-Ar-NQm"/>
                                             </connections>
@@ -434,7 +434,7 @@
                                         <constraint firstAttribute="bottomMargin" secondItem="3Uw-0W-NRs" secondAttribute="bottom" id="Ehw-R1-ffo"/>
                                         <constraint firstItem="wYb-Ie-26k" firstAttribute="leading" secondItem="fax-Yo-fIq" secondAttribute="leading" constant="15" id="FJs-nG-UCa"/>
                                         <constraint firstAttribute="bottom" secondItem="wYb-Ie-26k" secondAttribute="bottom" constant="7.5" id="FXt-1v-yWM"/>
-                                        <constraint firstItem="wYb-Ie-26k" firstAttribute="top" secondItem="fax-Yo-fIq" secondAttribute="top" constant="8" id="KOc-MM-ti9"/>
+                                        <constraint firstItem="wYb-Ie-26k" firstAttribute="top" secondItem="fax-Yo-fIq" secondAttribute="top" constant="12" id="KOc-MM-ti9"/>
                                         <constraint firstItem="3Uw-0W-NRs" firstAttribute="leading" secondItem="fax-Yo-fIq" secondAttribute="leadingMargin" id="Mab-hm-lQs"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -1401,6 +1401,7 @@
         <image name="check-box-empty" width="25" height="25"/>
         <image name="dailyschedule" width="25" height="25"/>
         <image name="landing" width="960" height="639"/>
+        <image name="letter-x" width="25" height="25"/>
         <image name="map" width="32" height="32"/>
         <image name="menu" width="25" height="25"/>
         <image name="parner" width="25" height="25"/>
