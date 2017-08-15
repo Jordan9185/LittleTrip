@@ -52,7 +52,7 @@ class BaggageListTableViewController: UITableViewController {
     
     func getBaggageListFromServer() {
         
-        startLoading()
+        startLoading(status: "Loading")
         
         BaggageRef = Database.database().reference().child("baggageList").child(currentSchedule.scheduleId)
         

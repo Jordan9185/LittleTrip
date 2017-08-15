@@ -9,10 +9,12 @@
 import Foundation
 import SVProgressHUD
 import UIKit
+import FirebaseDatabase
+import FirebaseStorage
 
 var isLoading = false
 
-func startLoading() {
+func startLoading(status: String) {
     
     if isLoading == true {
         
@@ -22,7 +24,7 @@ func startLoading() {
     
     isLoading = true
     
-    SVProgressHUD.show(withStatus: "Loading")
+    SVProgressHUD.show(withStatus: status)
     
     UIApplication.shared.beginIgnoringInteractionEvents()
     
@@ -137,5 +139,39 @@ func openCameraOrImageLibrary(imagePicker: UIImagePickerController, viewControll
     actionSheet.addAction(cancel)
     
     viewController.present(actionSheet, animated: true, completion: nil)
+    
+}
+
+func removeScheduleAllSnapshot(schedule: Schedule) {
+    
+    let currentScheduleID = schedule.scheduleId
+    
+    let currentRef = scheduleRef.child(currentScheduleID)
+    
+    let currentDailyRef = dailyScheduleRef.child(currentScheduleID)
+    
+    let currentBaggageListRef = baggageListRef.child(currentScheduleID)
+    
+    currentRef.removeValue()
+    
+    currentDailyRef.removeValue()
+    
+    currentBaggageListRef.removeValue()
+    
+    let imageRef = Storage.storage().reference().child("ScheduleImage/\(currentScheduleID).jpg")
+    
+    imageRef.delete { error in
+        
+        if let error = error {
+            
+            print("Delete ScheduleImage/\(currentScheduleID).jpg is failed.")
+            
+        } else {
+            
+            print("Delete ScheduleImage/\(currentScheduleID).jpg is successful.")
+            
+        }
+        
+    }
     
 }

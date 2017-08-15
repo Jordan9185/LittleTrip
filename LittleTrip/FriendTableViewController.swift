@@ -68,7 +68,7 @@ class FriendTableViewController: UITableViewController {
     
     func catchFriendList() {
         
-        startLoading()
+        startLoading(status: "Loading")
         
         self.userListRef = Database.database().reference().child("user")
         
@@ -94,7 +94,7 @@ class FriendTableViewController: UITableViewController {
 
     func getFriendData(_ friendID: String) {
         
-        startLoading()
+        startLoading(status: "Loading")
         
         self.userListRef?.child(friendID).observeSingleEvent(of: .value, with: { (snapshot) in
             
@@ -313,7 +313,7 @@ class FriendTableViewController: UITableViewController {
                         
                     }
                     
-                    startLoading()
+                    startLoading(status: "Loading")
                     
                     currentParnerRef.observeSingleEvent(of: .value, with: { (snap) in
                         
@@ -443,7 +443,7 @@ class FriendTableViewController: UITableViewController {
             
         }
         
-        startLoading()
+        startLoading(status: "Loading")
         
         self.userListRef?.child(friendID).observeSingleEvent(of: .value, with: { (snapshot) in
             

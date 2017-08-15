@@ -12,6 +12,8 @@
 		980C56051F27324B007B4810 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 980C56041F27324B007B4810 /* Assets.xcassets */; };
 		980C56081F27324B007B4810 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 980C56061F27324B007B4810 /* LaunchScreen.storyboard */; };
 		981B9EB91F42E6C300A4FD6B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 981B9EBB1F42E6C300A4FD6B /* Localizable.strings */; };
+		981B9EBD1F42EBDD00A4FD6B /* ScheduleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981B9EBC1F42EBDD00A4FD6B /* ScheduleManager.swift */; };
+		981B9EBF1F43507500A4FD6B /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981B9EBE1F43507500A4FD6B /* constants.swift */; };
 		9821C5071F28245A0024B9D4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9821C5061F28245A0024B9D4 /* SignUpViewController.swift */; };
 		9827F8251F38340700A50043 /* SlideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9827F8241F38340700A50043 /* SlideMenuViewController.swift */; };
 		9827F8271F3837E600A50043 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9827F8261F3837E600A50043 /* MenuViewController.swift */; };
@@ -48,6 +50,8 @@
 		981B9EB41F42E4D400A4FD6B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		981B9EB51F42E4D400A4FD6B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		981B9EBA1F42E6C300A4FD6B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		981B9EBC1F42EBDD00A4FD6B /* ScheduleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleManager.swift; sourceTree = "<group>"; };
+		981B9EBE1F43507500A4FD6B /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
 		9821C5061F28245A0024B9D4 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		9827F8241F38340700A50043 /* SlideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuViewController.swift; sourceTree = "<group>"; };
 		9827F8261F3837E600A50043 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -122,7 +126,7 @@
 		980C55FC1F27324A007B4810 /* LittleTrip */ = {
 			isa = PBXGroup;
 			children = (
-				981B9EB61F42E68500A4FD6B /* Localization */,
+				981B9EBE1F43507500A4FD6B /* constants.swift */,
 				9827F8391F3C61B300A50043 /* commonFuncton.swift */,
 				9821C5011F2821AB0024B9D4 /* AppDelegate */,
 				98D11F591F29D27500A157BF /* CreateNewSchedule */,
@@ -133,6 +137,7 @@
 				9827F8231F3833C800A50043 /* SlideMenu */,
 				98D11F541F29726100A157BF /* ScheduleMain */,
 				9821C5031F2822250024B9D4 /* Storyboard */,
+				981B9EB61F42E68500A4FD6B /* Localization */,
 				9821C5041F2822360024B9D4 /* Plist */,
 				9821C5021F2822140024B9D4 /* Assets */,
 			);
@@ -231,6 +236,7 @@
 			children = (
 				98D11F551F2972C600A157BF /* ScheduleMainTableViewController.swift */,
 				98D11F571F2974E500A157BF /* ScheduleMainTableViewCell.swift */,
+				981B9EBC1F42EBDD00A4FD6B /* ScheduleManager.swift */,
 			);
 			name = ScheduleMain;
 			sourceTree = "<group>";
@@ -412,6 +418,7 @@
 				9827F8251F38340700A50043 /* SlideMenuViewController.swift in Sources */,
 				98FBC1E41F2B220100E2E70F /* DailyScheduleTableViewCell.swift in Sources */,
 				9827F8271F3837E600A50043 /* MenuViewController.swift in Sources */,
+				981B9EBF1F43507500A4FD6B /* constants.swift in Sources */,
 				98FBC1DC1F2B114400E2E70F /* DailyScheduleTableViewController.swift in Sources */,
 				98FBC1E21F2B12A500E2E70F /* DailyTabBarViewController.swift in Sources */,
 				9821C5071F28245A0024B9D4 /* SignUpViewController.swift in Sources */,
@@ -425,6 +432,7 @@
 				9827F8321F3AF96700A50043 /* ParnerBoardTableViewController.swift in Sources */,
 				980C55FE1F27324B007B4810 /* AppDelegate.swift in Sources */,
 				9827F8361F3B05D600A50043 /* ParnerCollectionViewController.swift in Sources */,
+				981B9EBD1F42EBDD00A4FD6B /* ScheduleManager.swift in Sources */,
 				984E4AAE1F305D73007766C7 /* BaggageListTableViewCell.swift in Sources */,
 				98FBC1DE1F2B115800E2E70F /* MapViewController.swift in Sources */,
 				9827F82F1F388FD100A50043 /* FriendTableViewCell.swift in Sources */,

@@ -59,7 +59,7 @@ class DailyScheduleTableViewController: UITableViewController {
     
     func catchDailySchedules() {
         
-        startLoading()
+        startLoading(status: "Loading")
         
         self.dailyScheduleRef = Database.database().reference().child("dailySchedule").child(currentSchedule.scheduleId)
 
@@ -111,7 +111,7 @@ class DailyScheduleTableViewController: UITableViewController {
     
     func catchScheduleHostData() {
         
-        startLoading()
+        startLoading(status: "Loading")
         
         userRef.child(currentSchedule.uid).observeSingleEvent(of: .value, with: { (snapshot) in
             

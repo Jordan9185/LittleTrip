@@ -67,7 +67,7 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
 
     func catchChatroomMessage() {
         
-        startLoading()
+        startLoading(status: "Loading")
         
         chatroomRef.child(currentSchedule.scheduleId).child("messages").observe(.value, with: { (snapshot) in
             

@@ -109,7 +109,7 @@ class MenuViewController: UIViewController {
 
     func catchUserData() {
         
-        startLoading()
+        startLoading(status: "Loading")
         
         let user = Auth.auth().currentUser
         

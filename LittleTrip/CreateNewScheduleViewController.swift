@@ -85,6 +85,8 @@ class CreateNewScheduleViewController: UIViewController, UIImagePickerController
     
     @IBAction func uploadButtonTapped(_ sender: UIBarButtonItem) {
         
+        startLoading(status: "Upload data, please wait a moment.")
+        
         let scheduleName = scheduleNameTextField.text ?? ""
         
         let date = dateTextField.text ?? ""
@@ -151,11 +153,13 @@ class CreateNewScheduleViewController: UIViewController, UIImagePickerController
                     
                 }
                 
+                self.dismiss(animated: true, completion: nil)
+                
+                endLoading()
             })
+            
         }
-        
-        dismiss(animated: true, completion: nil)
-        
+
     }
     
     @IBAction func pickImageButtomTapped(_ sender: UIButton) {
