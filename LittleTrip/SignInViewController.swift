@@ -10,6 +10,8 @@ import UIKit
 
 import FirebaseAuth
 
+import Crashlytics
+
 class SignInViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var signInButton: UIButton!
@@ -60,7 +62,13 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                 
             }
             
-            print("\(user) is sign in .")
+            Answers.logLogin(
+                withMethod: "signInButtonTapped",
+                success: true,
+                customAttributes: [
+                    "User email": user?.email
+                ]
+            )
             
         }
         

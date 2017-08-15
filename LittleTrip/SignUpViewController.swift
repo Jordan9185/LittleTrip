@@ -12,6 +12,8 @@ import FirebaseAuth
 
 import FirebaseDatabase
 
+import Crashlytics
+
 let defaultImageURLString = "https://firebasestorage.googleapis.com/v0/b/littletrip-58892.appspot.com/o/UserPic%2FprofileDefault.png?alt=media&token=849c5597-b7e2-44a1-9f23-30394636b8c8"
 
 class SignUpViewController: UIViewController, UITextFieldDelegate {
@@ -72,6 +74,12 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             
             userRef.updateChildValues(updateDic)
             
+            Answers.logSignUp(
+                withMethod: "signUpButtonTapped",
+                success: true,
+                customAttributes: [
+                    "User email" : user?.email
+                ])
         }
         
         self.navigationController?.popViewController(animated: true)
