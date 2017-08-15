@@ -14,6 +14,8 @@ class ParnerBoardTableViewCell: UITableViewCell {
     
     @IBOutlet var messageLabel: UILabel!
     
+    @IBOutlet var flexiableView: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

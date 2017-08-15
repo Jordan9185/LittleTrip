@@ -177,6 +177,8 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
             
             cell.messageLabel.textAlignment = .right
             
+            cell.flexiableView.isHidden = false
+            
         } else {
             
             cell.nameLabel.text = "\(poster) \(postTime)"
@@ -184,6 +186,8 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
             cell.nameLabel.textAlignment = .left
             
             cell.messageLabel.textAlignment = .left
+            
+            cell.flexiableView.isHidden = true
             
         }
         
