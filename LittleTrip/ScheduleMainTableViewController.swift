@@ -247,15 +247,19 @@ class ScheduleMainTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
+        let myScheduleString = NSLocalizedString("My Schedule", comment: "我的行程")
+        
+        let iAmJoiningString = NSLocalizedString("I am joining", comment: "目前加入的行程")
+        
         switch mainViewSections[section] {
             
         case .mySchedule:
         
-            return headerViewSetting(viewFrame:self.view.frame, text:"My Schedule")
+            return headerViewSetting(viewFrame:self.view.frame, text:myScheduleString)
             
         case .iAmJoining:
             
-            return headerViewSetting(viewFrame:self.view.frame, text:"I am joining")
+            return headerViewSetting(viewFrame:self.view.frame, text:iAmJoiningString)
         }
         
     }

@@ -125,11 +125,13 @@ class BaggageListTableViewController: UITableViewController {
         
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.view.frame.width / 2.2, height: 25))
         
+        let newItemString = NSLocalizedString("New a item", comment: "加入物品")
+        
         button.center = CGPoint(x: footerView.frame.width/2, y: footerView.frame.height/2)
         
         button.layer.cornerRadius = 10
         
-        button.setTitle("New a item", for: .normal)
+        button.setTitle(newItemString, for: .normal)
         
         button.titleLabel?.textAlignment = .center
         

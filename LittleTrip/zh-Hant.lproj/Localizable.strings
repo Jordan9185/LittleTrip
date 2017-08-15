@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  LittleTrip
+
+  Created by JordanLin on 2017/8/15.
+  Copyright © 2017年 JordanLin. All rights reserved.
+*/
+
+"My Schedule" = "我的行程";
+
+"I am joining" = "目前加入的行程";
+
+"New a schedule" = "加入新行程";
+
+"New a item" = "加入物品";

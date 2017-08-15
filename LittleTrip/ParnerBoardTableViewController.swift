@@ -139,6 +139,12 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         
         let message = (willSendMsgTextField.text)!
         
+        if message == "" {
+            
+            return
+            
+        }
+        
         let updateDic = [
             "poster": userName,
             "postTime": currentTime,

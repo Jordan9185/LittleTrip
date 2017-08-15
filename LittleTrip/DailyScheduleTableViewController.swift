@@ -188,8 +188,6 @@ class DailyScheduleTableViewController: UITableViewController {
             
             cell.startTimeTextField.isHidden = false
             
-            //cell.endTimeTextField.isHidden = true
-            
             cell.toLabel.isHidden = false
             
             cell.headerImageView.isHidden = true
@@ -201,8 +199,6 @@ class DailyScheduleTableViewController: UITableViewController {
             cell.headerImageView.image = #imageLiteral(resourceName: "start")
             
             cell.startTimeTextField.isHidden = true
-            
-            //cell.endTimeTextField.isHidden = true
             
             cell.toLabel.isHidden = true
             
@@ -231,11 +227,13 @@ class DailyScheduleTableViewController: UITableViewController {
         
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.dailySchedulesTableView.frame.width / 2.2, height: 25))
         
+        let newScheduleString = NSLocalizedString("New a schedule", comment: "加入新行程")
+        
         button.center = CGPoint(x: footerView.frame.width/2, y: footerView.frame.height/2)
         
         button.layer.cornerRadius = 10
         
-        button.setTitle("New a schedule", for: .normal)
+        button.setTitle(newScheduleString, for: .normal)
         
         button.titleLabel?.textAlignment = .center
         
