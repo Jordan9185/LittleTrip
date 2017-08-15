@@ -39,6 +39,8 @@ class MenuViewController: UIViewController {
         
         super.viewDidDisappear(true)
         
+        userNameTextField.resignFirstResponder()
+        
         userRef?.removeAllObservers()
         
     }
@@ -86,16 +88,23 @@ class MenuViewController: UIViewController {
     
     @IBAction func SignOutActionTapped(_ sender: UIButton) {
         
-        do {
+        let confirmAction = UIAlertAction(title: "OK", style: .default) { (action) in
             
-            try Auth.auth().signOut()
-            
-        } catch(let error) {
-            
-            print(error)
-            
+            do {
+                
+                try Auth.auth().signOut()
+                
+            } catch(let error) {
+                
+                print(error)
+                
+            }
         }
         
+        let cancelAction = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
+        
+        showAlert(title: "Sign Out", message: "Are you sure?", viewController: self, confirmAction: confirmAction, cancelAction: cancelAction)
+
     }
 
     func catchUserData() {
@@ -165,7 +174,7 @@ extension MenuViewController: UITextFieldDelegate {
             updateUserName()
             
         }
-        
+
     }
     
     func updateUserName() {
