@@ -247,42 +247,22 @@ class ScheduleMainTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
-        
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
-        
-        headerView.backgroundColor = UIColor(red: 214/255, green: 234/255, blue: 248/255, alpha: 0.3)
-        
-        label.font = UIFont(name: "TrebuchetMS-Bold", size: 15)
-        
-        label.textAlignment = .center
-        
-        label.textColor = UIColor(red: 4/255, green: 107/255, blue: 149/255, alpha: 0.7)
-        
         switch mainViewSections[section] {
             
         case .mySchedule:
         
-            label.text = "My Schedule"
-        
-            headerView.addSubview(label)
-        
-            return headerView
+            return headerViewSetting(viewFrame:self.view.frame, text:"My Schedule")
             
         case .iAmJoining:
             
-            label.text = "I am joining"
-            
-            headerView.addSubview(label)
-            
-            return headerView
+            return headerViewSetting(viewFrame:self.view.frame, text:"I am joining")
         }
         
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
-        return 40
+        return 50
     
     }
     

@@ -21,6 +21,8 @@ class CreateNewScheduleViewController: UIViewController, UIImagePickerController
     
     @IBOutlet var daysTextField: UITextField!
     
+    @IBOutlet var scrollView: UIScrollView!
+    
     let dateFormatter = DateFormatter()
     
     override func viewDidLoad() {
@@ -48,6 +50,14 @@ class CreateNewScheduleViewController: UIViewController, UIImagePickerController
         dateFormatter.dateFormat = "yyyy-MM-dd"
         
         dateTextField.text = dateFormatter.string(from: Date())
+        
+        UIApplication.shared.statusBarView?.backgroundColor = UIColor(red: 4/255, green: 107/255, blue: 149/255, alpha: 1)
+        
+        scheduleNameTextField.delegate = self
+        
+        dateTextField.delegate = self
+        
+        daysTextField.delegate = self
 
     }
     
@@ -151,12 +161,15 @@ class CreateNewScheduleViewController: UIViewController, UIImagePickerController
     @IBAction func pickImageButtomTapped(_ sender: UIButton) {
         
         let imagePicker = UIImagePickerController()
-    
-        imagePicker.sourceType = .photoLibrary
         
         imagePicker.delegate = self
         
-        self.present(imagePicker, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            
+            openCameraOrImageLibrary(imagePicker: imagePicker, viewController: self)
+            
+        }
+        
     }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -176,4 +189,56 @@ class CreateNewScheduleViewController: UIViewController, UIImagePickerController
         self.dismiss(animated: true, completion: nil)
         
     }
+}
+
+extension CreateNewScheduleViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        
+        return true
+        
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+    
+        let center = NotificationCenter.default
+        
+        center.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: .UIKeyboardWillShow,
+            object: nil
+        )
+
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        scrollView.contentInset = UIEdgeInsets.zero
+        
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        
+        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
+        
+        let keyboardSize = (userInfo.object(forKey: UIKeyboardFrameBeginUserInfoKey)! as AnyObject).cgRectValue.size
+        
+        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+        
+        scrollView.contentInset = contentInsets
+        
+    }
+    
+}
+
+extension UIApplication {
+    
+    var statusBarView: UIView? {
+        return value(forKeyPath: "statusBar") as? UIView
+    }
+    
 }

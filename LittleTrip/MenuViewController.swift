@@ -18,6 +18,8 @@ class MenuViewController: UIViewController {
     
     @IBOutlet var userNameTextField: UITextField!
     
+    @IBOutlet var backgroundImageView: UIImageView!
+    
     var userRef: DatabaseReference?
 
     override func viewDidLoad() {
@@ -28,16 +30,38 @@ class MenuViewController: UIViewController {
         
         userNameTextField.delegate = self
         
-        userImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(changeUserPicture)))
+        setBackGroundConfig()
         
+        setUserImageViewConfig()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         
         super.viewDidDisappear(true)
         
+        userNameTextField.resignFirstResponder()
+        
         userRef?.removeAllObservers()
         
+    }
+    
+    func setBackGroundConfig() {
+        
+        let blurEffect = UIBlurEffect(style: .regular)
+        
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        
+        blurView.frame.size = self.backgroundImageView.frame.size
+        
+        self.backgroundImageView.addSubview(blurView)
+        
+    }
+    
+    func setUserImageViewConfig() {
+        
+        userImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(changeUserPicture)))
+        
+        userImageView.layer.cornerRadius = 20
     }
     
     @IBAction func mainPageButtonTapped(_ sender: UIButton) {
@@ -64,16 +88,23 @@ class MenuViewController: UIViewController {
     
     @IBAction func SignOutActionTapped(_ sender: UIButton) {
         
-        do {
+        let confirmAction = UIAlertAction(title: "OK", style: .default) { (action) in
             
-            try Auth.auth().signOut()
-            
-        } catch(let error) {
-            
-            print(error)
-            
+            do {
+                
+                try Auth.auth().signOut()
+                
+            } catch(let error) {
+                
+                print(error)
+                
+            }
         }
         
+        let cancelAction = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
+        
+        showAlert(title: "Sign Out", message: "Are you sure?", viewController: self, confirmAction: confirmAction, cancelAction: cancelAction)
+
     }
 
     func catchUserData() {
@@ -93,6 +124,8 @@ class MenuViewController: UIViewController {
                     if let userImageURL = userData["imageURL"] as? String {
                         
                         self.userImageView.sd_setImage(with: URL(string: userImageURL))
+                        
+                        self.backgroundImageView.sd_setImage(with: URL(string: userImageURL))
                         
                         self.userImageView.contentMode = .scaleAspectFill
                         
@@ -141,7 +174,7 @@ extension MenuViewController: UITextFieldDelegate {
             updateUserName()
             
         }
-        
+
     }
     
     func updateUserName() {
@@ -168,41 +201,11 @@ extension MenuViewController: UIImagePickerControllerDelegate, UINavigationContr
         
         imagePicker.delegate = self
         
-        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        if UIImagePickerController.isSourceTypeAvailable(.camera)
-        {
-            let openCamera = UIAlertAction(title: "Open camera", style: .default) { action in
-                
-                imagePicker.sourceType = .camera
-                
-                self.present(imagePicker, animated: true, completion: nil)
-                
-            }
+        DispatchQueue.main.async {
             
-            actionSheet.addAction(openCamera)
+            openCameraOrImageLibrary(imagePicker: imagePicker, viewController: self)
             
         }
-        
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary)
-        {
-            let openPhotoAlbum = UIAlertAction(title: "Open album", style: .default) { action in
-                
-                imagePicker.sourceType = .photoLibrary
-                
-                self.present(imagePicker, animated: true, completion: nil)
-                
-            }
-            
-            actionSheet.addAction(openPhotoAlbum)
-            
-        }
-        
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        actionSheet.addAction(cancel)
-        
-        present(actionSheet, animated: true, completion: nil)
         
     }
     
@@ -213,6 +216,8 @@ extension MenuViewController: UIImagePickerControllerDelegate, UINavigationContr
             self.userImageView.image = image
             
             self.userImageView.contentMode = .scaleAspectFill
+            
+            self.backgroundImageView.image = image
             
             updateUserImage(image)
             

@@ -163,6 +163,12 @@ class FriendTableViewController: UITableViewController {
                 
                 cell.friendNameLabel.font.withSize(40)
                 
+                cell.friendNameLabel.font = UIFont(name: "TrebuchetMS-Bold", size: 20)
+                
+                cell.friendNameLabel.textColor = UIColor.white
+                
+                cell.backgroundColor = UIColor(red: 4/255, green: 107/255, blue: 149/255, alpha: 1)
+                
                 cell.userImageView.isHidden = true
                 
                 cell.disMissButton.isHidden = false
@@ -170,7 +176,7 @@ class FriendTableViewController: UITableViewController {
                 return cell
                 
             }
-        
+            
             cell.friendNameLabel.text = "\(uid)"
             
             cell.friendNameLabel.textAlignment = .center
@@ -218,19 +224,7 @@ class FriendTableViewController: UITableViewController {
                 
             }
             
-            let headerView = UIView(frame: CGRect(x: 0 , y: 0, width: self.view.frame.width, height: 40))
-        
-            let labelView = UILabel(frame: CGRect(x: 0 , y: 0, width: self.view.frame.width, height: 40))
-        
-            labelView.text = "My UID"
-        
-            labelView.textAlignment = .center
-        
-            labelView.backgroundColor = UIColor.yellow
-            
-            headerView.addSubview(labelView)
-            
-            return headerView
+            return headerViewSetting(viewFrame:self.view.frame, text:"My UID")
         
         case .friendList:
             
@@ -252,7 +246,7 @@ class FriendTableViewController: UITableViewController {
                 
             }
             
-            return 40
+            return 50
             
         case .friendList:
             
@@ -309,6 +303,8 @@ class FriendTableViewController: UITableViewController {
                     
                     let currentParnerRef = Database.database().reference().child("scheduleParners").child(scheduleID).child("parners")
                     
+                    let scheduleHadJoinedRef = Database.database().reference().child("scheduleHadJoined")
+                    
                     if newUserID == self.scheduleHost?.uid {
                         
                         showAlert(title: "重複好友", message: "此好友為行程主人", viewController: self, confirmAction: nil, cancelAction: nil)
@@ -341,6 +337,32 @@ class FriendTableViewController: UITableViewController {
                         parnerIDs.append(newUserID)
                         
                         currentParnerRef.setValue(parnerIDs)
+                        
+                        scheduleHadJoinedRef.child(newUserID).child("schedules").observeSingleEvent(of: .value, with: { (snap) in
+                            
+                            var updateSchedules: [String] = []
+                            
+                            if snap.exists() {
+                                
+                                if let values = snap.value as? [String] {
+                                
+                                    updateSchedules = values
+                                
+                                    updateSchedules.append((self.currentSchedule?.scheduleId)!)
+                                
+                                    scheduleHadJoinedRef.child(newUserID).child("schedules").setValue(updateSchedules)
+                                
+                                }
+                                
+                            } else {
+                                
+                                updateSchedules.append((self.currentSchedule?.scheduleId)!)
+                                
+                                scheduleHadJoinedRef.child(newUserID).child("schedules").setValue(updateSchedules)
+                                
+                            }
+                            
+                        })
                         
                         showAlert(title: "加入成功", message: "此好友已加入旅伴清單", viewController: self, confirmAction: nil, cancelAction: nil)
                         

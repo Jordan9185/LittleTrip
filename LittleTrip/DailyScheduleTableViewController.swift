@@ -215,23 +215,7 @@ class DailyScheduleTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
-        
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
-        
-        label.textAlignment = .center
-        
-        label.textColor = .brown
-        
-        label.text = "Day \(section + 1)"
-        
-        label.font = UIFont(name: "AvenirNext-Bold", size: 16)
-        
-        headerView.backgroundColor = UIColor(red: 1, green: 235/255, blue: 205/255, alpha: 0.7)
-        
-        headerView.addSubview(label)
-        
-        return headerView
+        return headerViewSetting(viewFrame:self.view.frame, text:"Day \(section + 1)")
         
     }
     
@@ -243,19 +227,23 @@ class DailyScheduleTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.dailySchedulesTableView.frame.width, height: 40))
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.dailySchedulesTableView.frame.width, height: 30))
         
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.dailySchedulesTableView.frame.width, height: 40))
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.dailySchedulesTableView.frame.width / 2.2, height: 25))
         
-        button.setTitle("Add new daily schedule for day\(section + 1)...", for: .normal)
+        button.center = CGPoint(x: footerView.frame.width/2, y: footerView.frame.height/2)
+        
+        button.layer.cornerRadius = 10
+        
+        button.setTitle("New a schedule", for: .normal)
         
         button.titleLabel?.textAlignment = .center
         
-        button.setTitleColor(.brown, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         
-        button.titleLabel?.font = UIFont(name: "AvenirNext", size: 14)
+        button.titleLabel?.font = UIFont(name: "AvenirNext", size: 10)
         
-        button.backgroundColor =  .white
+        button.backgroundColor = UIColor(red: 4/255, green: 107/255, blue: 149/255, alpha: 0.5)
         
         button.tag = section
         
@@ -467,8 +455,6 @@ class DailyScheduleTableViewController: UITableViewController {
                         
                         self.dailySchedules[indexPath.section]?[indexPath.row].travelTime = (duration["text"] as? String)!
                         
-                        //test
-                        
                         if let totalTimeValue = duration["value"] as? Int {
                             
                             var hour = totalTimeValue / 3600
@@ -503,8 +489,6 @@ class DailyScheduleTableViewController: UITableViewController {
                             
                             self.dailySchedules[indexPath.section]?[indexPath.row].startTime = "\(hour):\(min)"
                         }
-                        
-                        //test
                         
                         DispatchQueue.main.async {
                                 

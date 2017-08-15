@@ -70,3 +70,72 @@ func showAlert(title: String, message: String, viewController: UIViewController,
     
 }
 
+func headerViewSetting(viewFrame:CGRect, text:String) -> UIView {
+    
+    let headerView = UIView(frame: CGRect(x: 0, y: 0, width: viewFrame.width, height: 40))
+    
+    let label = UILabel(frame: CGRect(x: 0, y: 0, width: viewFrame.width / 2, height: 30))
+    
+    let contentView = UIView(frame: CGRect(x: 0, y: 0, width: viewFrame.width / 2, height: 30))
+    
+    contentView.backgroundColor = UIColor(red: 214/255, green: 234/255, blue: 248/255, alpha: 0.8)
+    
+    contentView.layer.cornerRadius = 15
+    
+    contentView.center = CGPoint(x: headerView.frame.width/2, y: headerView.frame.height/2 + 5)
+    
+    label.textAlignment = .center
+    
+    label.textColor = UIColor(red: 4/255, green: 107/255, blue: 149/255, alpha: 0.7)
+    
+    label.text = text
+    
+    label.font = UIFont(name: "TrebuchetMS-Bold", size: 15)
+    
+    contentView.addSubview(label)
+    
+    headerView.addSubview(contentView)
+    
+    return headerView
+    
+}
+
+func openCameraOrImageLibrary(imagePicker: UIImagePickerController, viewController: UIViewController) {
+    
+    let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+    
+    if UIImagePickerController.isSourceTypeAvailable(.camera)
+    {
+        let openCamera = UIAlertAction(title: "Open camera", style: .default) { action in
+            
+            imagePicker.sourceType = .camera
+            
+            viewController.present(imagePicker, animated: true, completion: nil)
+            
+        }
+        
+        actionSheet.addAction(openCamera)
+        
+    }
+    
+    if UIImagePickerController.isSourceTypeAvailable(.photoLibrary)
+    {
+        let openPhotoAlbum = UIAlertAction(title: "Open album", style: .default) { action in
+            
+            imagePicker.sourceType = .photoLibrary
+            
+            viewController.present(imagePicker, animated: true, completion: nil)
+            
+        }
+        
+        actionSheet.addAction(openPhotoAlbum)
+        
+    }
+    
+    let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+    
+    actionSheet.addAction(cancel)
+    
+    viewController.present(actionSheet, animated: true, completion: nil)
+    
+}

@@ -10,6 +10,8 @@ import UIKit
 
 import FirebaseDatabase
 
+import SwifterSwift
+
 struct Message {
     
     let poster: String
@@ -34,6 +36,8 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
 
     @IBOutlet var tableView: UITableView!
     
+    @IBOutlet var scrollView: UIScrollView!
+    
     override func loadView() {
         
         super.loadView()
@@ -56,6 +60,8 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         tableView.estimatedRowHeight = 200
         
         catchChatroomMessage()
+        
+        setTableViewBackgroundImage()
         
     }
 
@@ -87,12 +93,35 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
                     
                 })
                 
-                self.tableView.reloadData()
+                self.tableView.reloadData({
+                    
+                    self.tableView.scrollToBottom(animated: false)
+                    
+                })
                 
                 endLoading()
+                
             }
             
         })
+        
+    }
+    
+    func setTableViewBackgroundImage() {
+        
+        let imageView = UIImageView(frame: tableView.frame)
+        
+        imageView.sd_setImage(with: URL(string: currentSchedule.imageUrl)!)
+        
+        let blurEffect = UIBlurEffect(style: .extraLight)
+        
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        
+        blurView.frame.size = tableView.frame.size
+        
+        imageView.addSubview(blurView)
+        
+        tableView.backgroundView = imageView
         
     }
     
@@ -119,6 +148,8 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         chatroomRef.child(currentSchedule.scheduleId).child("messages").updateChildValues(["\(self.messages.count)": updateDic])
         
         willSendMsgTextField.text = ""
+        
+        tableView.reloadData()
 
     }
     
@@ -146,7 +177,9 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         let userName = UserDefaults.standard.string(forKey: "userName")
         
         cell.messageLabel.text = messages[indexPath.row].contentText
-
+        
+        cell.backgroundColor = UIColor.clear
+        
         if messages[indexPath.row].poster == userName {
             
             cell.nameLabel.text = "\(postTime) \(poster) "
@@ -154,6 +187,8 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
             cell.nameLabel.textAlignment = .right
             
             cell.messageLabel.textAlignment = .right
+            
+            cell.flexiableView.isHidden = false
             
         } else {
             
@@ -163,8 +198,10 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
             
             cell.messageLabel.textAlignment = .left
             
+            cell.flexiableView.isHidden = true
+            
         }
-        
+
         return cell
         
     }
@@ -211,4 +248,37 @@ extension ParnerBoardTableViewController: UITextFieldDelegate {
         return true
         
     }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        
+        let center = NotificationCenter.default
+        
+        center.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: .UIKeyboardWillShow,
+            object: nil
+        )
+        
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        scrollView.contentInset = UIEdgeInsets.zero
+        
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        
+        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
+        
+        let keyboardSize = (userInfo.object(forKey: UIKeyboardFrameEndUserInfoKey)! as AnyObject).cgRectValue.size
+        
+        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height - 43, right: 0)
+        
+        scrollView.contentInset = contentInsets
+        
+    }
+    
 }

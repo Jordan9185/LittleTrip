@@ -34,6 +34,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SwifterSwift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>libwebp.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,32 +47,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>106063444D4B7589D160B796C38FEF0A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>107A9565F9DF88517DFD3E28C05B2B96</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>21792D20FB41A48AD900FCD0FB2400E8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>24437F78D5B86A643B1F794D0DE878CA</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>59ECB7543868AE4C340DC2BE81BF69F6</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>5CB21F596109BB91BA8AB94ADEC4AC87</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>61A4CD63F42BF890FB2DC9B8BE267FED</key>
+		<key>5DA1D4A3AC780E3A88D7CA6423ACF465</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -77,27 +67,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6F5A8A1110ED41F90C3D135AECBC5809</key>
+		<key>98E52AC36E8EB4094CC740B4C111B74E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>823CDAEA43B555E3A1EB60BA6A5C2AB4</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A96761C73A4B7953B4099A0A0B0CFC81</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>AB08D296E69B0AF384E11EEC1F20D969</key>
+		<key>9DB491FA886B68105B29E42FAE5A2AF5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>C052BEBFBD0AB5218CC64BA3450F6547</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EA17B149D6D0CD2F31D9C9678F76DBD5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
