@@ -10,6 +10,8 @@ import UIKit
 
 import FirebaseDatabase
 
+import SwifterSwift
+
 struct Message {
     
     let poster: String
@@ -60,7 +62,7 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         catchChatroomMessage()
         
         setTableViewBackgroundImage()
-
+        
     }
 
     func catchChatroomMessage() {
@@ -93,7 +95,10 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
                 
                 self.tableView.reloadData()
                 
+                self.tableView.scrollToBottom(animated: false)
+                
                 endLoading()
+                
             }
             
         })
@@ -141,6 +146,8 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         chatroomRef.child(currentSchedule.scheduleId).child("messages").updateChildValues(["\(self.messages.count)": updateDic])
         
         willSendMsgTextField.text = ""
+        
+        tableView.reloadData()
 
     }
     
@@ -192,7 +199,7 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
             cell.flexiableView.isHidden = true
             
         }
-        
+
         return cell
         
     }

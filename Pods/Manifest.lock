@@ -80,6 +80,7 @@ PODS:
     - SDWebImage/Core
   - SlideMenuControllerSwift (3.0.1)
   - SVProgressHUD (2.1.2)
+  - SwifterSwift (1.6.4)
   - SwiftLint (0.20.0)
 
 DEPENDENCIES:
@@ -93,6 +94,7 @@ DEPENDENCIES:
   - SDWebImage/WebP
   - SlideMenuControllerSwift (~> 3.0)
   - SVProgressHUD
+  - SwifterSwift
   - SwiftLint
 
 SPEC CHECKSUMS:
@@ -112,8 +114,9 @@ SPEC CHECKSUMS:
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SlideMenuControllerSwift: 9a163b16d54afab734add42858cba7ef7c307755
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
+  SwifterSwift: 92c73c47c3cbf7d5f788adf6459bf07b5d23d3fb
   SwiftLint: 3f7543509c931d1291395335f34e245d3919b7f2
 
-PODFILE CHECKSUM: 3022a4305341687ccdf297f83a3493d64321dd4c
+PODFILE CHECKSUM: ee67257141cde3b8d14be35019b1b84993f14a71
 
 COCOAPODS: 1.2.1
