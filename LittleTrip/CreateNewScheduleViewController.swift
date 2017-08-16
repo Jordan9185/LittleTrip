@@ -135,7 +135,13 @@ class CreateNewScheduleViewController: UIViewController, UIImagePickerController
                 
                 let childUpdates = ["/\(key)": schedule]
                 
-                scheduleRef.updateChildValues(childUpdates)
+                scheduleRef.updateChildValues(childUpdates, withCompletionBlock: { (error, ref) in
+                    
+                    self.dismiss(animated: true, completion: nil)
+                    
+                    endLoading()
+                    
+                })
                 
                 let daysInt = Int(days)!
                 
@@ -152,10 +158,7 @@ class CreateNewScheduleViewController: UIViewController, UIImagePickerController
                     dailyScheduleRef.child(key).updateChildValues(["\(day)": ["0": newDailyScheduleDic]])
                     
                 }
-                
-                self.dismiss(animated: true, completion: nil)
-                
-                endLoading()
+            
             })
             
         }
