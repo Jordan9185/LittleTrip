@@ -322,6 +322,19 @@ class DailyScheduleTableViewController: UITableViewController {
         
         let currentSection = sender.tag
         
+        if dailySchedules[currentSection]?.last?.locationName == "尚未選擇" {
+            
+            showAlert(
+                title: "Found empty dailySchedule",
+                message: "Day \(currentSection + 1) 的最後行程尚未選擇\n請先指定該行程目的地",
+                viewController: self,
+                confirmAction: nil,
+                cancelAction: nil)
+            
+            return
+            
+        }
+        
         let newRow = (self.dailySchedules[currentSection]?.count)!
         
         var previousScheduleEndTime = ""
@@ -336,7 +349,7 @@ class DailyScheduleTableViewController: UITableViewController {
         
         let updateDic: [String:Any] = {
             [
-                "endTime" : "08:00",
+                "endTime" : previousScheduleEndTime,
                 "latitude" : "0",
                 "locationName" : "尚未選擇",
                 "longitude" : "0",
@@ -500,7 +513,7 @@ class DailyScheduleTableViewController: UITableViewController {
                             
                             if let travelTime = duration["text"] as? String {
                             
-                             cell?.travelTimeLabel.text = "預估路程約 \(travelTime)"
+                             cell?.travelTimeLabel.text = "預估抵達此處時間約需 \(travelTime)"
                                 
                             }
                             

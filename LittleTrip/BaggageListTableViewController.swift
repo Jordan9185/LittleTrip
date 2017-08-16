@@ -153,13 +153,20 @@ class BaggageListTableViewController: UITableViewController {
     
     func addEmptyRowAction(_ sender: UIButton) {
         
+        if baggageItems.count > 50 {
+            
+            showAlert(title: "Max amount", message: "物品數量已達上限(50)", viewController: self, confirmAction: nil, cancelAction: nil)
+            
+            return
+        }
+        
         self.baggageItems.append(
             BaggageItem(
                 itemName: "New item",
                 isSelected: false
             )
         )
-        
+
         self.tableView.reloadData()
         
     }
