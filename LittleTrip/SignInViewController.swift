@@ -36,6 +36,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func signInButtonTapped(_ sender: UIButton) {
         
+        startLoading(status: "logging")
+        
         let email = emailTextField.text ?? ""
         
         if email == "" {

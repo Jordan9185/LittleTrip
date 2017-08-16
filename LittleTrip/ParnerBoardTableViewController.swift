@@ -94,8 +94,10 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
                 })
                 
                 self.tableView.reloadData({
+
+                    let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
                     
-                    self.tableView.scrollToBottom(animated: false)
+                    self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
                     
                 })
                 

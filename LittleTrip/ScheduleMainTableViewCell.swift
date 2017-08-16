@@ -14,6 +14,8 @@ class ScheduleMainTableViewCell: UITableViewCell {
     
     @IBOutlet var titleLabel: UILabel!
     
+    @IBOutlet var dateLabel: UILabel!
+    
     @IBOutlet var textBackView: UILabel!
     
     override func awakeFromNib() {

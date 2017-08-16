@@ -211,7 +211,9 @@ class DailyScheduleTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        return headerViewSetting(viewFrame:self.view.frame, text:"Day \(section + 1)")
+        let dateString = addDaysForDate(dateString: currentSchedule.createdDate, days: section + 1)
+        
+        return headerViewSetting(viewFrame:self.view.frame, text:"Day \(section + 1)    \(dateString)")
         
     }
     

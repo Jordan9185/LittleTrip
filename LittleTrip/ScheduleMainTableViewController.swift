@@ -87,7 +87,7 @@ class ScheduleMainTableViewController: UITableViewController {
         }
         
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "scheduleCell", for: indexPath) as! ScheduleMainTableViewCell
@@ -97,6 +97,12 @@ class ScheduleMainTableViewController: UITableViewController {
         case .mySchedule:
 
             cell.titleLabel.text = schedules[indexPath.row].title
+            
+            let startDateString = schedules[indexPath.row].createdDate
+            
+            let endDateString = addDaysForDate(dateString: startDateString, days: schedules[indexPath.row].days)
+            
+            cell.dateLabel.text = "\(startDateString) ~ \(endDateString)"
         
             cell.backgroundImageView.contentMode = .scaleAspectFill
         
@@ -115,6 +121,12 @@ class ScheduleMainTableViewController: UITableViewController {
             }
             
             cell.titleLabel.text = scheduleHadJoineds[indexPath.row].title
+
+            let startDateString = scheduleHadJoineds[indexPath.row].createdDate
+            
+            let endDateString = addDaysForDate(dateString: startDateString, days: scheduleHadJoineds[indexPath.row].days)
+            
+            cell.dateLabel.text = "\(startDateString) ~ \(endDateString)"
             
             cell.backgroundImageView.contentMode = .scaleAspectFill
             

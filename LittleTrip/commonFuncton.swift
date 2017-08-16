@@ -76,13 +76,13 @@ func headerViewSetting(viewFrame:CGRect, text:String) -> UIView {
     
     let headerView = UIView(frame: CGRect(x: 0, y: 0, width: viewFrame.width, height: 40))
     
-    let label = UILabel(frame: CGRect(x: 0, y: 0, width: viewFrame.width / 2, height: 30))
+    let label = UILabel(frame: CGRect(x: 0, y: 0, width: viewFrame.width / 2 + 40, height: 30))
     
-    let contentView = UIView(frame: CGRect(x: 0, y: 0, width: viewFrame.width / 2, height: 30))
+    let contentView = UIView(frame: CGRect(x: 0, y: 0, width: viewFrame.width / 2 + 40, height: 30))
     
     contentView.backgroundColor = UIColor(red: 214/255, green: 234/255, blue: 248/255, alpha: 0.8)
     
-    contentView.layer.cornerRadius = 15
+    contentView.layer.cornerRadius = 12
     
     contentView.center = CGPoint(x: headerView.frame.width/2, y: headerView.frame.height/2 + 5)
     
@@ -174,4 +174,17 @@ func removeScheduleAllSnapshot(schedule: Schedule) {
         
     }
     
+}
+
+func addDaysForDate(dateString:String, days:Int) -> String {
+    
+    let dateFormatter = DateFormatter()
+    
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    
+    var date = dateFormatter.date(from: dateString)
+    
+    date?.add(.day, value: (days - 1))
+    
+    return dateFormatter.string(from: date!)
 }
