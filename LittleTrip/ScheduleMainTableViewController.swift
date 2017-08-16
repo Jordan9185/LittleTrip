@@ -68,7 +68,7 @@ class ScheduleMainTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
 
-        return 1
+        return mainViewSections.count
         
     }
 

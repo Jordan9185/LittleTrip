@@ -42,7 +42,7 @@ class FriendTableViewController: UITableViewController {
     
     var friends:[User] = []
     
-    let sections: [sectionType] = [.myUID, .friendList]
+    let sections: [sectionType] = [.friendList]
     
     override func viewDidLoad() {
         
@@ -394,24 +394,47 @@ class FriendTableViewController: UITableViewController {
     
     @IBAction func addFriendActionTapped(_ sender: UIBarButtonItem) {
         
-        let alertController = UIAlertController(title: "Add Friend", message: "Enter your friend UID", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Add Friend", message: "Enter your friend E-mail", preferredStyle: .alert)
         
         alertController.addTextField(configurationHandler: {(_ textField: UITextField) -> Void in
             
-            textField.placeholder = "Your friend UID"
+            textField.placeholder = "Your friend E-mail"
             
         })
         
         let confirmAction = UIAlertAction(title: "OK", style: .default, handler: {(_ action: UIAlertAction) -> Void in
             
-            guard let friendID = alertController.textFields?.first?.text else {
+            guard let friendEmail = alertController.textFields?.first?.text else {
                 return
             }
             
-            self.updateFriendList(who: self.uid, friendID: friendID)
-            
-            self.updateFriendList(who: friendID, friendID: self.uid)
-            
+            self.userListRef?.queryOrdered(byChild: "email").queryEqual(toValue: friendEmail).observeSingleEvent(of: .value, with: { (snap) in
+                
+                if snap.exists() {
+                
+                    if let values = snap.value as? [String:Any]{
+                    
+                        let friendID = values.keys.first!
+                    
+                        self.updateFriendList(who: self.uid, friendID: friendID)
+                    
+                        self.updateFriendList(who: friendID, friendID: self.uid)
+                    
+                    } else {
+                        
+                        print("Add Friend error: catch user error.")
+                    }
+                    
+                } else {
+                        showAlert(title: "No user",
+                                  message: "User doesn't exist.",
+                                  viewController: self,
+                                  confirmAction: nil,
+                                  cancelAction: nil)
+                }
+                
+            })
+        
         })
         
         alertController.addAction(confirmAction)

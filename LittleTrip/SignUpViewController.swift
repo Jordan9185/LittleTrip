@@ -44,6 +44,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
         if email == "" {
             
+            showAlert(title: "Empty", message: "Email is empty. \nformat: example@example.com", viewController: self, confirmAction: nil, cancelAction: nil)
+            
             return
         }
         
@@ -51,7 +53,17 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
         if password == "" {
             
+            showAlert(title: "Empty", message: "Password is empty.", viewController: self, confirmAction: nil, cancelAction: nil)
+            
             return
+        }
+        
+        if password.characters.count < 6 {
+            
+            showAlert(title: "Password too short.", message: "Need more than 6 letters.", viewController: self, confirmAction: nil, cancelAction: nil)
+            
+            return
+            
         }
         
         Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
@@ -65,8 +77,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             let updateDic = [
                 (user?.uid)! : [
                     "friendList" : [],
-                    "imageURL" : defaultImageURLString,
-                    "name" : "user"
+                    "imageURL"  : defaultImageURLString,
+                    "name" : "user",
+                    "email" : (user?.email)!
                 ]
             ]
             
