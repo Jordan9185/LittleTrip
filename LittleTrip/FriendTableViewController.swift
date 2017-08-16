@@ -410,6 +410,8 @@ class FriendTableViewController: UITableViewController {
             
             self.updateFriendList(who: self.uid, friendID: friendID)
             
+            self.updateFriendList(who: friendID, friendID: self.uid)
+            
         })
         
         alertController.addAction(confirmAction)
