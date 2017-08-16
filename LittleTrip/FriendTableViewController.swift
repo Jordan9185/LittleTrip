@@ -42,7 +42,7 @@ class FriendTableViewController: UITableViewController {
     
     var friends:[User] = []
     
-    let sections: [sectionType] = [.friendList]
+    var sections: [sectionType] = []
     
     override func viewDidLoad() {
         
@@ -51,6 +51,14 @@ class FriendTableViewController: UITableViewController {
         if isAddFriendMode == nil {
             
             self.isAddFriendMode = false
+            
+            self.sections = [.friendList]
+            
+        }
+        
+        if isAddFriendMode! {
+            
+            self.sections = [.myUID , .friendList]
             
         }
         
