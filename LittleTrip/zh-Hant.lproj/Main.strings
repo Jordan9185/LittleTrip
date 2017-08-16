@@ -6,7 +6,9 @@
 "0v1-eT-kbK.text" = "Label";
 
 /* Class = "UIButton"; normalTitle = " Main Page"; ObjectID = "5d8-rt-4CY"; */
-"5d8-rt-4CY.normalTitle" = " 主畫面";
+"5d8-rt-4CY.normalTitle" = " 我的行程";
+
+"uBn-Zw-nGU.normalTitle" = " 好友共同行程";
 
 /* Class = "UINavigationItem"; title = "Baggage list"; ObjectID = "9q5-28-Rgn"; */
 "9q5-28-Rgn.title" = "行李清單";

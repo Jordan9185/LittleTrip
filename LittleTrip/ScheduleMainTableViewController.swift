@@ -12,9 +12,9 @@ import FirebaseDatabase
 import FirebaseStorage
 import SDWebImage
 
-enum scheduleSection: Int {
+enum scheduleSection {
     
-    case mySchedule = 0
+    case mySchedule
     
     case iAmJoining
     
@@ -26,7 +26,11 @@ class ScheduleMainTableViewController: UITableViewController {
     
     var scheduleHadJoineds: [Schedule] = []
     
-    let mainViewSections: [scheduleSection] = [ .mySchedule, .iAmJoining]
+    var mainViewSections: [scheduleSection] = []
+    
+    var isTripGroupMode: Bool!
+    
+    @IBOutlet var addBarButton: UIBarButtonItem!
     
     @IBOutlet var schedulesTableView: UITableView!
     
@@ -34,11 +38,29 @@ class ScheduleMainTableViewController: UITableViewController {
         
         super.viewWillAppear(true)
         
+        let nav = self.navigationController as! MainFlowViewController
+        
+        isTripGroupMode = nav.isTripGroipMode
+        
         ScheduleManager.shared.delegate = self
         
-        ScheduleManager.shared.getScheduleDataOnServer()
+        if isTripGroupMode {
+            
+            ScheduleManager.shared.getScheduleHadJoinedOnServer()
+            
+            mainViewSections = [.iAmJoining]
         
-        ScheduleManager.shared.getScheduleHadJoinedOnServer()
+            addBarButton.isEnabled = false
+            
+            addBarButton.image = nil
+            
+        } else {
+            
+            ScheduleManager.shared.getScheduleDataOnServer()
+            
+            mainViewSections = [.mySchedule]
+            
+        }
         
     }
 
@@ -46,7 +68,7 @@ class ScheduleMainTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
 
-        return 2
+        return 1
         
     }
 
