@@ -85,6 +85,8 @@ class CreateNewScheduleViewController: UIViewController, UIImagePickerController
     
     @IBAction func uploadButtonTapped(_ sender: UIBarButtonItem) {
         
+        startLoading(status: "Upload data, please wait a moment.")
+        
         let scheduleName = scheduleNameTextField.text ?? ""
         
         let date = dateTextField.text ?? ""
@@ -133,7 +135,13 @@ class CreateNewScheduleViewController: UIViewController, UIImagePickerController
                 
                 let childUpdates = ["/\(key)": schedule]
                 
-                scheduleRef.updateChildValues(childUpdates)
+                scheduleRef.updateChildValues(childUpdates, withCompletionBlock: { (error, ref) in
+                    
+                    self.dismiss(animated: true, completion: nil)
+                    
+                    endLoading()
+                    
+                })
                 
                 let daysInt = Int(days)!
                 
@@ -150,12 +158,11 @@ class CreateNewScheduleViewController: UIViewController, UIImagePickerController
                     dailyScheduleRef.child(key).updateChildValues(["\(day)": ["0": newDailyScheduleDic]])
                     
                 }
-                
+            
             })
+            
         }
-        
-        dismiss(animated: true, completion: nil)
-        
+
     }
     
     @IBAction func pickImageButtomTapped(_ sender: UIButton) {

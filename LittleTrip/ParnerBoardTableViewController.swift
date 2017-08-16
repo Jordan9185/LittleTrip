@@ -67,7 +67,7 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
 
     func catchChatroomMessage() {
         
-        startLoading()
+        startLoading(status: "Loading")
         
         chatroomRef.child(currentSchedule.scheduleId).child("messages").observe(.value, with: { (snapshot) in
             
@@ -94,8 +94,10 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
                 })
                 
                 self.tableView.reloadData({
+
+                    let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
                     
-                    self.tableView.scrollToBottom(animated: false)
+                    self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
                     
                 })
                 
@@ -138,6 +140,12 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         let currentTime = dateFormatter.string(from: date)
         
         let message = (willSendMsgTextField.text)!
+        
+        if message == "" {
+            
+            return
+            
+        }
         
         let updateDic = [
             "poster": userName,

@@ -59,7 +59,7 @@ class DailyScheduleTableViewController: UITableViewController {
     
     func catchDailySchedules() {
         
-        startLoading()
+        startLoading(status: "Loading")
         
         self.dailyScheduleRef = Database.database().reference().child("dailySchedule").child(currentSchedule.scheduleId)
 
@@ -111,7 +111,7 @@ class DailyScheduleTableViewController: UITableViewController {
     
     func catchScheduleHostData() {
         
-        startLoading()
+        startLoading(status: "Loading")
         
         userRef.child(currentSchedule.uid).observeSingleEvent(of: .value, with: { (snapshot) in
             
@@ -188,8 +188,6 @@ class DailyScheduleTableViewController: UITableViewController {
             
             cell.startTimeTextField.isHidden = false
             
-            //cell.endTimeTextField.isHidden = true
-            
             cell.toLabel.isHidden = false
             
             cell.headerImageView.isHidden = true
@@ -202,8 +200,6 @@ class DailyScheduleTableViewController: UITableViewController {
             
             cell.startTimeTextField.isHidden = true
             
-            //cell.endTimeTextField.isHidden = true
-            
             cell.toLabel.isHidden = true
             
             cell.headerImageView.isHidden = false
@@ -215,7 +211,9 @@ class DailyScheduleTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        return headerViewSetting(viewFrame:self.view.frame, text:"Day \(section + 1)")
+        let dateString = addDaysForDate(dateString: currentSchedule.createdDate, days: section + 1)
+        
+        return headerViewSetting(viewFrame:self.view.frame, text:"Day \(section + 1)    \(dateString)")
         
     }
     
@@ -231,11 +229,13 @@ class DailyScheduleTableViewController: UITableViewController {
         
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.dailySchedulesTableView.frame.width / 2.2, height: 25))
         
+        let newScheduleString = NSLocalizedString("New a schedule", comment: "加入新行程")
+        
         button.center = CGPoint(x: footerView.frame.width/2, y: footerView.frame.height/2)
         
         button.layer.cornerRadius = 10
         
-        button.setTitle("New a schedule", for: .normal)
+        button.setTitle(newScheduleString, for: .normal)
         
         button.titleLabel?.textAlignment = .center
         
@@ -322,6 +322,19 @@ class DailyScheduleTableViewController: UITableViewController {
         
         let currentSection = sender.tag
         
+        if dailySchedules[currentSection]?.last?.locationName == "尚未選擇" {
+            
+            showAlert(
+                title: "Found empty dailySchedule",
+                message: "Day \(currentSection + 1) 的最後行程尚未選擇\n請先指定該行程目的地",
+                viewController: self,
+                confirmAction: nil,
+                cancelAction: nil)
+            
+            return
+            
+        }
+        
         let newRow = (self.dailySchedules[currentSection]?.count)!
         
         var previousScheduleEndTime = ""
@@ -336,7 +349,7 @@ class DailyScheduleTableViewController: UITableViewController {
         
         let updateDic: [String:Any] = {
             [
-                "endTime" : "08:00",
+                "endTime" : previousScheduleEndTime,
                 "latitude" : "0",
                 "locationName" : "尚未選擇",
                 "longitude" : "0",
@@ -481,13 +494,17 @@ class DailyScheduleTableViewController: UITableViewController {
                                 
                             }
                             
+                            let minString = String(format: "%02d", min)
+                            
                             if hour >= 24 {
                                 
                                 hour = hour % 24
                                 
                             }
                             
-                            self.dailySchedules[indexPath.section]?[indexPath.row].startTime = "\(hour):\(min)"
+                            let hourString = String(format: "%02d", hour)
+                            
+                            self.dailySchedules[indexPath.section]?[indexPath.row].startTime = "\(hourString):\(minString)"
                         }
                         
                         DispatchQueue.main.async {
@@ -496,7 +513,7 @@ class DailyScheduleTableViewController: UITableViewController {
                             
                             if let travelTime = duration["text"] as? String {
                             
-                             cell?.travelTimeLabel.text = "預估路程約 \(travelTime)"
+                             cell?.travelTimeLabel.text = "預估抵達此處時間約需 \(travelTime)"
                                 
                             }
                             

@@ -52,7 +52,7 @@ class BaggageListTableViewController: UITableViewController {
     
     func getBaggageListFromServer() {
         
-        startLoading()
+        startLoading(status: "Loading")
         
         BaggageRef = Database.database().reference().child("baggageList").child(currentSchedule.scheduleId)
         
@@ -125,11 +125,13 @@ class BaggageListTableViewController: UITableViewController {
         
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.view.frame.width / 2.2, height: 25))
         
+        let newItemString = NSLocalizedString("New a item", comment: "加入物品")
+        
         button.center = CGPoint(x: footerView.frame.width/2, y: footerView.frame.height/2)
         
         button.layer.cornerRadius = 10
         
-        button.setTitle("New a item", for: .normal)
+        button.setTitle(newItemString, for: .normal)
         
         button.titleLabel?.textAlignment = .center
         
@@ -151,13 +153,20 @@ class BaggageListTableViewController: UITableViewController {
     
     func addEmptyRowAction(_ sender: UIButton) {
         
+        if baggageItems.count > 50 {
+            
+            showAlert(title: "Max amount", message: "物品數量已達上限(50)", viewController: self, confirmAction: nil, cancelAction: nil)
+            
+            return
+        }
+        
         self.baggageItems.append(
             BaggageItem(
                 itemName: "New item",
                 isSelected: false
             )
         )
-        
+
         self.tableView.reloadData()
         
     }

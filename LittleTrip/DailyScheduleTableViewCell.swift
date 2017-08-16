@@ -26,6 +26,10 @@ class DailyScheduleTableViewCell: UITableViewCell {
     
     var dailyScheduleRef: DatabaseReference?
     
+    let startTimePicker = UIDatePicker()
+    
+    let endTimePicker = UIDatePicker()
+    
     override func awakeFromNib() {
         
         super.awakeFromNib()
@@ -33,10 +37,6 @@ class DailyScheduleTableViewCell: UITableViewCell {
         self.startTimeTextField.delegate = self
         
         self.endTimeTextField.delegate = self
-        
-        let startTimePicker = UIDatePicker()
-        
-        let endTimePicker = UIDatePicker()
         
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 40))
         
@@ -90,7 +90,11 @@ class DailyScheduleTableViewCell: UITableViewCell {
         
         let min = calender.component(.minute, from: sender.date)
         
-        self.startTimeTextField.text = "\(hour):\(min)"
+        let minString = String(format: "%02d", min)
+        
+        let hourString = String(format: "%02d", hour)
+        
+        self.startTimeTextField.text = "\(hourString):\(minString)"
         
     }
     
@@ -102,13 +106,48 @@ class DailyScheduleTableViewCell: UITableViewCell {
         
         let min = calender.component(.minute, from: sender.date)
         
-        self.endTimeTextField.text = "\(hour):\(min)"
+        let minString = String(format: "%02d", min)
+        
+        let hourString = String(format: "%02d", hour)
+        
+        self.endTimeTextField.text = "\(hourString):\(minString)"
         
     }
 
 }
 
 extension DailyScheduleTableViewCell: UITextFieldDelegate {
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        switch textField {
+            
+        case self.startTimeTextField:
+            
+            showAlert(
+                title: "Editing",
+                message: "Start time will auto complete.",
+                viewController: self.parentViewController!,
+                confirmAction: nil,
+                cancelAction: nil)
+            
+            return false
+            
+        case self.endTimeTextField:
+
+            let dateFormatter = DateFormatter()
+        
+            dateFormatter.dateFormat = "HH:mm"
+        
+            endTimePicker.date = dateFormatter.date(from: startTimeTextField.text!)!
+        
+        default:
+            
+            break
+        }
+        
+        return true
+        
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         

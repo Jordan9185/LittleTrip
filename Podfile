@@ -19,7 +19,5 @@ target 'LittleTrip' do
   	pod 'SlideMenuControllerSwift', '~> 3.0'
 	pod 'SVProgressHUD'
 	pod 'SwifterSwift'
-	pod 'Fabric'
-	pod 'Crashlytics'
-	
+  	
 end
