@@ -90,7 +90,11 @@ class DailyScheduleTableViewCell: UITableViewCell {
         
         let min = calender.component(.minute, from: sender.date)
         
-        self.startTimeTextField.text = "\(hour):\(min)"
+        let minString = String(format: "%02d", min)
+        
+        let hourString = String(format: "%02d", hour)
+        
+        self.startTimeTextField.text = "\(hourString):\(minString)"
         
     }
     
@@ -102,7 +106,11 @@ class DailyScheduleTableViewCell: UITableViewCell {
         
         let min = calender.component(.minute, from: sender.date)
         
-        self.endTimeTextField.text = "\(hour):\(min)"
+        let minString = String(format: "%02d", min)
+        
+        let hourString = String(format: "%02d", hour)
+        
+        self.endTimeTextField.text = "\(hourString):\(minString)"
         
     }
 

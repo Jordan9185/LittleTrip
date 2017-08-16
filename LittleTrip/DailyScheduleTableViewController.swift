@@ -479,13 +479,17 @@ class DailyScheduleTableViewController: UITableViewController {
                                 
                             }
                             
+                            let minString = String(format: "%02d", min)
+                            
                             if hour >= 24 {
                                 
                                 hour = hour % 24
                                 
                             }
                             
-                            self.dailySchedules[indexPath.section]?[indexPath.row].startTime = "\(hour):\(min)"
+                            let hourString = String(format: "%02d", hour)
+                            
+                            self.dailySchedules[indexPath.section]?[indexPath.row].startTime = "\(hourString):\(minString)"
                         }
                         
                         DispatchQueue.main.async {
