@@ -47,6 +47,12 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         currentSchedule = myTabBarViewController.schedule!
         
         scheduleHost = myTabBarViewController.scheduleHost
+        
+        let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        
+        let childCollectionViewController = storyBoard.instantiateViewController(withIdentifier: "ParnerCollectionViewController") as! ParnerCollectionViewController
+        
+        childCollectionViewController.scheduleHost = scheduleHost
     }
 
     override func viewDidLoad() {
@@ -67,7 +73,7 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
 
     func catchChatroomMessage() {
         
-        startLoading()
+        startLoading(status: "Loading")
         
         chatroomRef.child(currentSchedule.scheduleId).child("messages").observe(.value, with: { (snapshot) in
             
@@ -94,8 +100,10 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
                 })
                 
                 self.tableView.reloadData({
+
+                    let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
                     
-                    self.tableView.scrollToBottom(animated: false)
+                    self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
                     
                 })
                 
@@ -113,11 +121,15 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         
         imageView.sd_setImage(with: URL(string: currentSchedule.imageUrl)!)
         
+        imageView.clipsToBounds = true
+        
+        imageView.contentMode = .scaleAspectFill
+        
         let blurEffect = UIBlurEffect(style: .extraLight)
         
         let blurView = UIVisualEffectView(effect: blurEffect)
         
-        blurView.frame.size = tableView.frame.size
+        blurView.frame.size = self.view.frame.size
         
         imageView.addSubview(blurView)
         
@@ -138,6 +150,12 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         let currentTime = dateFormatter.string(from: date)
         
         let message = (willSendMsgTextField.text)!
+        
+        if message == "" {
+            
+            return
+            
+        }
         
         let updateDic = [
             "poster": userName,

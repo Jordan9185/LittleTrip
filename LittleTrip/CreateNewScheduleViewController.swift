@@ -85,6 +85,8 @@ class CreateNewScheduleViewController: UIViewController, UIImagePickerController
     
     @IBAction func uploadButtonTapped(_ sender: UIBarButtonItem) {
         
+        startLoading(status: "Upload data, please wait a moment.")
+        
         let scheduleName = scheduleNameTextField.text ?? ""
         
         let date = dateTextField.text ?? ""
@@ -133,29 +135,43 @@ class CreateNewScheduleViewController: UIViewController, UIImagePickerController
                 
                 let childUpdates = ["/\(key)": schedule]
                 
-                scheduleRef.updateChildValues(childUpdates)
-                
-                let daysInt = Int(days)!
-                
-                for day in 0..<daysInt {
+                scheduleRef.updateChildValues(childUpdates, withCompletionBlock: { (error, ref) in
                     
-                    let newDailyScheduleDic = [
-                        "endTime" : "09:00",
-                        "latitude" : "0",
-                        "locationName" : "尚未選擇",
-                        "longitude" : "0",
-                        "startTime" : "08:00"
-                        ] as [String : Any]
+                    let daysInt = Int(days)!
                     
-                    dailyScheduleRef.child(key).updateChildValues(["\(day)": ["0": newDailyScheduleDic]])
+                    for day in 0..<daysInt {
+                        
+                        let newDailyScheduleDic = [
+                            "endTime" : "09:00",
+                            "latitude" : "0",
+                            "locationName" : "尚未選擇",
+                            "longitude" : "0",
+                            "startTime" : "08:00"
+                            ] as [String : Any]
+                        
+                        if day == daysInt - 1 {
+                            
+                            dailyScheduleRef.child(key).updateChildValues(["\(day)": ["0": newDailyScheduleDic]] , withCompletionBlock: { (error, ref) in
+                                
+                                self.dismiss(animated: true, completion: nil)
+                                
+                                endLoading()
+                                
+                            })
+                            
+                        } else {
+                            dailyScheduleRef.child(key).updateChildValues(["\(day)": ["0": newDailyScheduleDic]])
+                        }
+                        
+                    }
                     
-                }
+                })
                 
+
             })
+            
         }
-        
-        dismiss(animated: true, completion: nil)
-        
+
     }
     
     @IBAction func pickImageButtomTapped(_ sender: UIButton) {
@@ -163,12 +179,9 @@ class CreateNewScheduleViewController: UIViewController, UIImagePickerController
         let imagePicker = UIImagePickerController()
         
         imagePicker.delegate = self
-        
-        DispatchQueue.main.async {
-            
-            openCameraOrImageLibrary(imagePicker: imagePicker, viewController: self)
-            
-        }
+
+        openCameraOrImageLibrary(imagePicker: imagePicker, viewController: self)
+ 
         
     }
 

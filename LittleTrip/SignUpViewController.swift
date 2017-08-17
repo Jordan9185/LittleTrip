@@ -12,8 +12,6 @@ import FirebaseAuth
 
 import FirebaseDatabase
 
-import Crashlytics
-
 let defaultImageURLString = "https://firebasestorage.googleapis.com/v0/b/littletrip-58892.appspot.com/o/UserPic%2FprofileDefault.png?alt=media&token=849c5597-b7e2-44a1-9f23-30394636b8c8"
 
 class SignUpViewController: UIViewController, UITextFieldDelegate {
@@ -46,6 +44,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
         if email == "" {
             
+            showAlert(title: "Empty", message: "Email is empty. \nformat: example@example.com", viewController: self, confirmAction: nil, cancelAction: nil)
+            
             return
         }
         
@@ -53,7 +53,17 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
         if password == "" {
             
+            showAlert(title: "Empty", message: "Password is empty.", viewController: self, confirmAction: nil, cancelAction: nil)
+            
             return
+        }
+        
+        if password.characters.count < 6 {
+            
+            showAlert(title: "Password too short.", message: "Need more than 6 letters.", viewController: self, confirmAction: nil, cancelAction: nil)
+            
+            return
+            
         }
         
         Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
@@ -67,19 +77,14 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             let updateDic = [
                 (user?.uid)! : [
                     "friendList" : [],
-                    "imageURL" : defaultImageURLString,
-                    "name" : "user"
+                    "imageURL"  : defaultImageURLString,
+                    "name" : "user",
+                    "email" : (user?.email)!
                 ]
             ]
             
             userRef.updateChildValues(updateDic)
             
-            Answers.logSignUp(
-                withMethod: "signUpButtonTapped",
-                success: true,
-                customAttributes: [
-                    "User email" : user?.email
-                ])
         }
         
         self.navigationController?.popViewController(animated: true)

@@ -1,0 +1,113 @@
+
+/* Class = "UITabBarItem"; title = "Parner Board"; ObjectID = "0C8-1W-7gX"; */
+"0C8-1W-7gX.title" = "行程討論";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "0v1-eT-kbK"; */
+"0v1-eT-kbK.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = " Main Page"; ObjectID = "5d8-rt-4CY"; */
+"5d8-rt-4CY.normalTitle" = " 我的行程";
+
+"uBn-Zw-nGU.normalTitle" = " 好友共同行程";
+
+/* Class = "UINavigationItem"; title = "Baggage list"; ObjectID = "9q5-28-Rgn"; */
+"9q5-28-Rgn.title" = "行李清單";
+
+/* Class = "UITabBarItem"; title = "Baggage list"; ObjectID = "9vP-pK-VUG"; */
+"9vP-pK-VUG.title" = "行李清單";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "ATK-jb-spj"; */
+"ATK-jb-spj.placeholder" = "密碼";
+
+/* Class = "UINavigationItem"; title = "New Schedule"; ObjectID = "Bzo-Qq-Haz"; */
+"Bzo-Qq-Haz.title" = "建立新行程";
+
+/* Class = "UINavigationItem"; title = "Little Trip"; ObjectID = "CfI-MB-hfP"; */
+"CfI-MB-hfP.title" = "Little Trip";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "D0G-li-o2P"; */
+"D0G-li-o2P.text" = "Label";
+
+/* Class = "UILabel"; text = "Little Trip"; ObjectID = "EjV-rq-8fe"; */
+"EjV-rq-8fe.text" = "Little Trip";
+
+/* Class = "UINavigationItem"; title = "Daily Schedule"; ObjectID = "Kbb-Jg-I2t"; */
+"Kbb-Jg-I2t.title" = "每日行程規劃";
+
+/* Class = "UIButton"; normalTitle = "register"; ObjectID = "MSp-j2-MIo"; */
+"MSp-j2-MIo.normalTitle" = "註冊";
+
+/* Class = "UITextField"; placeholder = "ScheduleName"; ObjectID = "O51-SU-v00"; */
+"O51-SU-v00.placeholder" = "行程名稱";
+
+/* Class = "UINavigationItem"; title = "Map"; ObjectID = "OAN-2G-IRZ"; */
+"OAN-2G-IRZ.title" = "地圖";
+
+/* Class = "UILabel"; text = "to"; ObjectID = "Oue-6H-zYw"; */
+"Oue-6H-zYw.text" = "到";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "Q2n-Hm-Y3Z"; */
+"Q2n-Hm-Y3Z.placeholder" = "密碼";
+
+/* Class = "UILabel"; text = "message"; ObjectID = "U62-gQ-nhj"; */
+"U62-gQ-nhj.text" = "訊息";
+
+/* Class = "UITextField"; placeholder = "E-mail"; ObjectID = "W8C-MA-IOU"; */
+"W8C-MA-IOU.placeholder" = "E-mail";
+
+/* Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "WNb-Ea-A0Z"; */
+"WNb-Ea-A0Z.normalTitle" = "註冊";
+
+/* Class = "UIButton"; normalTitle = "Sign In"; ObjectID = "XUX-kb-h3Z"; */
+"XUX-kb-h3Z.normalTitle" = "登入";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "XYc-DE-KgA"; */
+"XYc-DE-KgA.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "新增圖片"; ObjectID = "Ykg-Gw-By2"; */
+"Ykg-Gw-By2.normalTitle" = "新增圖片";
+
+/* Class = "UITextField"; placeholder = "E-mail"; ObjectID = "b8q-YT-IHH"; */
+"b8q-YT-IHH.placeholder" = "E-mail";
+
+/* Class = "UITabBarItem"; title = "Daily Schedule"; ObjectID = "bkJ-fc-SmX"; */
+"bkJ-fc-SmX.title" = "每日行程";
+
+/* Class = "UILabel"; text = "user"; ObjectID = "fN3-zq-eHC"; */
+"fN3-zq-eHC.text" = "使用者";
+
+/* Class = "UINavigationItem"; title = "Friend List"; ObjectID = "gwB-39-4yg"; */
+"gwB-39-4yg.title" = "旅伴列表";
+
+/* Class = "UITextField"; placeholder = "How many days?"; ObjectID = "h9U-b4-iof"; */
+"h9U-b4-iof.placeholder" = "預計天數";
+
+/* Class = "UILabel"; text = "Little Trip"; ObjectID = "iSY-eU-XMJ"; */
+"iSY-eU-XMJ.text" = "Little Trip";
+
+/* Class = "UIButton"; normalTitle = " Sign out"; ObjectID = "jJy-VT-nY9"; */
+"jJy-VT-nY9.normalTitle" = " 登出";
+
+/* Class = "UIButton"; normalTitle = "Sign In"; ObjectID = "kmz-A4-xV3"; */
+"kmz-A4-xV3.normalTitle" = "登入";
+
+/* Class = "UITabBarItem"; title = "Map"; ObjectID = "lWI-tT-4PG"; */
+"lWI-tT-4PG.title" = "地圖";
+
+/* Class = "UIButton"; normalTitle = " Friend list"; ObjectID = "oQh-Qa-qZQ"; */
+"oQh-Qa-qZQ.normalTitle" = " 旅伴列表";
+
+/* Class = "UINavigationItem"; title = "Parner board"; ObjectID = "phW-os-ZJ0"; */
+"phW-os-ZJ0.title" = "行程討論";
+
+/* Class = "UIViewController"; title = "New Schedule"; ObjectID = "pvo-8E-nfl"; */
+"pvo-8E-nfl.title" = "建立新行程";
+
+/* Class = "UITextField"; placeholder = "When"; ObjectID = "rqm-VJ-7Y8"; */
+"rqm-VJ-7Y8.placeholder" = "When";
+
+/* Class = "UITextField"; text = "Your Name"; ObjectID = "v0c-BM-SJr"; */
+"v0c-BM-SJr.text" = "Your Name";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "vZu-AB-a99"; */
+"vZu-AB-a99.text" = "Label";

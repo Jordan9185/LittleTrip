@@ -13,8 +13,6 @@ import GoogleMaps
 import GooglePlaces
 import SlideMenuControllerSwift
 import SVProgressHUD
-import Fabric
-import Crashlytics
 
 let googleProjectApiKey = "AIzaSyBF5_QyFXAgL9vYzLSrAPbHxGxH1c9wynE"
 
@@ -30,21 +28,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        Fabric.with([Crashlytics.self])
-        
         GMSServices.provideAPIKey(googleProjectApiKey)
         
         GMSPlacesClient.provideAPIKey(googleProjectApiKey)
         
         FirebaseApp.configure()
-
+        
         Auth.auth().addStateDidChangeListener { auth, user in
             
             let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
             
             if let user = user {
-                
-                Crashlytics.setUserEmail(user.email)
                 
                 let mainViewController = storyboard.instantiateViewController(withIdentifier: "MainFlow")
                 

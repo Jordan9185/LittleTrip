@@ -27,25 +27,28 @@ class MapViewController: UIViewController{
         
         self.dailySchedules = previousViewController.dailySchedules
         
-        setGoogleMaps()
+        locationManager.delegate = self
+        
+        if CLLocationManager.authorizationStatus() == .notDetermined {
+            locationManager.requestWhenInUseAuthorization()
+        } else if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+            locationManager.startUpdatingLocation()
+        } else {
+            print(CLLocationManager.authorizationStatus())
+        }
         
     }
-    
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
-        
-    }
 
-    func setGoogleMaps() {
-        
-        let location = self.dailySchedules?[0]?[0].coordinate
 
-        let latitude = location?.latitude
+    func setGoogleMaps(userLocation: CLLocationCoordinate2D) {
         
-        let longitude = location?.longitude
+        //let location = self.dailySchedules?[0]?[0].coordinate
 
-        let camera = GMSCameraPosition.camera(withLatitude: latitude!, longitude: longitude!, zoom: 7.0)
+        let latitude = userLocation.latitude
+        
+        let longitude = userLocation.longitude
+
+        let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: 8.0)
         
         let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         
@@ -90,4 +93,18 @@ class MapViewController: UIViewController{
         
     }
 
+}
+
+extension MapViewController: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        setGoogleMaps(userLocation: (locations.first?.coordinate)!)
+        
+        manager.stopUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+    }
 }

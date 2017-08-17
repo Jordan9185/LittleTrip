@@ -75,6 +75,21 @@ class MenuViewController: UIViewController {
         
     }
 
+    @IBAction func tripGroupButtonTapped(_ sender: UIButton) {
+        
+        if let controller = self.storyboard?.instantiateViewController(withIdentifier: "MainFlow") {
+            
+            let navController = controller as! MainFlowViewController
+            
+            navController.isTripGroipMode = true
+            
+            self.slideMenuController()?.mainViewController = controller
+            
+            self.slideMenuController()?.closeLeft()
+        }
+        
+    }
+    
     @IBAction func friendListButtonTapped(_ sender: UIButton) {
         
         if let controller = self.storyboard?.instantiateViewController(withIdentifier: "FriendList") {
@@ -109,7 +124,7 @@ class MenuViewController: UIViewController {
 
     func catchUserData() {
         
-        startLoading()
+        startLoading(status: "Loading")
         
         let user = Auth.auth().currentUser
         
@@ -201,11 +216,7 @@ extension MenuViewController: UIImagePickerControllerDelegate, UINavigationContr
         
         imagePicker.delegate = self
         
-        DispatchQueue.main.async {
-            
-            openCameraOrImageLibrary(imagePicker: imagePicker, viewController: self)
-            
-        }
+        openCameraOrImageLibrary(imagePicker: imagePicker, viewController: self)
         
     }
     

@@ -11,6 +11,10 @@
 		980C56031F27324B007B4810 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 980C56011F27324B007B4810 /* Main.storyboard */; };
 		980C56051F27324B007B4810 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 980C56041F27324B007B4810 /* Assets.xcassets */; };
 		980C56081F27324B007B4810 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 980C56061F27324B007B4810 /* LaunchScreen.storyboard */; };
+		981B9EB91F42E6C300A4FD6B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 981B9EBB1F42E6C300A4FD6B /* Localizable.strings */; };
+		981B9EBD1F42EBDD00A4FD6B /* ScheduleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981B9EBC1F42EBDD00A4FD6B /* ScheduleManager.swift */; };
+		981B9EBF1F43507500A4FD6B /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981B9EBE1F43507500A4FD6B /* constants.swift */; };
+		981B9EC11F43D1DE00A4FD6B /* MainFlowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981B9EC01F43D1DE00A4FD6B /* MainFlowViewController.swift */; };
 		9821C5071F28245A0024B9D4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9821C5061F28245A0024B9D4 /* SignUpViewController.swift */; };
 		9827F8251F38340700A50043 /* SlideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9827F8241F38340700A50043 /* SlideMenuViewController.swift */; };
 		9827F8271F3837E600A50043 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9827F8261F3837E600A50043 /* MenuViewController.swift */; };
@@ -44,6 +48,12 @@
 		980C56041F27324B007B4810 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		980C56071F27324B007B4810 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		980C56091F27324B007B4810 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		981B9EB41F42E4D400A4FD6B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		981B9EB51F42E4D400A4FD6B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		981B9EBA1F42E6C300A4FD6B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		981B9EBC1F42EBDD00A4FD6B /* ScheduleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleManager.swift; sourceTree = "<group>"; };
+		981B9EBE1F43507500A4FD6B /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
+		981B9EC01F43D1DE00A4FD6B /* MainFlowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainFlowViewController.swift; sourceTree = "<group>"; };
 		9821C5061F28245A0024B9D4 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		9827F8241F38340700A50043 /* SlideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuViewController.swift; sourceTree = "<group>"; };
 		9827F8261F3837E600A50043 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -118,6 +128,7 @@
 		980C55FC1F27324A007B4810 /* LittleTrip */ = {
 			isa = PBXGroup;
 			children = (
+				981B9EBE1F43507500A4FD6B /* constants.swift */,
 				9827F8391F3C61B300A50043 /* commonFuncton.swift */,
 				9821C5011F2821AB0024B9D4 /* AppDelegate */,
 				98D11F591F29D27500A157BF /* CreateNewSchedule */,
@@ -128,10 +139,19 @@
 				9827F8231F3833C800A50043 /* SlideMenu */,
 				98D11F541F29726100A157BF /* ScheduleMain */,
 				9821C5031F2822250024B9D4 /* Storyboard */,
+				981B9EB61F42E68500A4FD6B /* Localization */,
 				9821C5041F2822360024B9D4 /* Plist */,
 				9821C5021F2822140024B9D4 /* Assets */,
 			);
 			path = LittleTrip;
+			sourceTree = "<group>";
+		};
+		981B9EB61F42E68500A4FD6B /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				981B9EBB1F42E6C300A4FD6B /* Localizable.strings */,
+			);
+			name = Localization;
 			sourceTree = "<group>";
 		};
 		9821C5011F2821AB0024B9D4 /* AppDelegate */ = {
@@ -218,6 +238,8 @@
 			children = (
 				98D11F551F2972C600A157BF /* ScheduleMainTableViewController.swift */,
 				98D11F571F2974E500A157BF /* ScheduleMainTableViewCell.swift */,
+				981B9EBC1F42EBDD00A4FD6B /* ScheduleManager.swift */,
+				981B9EC01F43D1DE00A4FD6B /* MainFlowViewController.swift */,
 			);
 			name = ScheduleMain;
 			sourceTree = "<group>";
@@ -281,7 +303,6 @@
 				980C55F81F27324A007B4810 /* Resources */,
 				EF72C502B4E5D023F6F08335 /* [CP] Embed Pods Frameworks */,
 				C6110A9AEC325E914D7415D6 /* [CP] Copy Pods Resources */,
-				981B9EB31F42D51300A4FD6B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -332,6 +353,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				981B9EB91F42E6C300A4FD6B /* Localizable.strings in Resources */,
 				980C56081F27324B007B4810 /* LaunchScreen.storyboard in Resources */,
 				980C56051F27324B007B4810 /* Assets.xcassets in Resources */,
 				980C56031F27324B007B4810 /* Main.storyboard in Resources */,
@@ -356,19 +378,6 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
-		};
-		981B9EB31F42D51300A4FD6B /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" e3169ac6a84bed255547fc6bfd5cdbe991e15676 0f0cca87d5d19a1ea1f671210cb238c67819d5121cc2495d3dfaa013a7dbffb3";
 		};
 		C6110A9AEC325E914D7415D6 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -412,11 +421,13 @@
 				9827F8251F38340700A50043 /* SlideMenuViewController.swift in Sources */,
 				98FBC1E41F2B220100E2E70F /* DailyScheduleTableViewCell.swift in Sources */,
 				9827F8271F3837E600A50043 /* MenuViewController.swift in Sources */,
+				981B9EBF1F43507500A4FD6B /* constants.swift in Sources */,
 				98FBC1DC1F2B114400E2E70F /* DailyScheduleTableViewController.swift in Sources */,
 				98FBC1E21F2B12A500E2E70F /* DailyTabBarViewController.swift in Sources */,
 				9821C5071F28245A0024B9D4 /* SignUpViewController.swift in Sources */,
 				9827F8381F3B05E800A50043 /* ParnerCollectionViewCell.swift in Sources */,
 				98D11F561F2972C600A157BF /* ScheduleMainTableViewController.swift in Sources */,
+				981B9EC11F43D1DE00A4FD6B /* MainFlowViewController.swift in Sources */,
 				986438E11F27349A001DABC6 /* SignInViewController.swift in Sources */,
 				9827F83A1F3C61B300A50043 /* commonFuncton.swift in Sources */,
 				984E4AAC1F304F0A007766C7 /* BaggageListTableViewController.swift in Sources */,
@@ -425,6 +436,7 @@
 				9827F8321F3AF96700A50043 /* ParnerBoardTableViewController.swift in Sources */,
 				980C55FE1F27324B007B4810 /* AppDelegate.swift in Sources */,
 				9827F8361F3B05D600A50043 /* ParnerCollectionViewController.swift in Sources */,
+				981B9EBD1F42EBDD00A4FD6B /* ScheduleManager.swift in Sources */,
 				984E4AAE1F305D73007766C7 /* BaggageListTableViewCell.swift in Sources */,
 				98FBC1DE1F2B115800E2E70F /* MapViewController.swift in Sources */,
 				9827F82F1F388FD100A50043 /* FriendTableViewCell.swift in Sources */,
@@ -438,6 +450,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				980C56021F27324B007B4810 /* Base */,
+				981B9EB41F42E4D400A4FD6B /* zh-Hant */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -446,8 +459,17 @@
 			isa = PBXVariantGroup;
 			children = (
 				980C56071F27324B007B4810 /* Base */,
+				981B9EB51F42E4D400A4FD6B /* zh-Hant */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		981B9EBB1F42E6C300A4FD6B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				981B9EBA1F42E6C300A4FD6B /* zh-Hant */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -457,6 +479,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -507,6 +530,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
