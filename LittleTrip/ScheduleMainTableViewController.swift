@@ -67,6 +67,9 @@ class ScheduleMainTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        scheduleRef.observe(.childAdded, with: { (snapshot) in
+            self.tableView.reloadData()
+        })
     }
 
     // MARK: - Table view data source

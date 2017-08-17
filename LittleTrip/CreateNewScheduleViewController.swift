@@ -59,6 +59,17 @@ class CreateNewScheduleViewController: UIViewController, UIImagePickerController
         
         daysTextField.delegate = self
 
+        let tap = UITapGestureRecognizer(target: self, action: #selector(keyboardHidden))
+        
+        tap.cancelsTouchesInView = false
+        
+        self.view.addGestureRecognizer(tap)
+
+    }
+    
+    func keyboardHidden() {
+
+        self.view.endEditing(true)
     }
     
     func doneButtonTapped() {
