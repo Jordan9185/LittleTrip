@@ -137,28 +137,37 @@ class CreateNewScheduleViewController: UIViewController, UIImagePickerController
                 
                 scheduleRef.updateChildValues(childUpdates, withCompletionBlock: { (error, ref) in
                     
-                    self.dismiss(animated: true, completion: nil)
+                    let daysInt = Int(days)!
                     
-                    endLoading()
+                    for day in 0..<daysInt {
+                        
+                        let newDailyScheduleDic = [
+                            "endTime" : "09:00",
+                            "latitude" : "0",
+                            "locationName" : "尚未選擇",
+                            "longitude" : "0",
+                            "startTime" : "08:00"
+                            ] as [String : Any]
+                        
+                        if day == daysInt - 1 {
+                            
+                            dailyScheduleRef.child(key).updateChildValues(["\(day)": ["0": newDailyScheduleDic]] , withCompletionBlock: { (error, ref) in
+                                
+                                self.dismiss(animated: true, completion: nil)
+                                
+                                endLoading()
+                                
+                            })
+                            
+                        } else {
+                            dailyScheduleRef.child(key).updateChildValues(["\(day)": ["0": newDailyScheduleDic]])
+                        }
+                        
+                    }
                     
                 })
                 
-                let daysInt = Int(days)!
-                
-                for day in 0..<daysInt {
-                    
-                    let newDailyScheduleDic = [
-                        "endTime" : "09:00",
-                        "latitude" : "0",
-                        "locationName" : "尚未選擇",
-                        "longitude" : "0",
-                        "startTime" : "08:00"
-                        ] as [String : Any]
-                    
-                    dailyScheduleRef.child(key).updateChildValues(["\(day)": ["0": newDailyScheduleDic]])
-                    
-                }
-            
+
             })
             
         }
@@ -170,12 +179,9 @@ class CreateNewScheduleViewController: UIViewController, UIImagePickerController
         let imagePicker = UIImagePickerController()
         
         imagePicker.delegate = self
-        
-        DispatchQueue.main.async {
-            
-            openCameraOrImageLibrary(imagePicker: imagePicker, viewController: self)
-            
-        }
+
+        openCameraOrImageLibrary(imagePicker: imagePicker, viewController: self)
+ 
         
     }
 
