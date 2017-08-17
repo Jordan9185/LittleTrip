@@ -69,7 +69,19 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         
         setTableViewBackgroundImage()
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(keyboardHidden))
+        
+        tap.cancelsTouchesInView = false
+        
+        self.view.addGestureRecognizer(tap)
+        
     }
+    
+    func keyboardHidden() {
+        
+        self.view.endEditing(true)
+    }
+    
 
     func catchChatroomMessage() {
         
