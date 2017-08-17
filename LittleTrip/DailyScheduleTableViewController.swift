@@ -194,7 +194,7 @@ class DailyScheduleTableViewController: UITableViewController {
             
         } else {
             
-            cell.travelTimeLabel.text = "起點"
+            cell.travelTimeLabel.text = NSLocalizedString("Start", comment: "起點")
             
             cell.headerImageView.image = #imageLiteral(resourceName: "start")
             
@@ -513,7 +513,8 @@ class DailyScheduleTableViewController: UITableViewController {
                             
                             if let travelTime = duration["text"] as? String {
                             
-                             cell?.travelTimeLabel.text = "預估抵達此處時間約需 \(travelTime)"
+                             cell?.travelTimeLabel.text = NSLocalizedString("Estimated time ", comment: "預估時間") + travelTime
+                                
                                 
                             }
                             

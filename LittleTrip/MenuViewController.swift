@@ -216,11 +216,7 @@ extension MenuViewController: UIImagePickerControllerDelegate, UINavigationContr
         
         imagePicker.delegate = self
         
-        DispatchQueue.main.async {
-            
-            openCameraOrImageLibrary(imagePicker: imagePicker, viewController: self)
-            
-        }
+        openCameraOrImageLibrary(imagePicker: imagePicker, viewController: self)
         
     }
     

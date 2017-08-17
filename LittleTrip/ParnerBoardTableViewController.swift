@@ -47,6 +47,12 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         currentSchedule = myTabBarViewController.schedule!
         
         scheduleHost = myTabBarViewController.scheduleHost
+        
+        let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        
+        let childCollectionViewController = storyBoard.instantiateViewController(withIdentifier: "ParnerCollectionViewController") as! ParnerCollectionViewController
+        
+        childCollectionViewController.scheduleHost = scheduleHost
     }
 
     override func viewDidLoad() {
@@ -115,11 +121,15 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         
         imageView.sd_setImage(with: URL(string: currentSchedule.imageUrl)!)
         
+        imageView.clipsToBounds = true
+        
+        imageView.contentMode = .scaleAspectFill
+        
         let blurEffect = UIBlurEffect(style: .extraLight)
         
         let blurView = UIVisualEffectView(effect: blurEffect)
         
-        blurView.frame.size = tableView.frame.size
+        blurView.frame.size = self.view.frame.size
         
         imageView.addSubview(blurView)
         
