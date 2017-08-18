@@ -121,17 +121,6 @@ extension DailyScheduleTableViewCell: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         switch textField {
             
-        case self.startTimeTextField:
-            
-            showAlert(
-                title: "Editing",
-                message: "Start time will auto complete.",
-                viewController: self.parentViewController!,
-                confirmAction: nil,
-                cancelAction: nil)
-            
-            return false
-            
         case self.endTimeTextField:
 
             let dateFormatter = DateFormatter()

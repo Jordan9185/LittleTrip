@@ -75,6 +75,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        
+        Auth.auth().addStateDidChangeListener { auth, user in
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+            
+            if let user = user {
+                
+                let mainViewController = storyboard.instantiateViewController(withIdentifier: "MainFlow")
+                
+                let leftViewController = storyboard.instantiateViewController(withIdentifier: "Left")
+                
+                let slideMenuController = SlideMenuController(mainViewController: mainViewController, leftMenuViewController: leftViewController)
+                
+                UIApplication.shared.statusBarStyle = .lightContent
+                
+                self.window?.rootViewController = slideMenuController
+                
+            } else {
+                
+                let nextViewController = storyboard.instantiateViewController(withIdentifier: "LoginFlow")
+                
+                self.window?.rootViewController = nextViewController
+                
+            }
+            
+        }
+    
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
