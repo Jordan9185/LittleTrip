@@ -51,7 +51,7 @@ class MenuViewController: UIViewController {
         
         let blurView = UIVisualEffectView(effect: blurEffect)
         
-        blurView.frame.size = self.backgroundImageView.frame.size
+        blurView.frame.size = self.view.frame.size
         
         self.backgroundImageView.addSubview(blurView)
         
