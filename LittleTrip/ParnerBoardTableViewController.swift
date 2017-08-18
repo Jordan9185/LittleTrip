@@ -12,6 +12,8 @@ import FirebaseDatabase
 
 import SwifterSwift
 
+import FirebaseAuth
+
 struct Message {
     
     let poster: String
@@ -151,7 +153,7 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
     
     @IBAction func sendMessageActionTapped(_ sender: UIButton) {
         
-        let userName = UserDefaults.standard.string(forKey: "userName")
+        let userEmail = (Auth.auth().currentUser?.email)!
         
         let dateFormatter = DateFormatter()
         
@@ -170,7 +172,7 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         }
         
         let updateDic = [
-            "poster": userName,
+            "poster": userEmail,
             "postTime": currentTime,
             "contentText": message
         ]
@@ -206,13 +208,15 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         
         let userName = UserDefaults.standard.string(forKey: "userName")
         
+        let userEmail = Auth.auth().currentUser?.email!
+        
         cell.messageLabel.text = messages[indexPath.row].contentText
         
         cell.backgroundColor = UIColor.clear
         
-        if messages[indexPath.row].poster == userName {
+        if messages[indexPath.row].poster == userEmail {
             
-            cell.nameLabel.text = "\(postTime) \(poster) "
+            cell.nameLabel.text = "\(postTime) \(userName!) "
             
             cell.nameLabel.textAlignment = .right
             
@@ -221,7 +225,7 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
             cell.flexiableView.isHidden = false
             
         } else {
-            
+
             cell.nameLabel.text = "\(poster) \(postTime)"
             
             cell.nameLabel.textAlignment = .left
