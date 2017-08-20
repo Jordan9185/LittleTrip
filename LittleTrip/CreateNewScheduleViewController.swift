@@ -96,19 +96,35 @@ class CreateNewScheduleViewController: UIViewController, UIImagePickerController
     
     @IBAction func uploadButtonTapped(_ sender: UIBarButtonItem) {
         
-        startLoading(status: "Upload data, please wait a moment.")
-        
         let scheduleName = scheduleNameTextField.text ?? ""
         
         let date = dateTextField.text ?? ""
         
-        let days = daysTextField.text ?? ""
-        
-        if scheduleName == "" { return }
+        if scheduleName == "" {
+            
+            showAlert(title: "Not correct format", message: "Schedule name is empty.", viewController: self, confirmAction: nil, cancelAction: nil)
+            
+            return
+            
+        }
         
         if date == "" { return }
         
-        if days == "" { return }
+        guard let days = Int(daysTextField.text!) as? Int else {
+            
+            showAlert(title: "Not correct format", message: "Days must be a number.", viewController: self, confirmAction: nil, cancelAction: nil)
+            
+            return
+        }
+        
+        if days < 1 {
+            
+            showAlert(title: "Value incorrect", message: "At least one day.", viewController: self, confirmAction: nil, cancelAction: nil)
+
+            return
+        }
+        
+        startLoading(status: "Upload data, please wait a moment.")
         
         let ref = Database.database().reference()
         
@@ -138,7 +154,7 @@ class CreateNewScheduleViewController: UIViewController, UIImagePickerController
                 
                 let schedule = [
                     "title": scheduleName,
-                    "days": Int(days),
+                    "days": days,
                     "createdDate": date,
                     "uid": Auth.auth().currentUser?.uid,
                     "imageURL": metaData!.downloadURL()!.absoluteString
@@ -148,9 +164,7 @@ class CreateNewScheduleViewController: UIViewController, UIImagePickerController
                 
                 scheduleRef.updateChildValues(childUpdates, withCompletionBlock: { (error, ref) in
                     
-                    let daysInt = Int(days)!
-                    
-                    for day in 0..<daysInt {
+                    for day in 0..<days {
                         
                         let newDailyScheduleDic = [
                             "endTime" : "09:00",
@@ -160,7 +174,7 @@ class CreateNewScheduleViewController: UIViewController, UIImagePickerController
                             "startTime" : "08:00"
                             ] as [String : Any]
                         
-                        if day == daysInt - 1 {
+                        if day == days - 1 {
                             
                             dailyScheduleRef.child(key).updateChildValues(["\(day)": ["0": newDailyScheduleDic]] , withCompletionBlock: { (error, ref) in
                                 

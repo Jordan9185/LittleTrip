@@ -70,6 +70,7 @@ class ScheduleMainTableViewController: UITableViewController {
         scheduleRef.observe(.childAdded, with: { (snapshot) in
             self.tableView.reloadData()
         })
+
     }
 
     // MARK: - Table view data source
@@ -191,21 +192,38 @@ class ScheduleMainTableViewController: UITableViewController {
 
             case .iAmJoining:
                 
+                let scheduleParnersRef = Database.database().reference().child("scheduleParners")
+                
                 let uid = (Auth.auth().currentUser?.uid)!
                 
-                self.scheduleHadJoineds.remove(at: indexPath.row)
+                let currentSchedule = self.scheduleHadJoineds[indexPath.row]
                 
-                var localSchedules: [String] = []
-                
-                self.scheduleHadJoineds.map({ (schedule) in
+                scheduleParnersRef.child(currentSchedule.scheduleId).child("parners").observeSingleEvent(of: .value, with: { (snap) in
                     
-                    localSchedules.append(schedule.scheduleId)
-                    
+                    if let values = snap.value as? [String] {
+                        
+                        values.map({ (value) in
+                            if value == uid {
+                                
+                            }
+                        })
+                    }
                 })
-                
-                let currentScheduleHadJoinedRef = scheduleHadJoinedRef.child(uid).child("schedules")
-                
-                currentScheduleHadJoinedRef.setValue(localSchedules)
+//                let uid = (Auth.auth().currentUser?.uid)!
+//                
+//                self.scheduleHadJoineds.remove(at: indexPath.row)
+//                
+//                var localSchedules: [String] = []
+//                
+//                self.scheduleHadJoineds.map({ (schedule) in
+//                    
+//                    localSchedules.append(schedule.scheduleId)
+//                    
+//                })
+//                
+//                let currentScheduleHadJoinedRef = scheduleHadJoinedRef.child(uid).child("schedules")
+//                
+//                currentScheduleHadJoinedRef.setValue(localSchedules)
                 
                 self.tableView.reloadData()
             }
