@@ -44,9 +44,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
         if email == "" {
             
-            showAlert(title: "Empty", message: "Email is empty. \nformat: example@example.com", viewController: self, confirmAction: nil, cancelAction: nil)
+            showAlert(title: "Empty", message: "Email is empty.", viewController: self, confirmAction: nil, cancelAction: nil)
             
             return
+            
         }
         
         let password = passwordTextField.text ?? ""
@@ -56,19 +57,19 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             showAlert(title: "Empty", message: "Password is empty.", viewController: self, confirmAction: nil, cancelAction: nil)
             
             return
+            
         }
         
-        if password.characters.count < 6 {
-            
-            showAlert(title: "Password too short.", message: "Need more than 6 letters.", viewController: self, confirmAction: nil, cancelAction: nil)
-            
-            return
-            
-        }
+        startLoading(status: "Registering")
         
         Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
             
             if let error = error {
+                
+                endLoading()
+                
+                showAlert(title: "Register failure", message: "\(error.localizedDescription)", viewController: self, confirmAction: nil, cancelAction: nil)
+                
                 return
             }
             
@@ -85,9 +86,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             
             userRef.updateChildValues(updateDic)
             
+            self.navigationController?.popViewController(animated: true)
+            
+            endLoading()
+            
         }
-        
-        self.navigationController?.popViewController(animated: true)
         
     }
     

@@ -36,11 +36,11 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func signInButtonTapped(_ sender: UIButton) {
         
-        startLoading(status: "logging")
-        
         let email = emailTextField.text ?? ""
         
         if email == "" {
+            
+            showAlert(title: "Empty", message: "Email is empty.", viewController: self, confirmAction: nil, cancelAction: nil)
             
             return
             
@@ -50,19 +50,29 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         
         if password == "" {
             
+            showAlert(title: "Empty", message: "Password is empty.", viewController: self, confirmAction: nil, cancelAction: nil)
+            
             return
             
         }
         
+        startLoading(status: "Logging")
+        
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
             
             if let error = error {
+                
+                endLoading()
+                
+                showAlert(title: "Login failure", message: "\(error.localizedDescription)", viewController: self, confirmAction: nil, cancelAction: nil)
                 
                 return
                 
             }
             
             print("\(user) is sign in .")
+            
+            endLoading()
             
         }
         
