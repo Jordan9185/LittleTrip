@@ -264,14 +264,16 @@ class FriendTableViewController: UITableViewController {
         
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
-        switch editingStyle {
-            
-        case .delete:
+        if self.isAddFriendMode! {
+            return nil
+        }
+        
+        let deleteRowAction = UITableViewRowAction(style: .default, title: "Delete") { (action, indexPath) in
             
             self.friends.remove(at: indexPath.row)
-
+            
             var friendList: [String] = []
             
             self.friends.map({ (friend) in
@@ -280,12 +282,11 @@ class FriendTableViewController: UITableViewController {
                 
             })
             
-            self.userListRef?.child(uid).child("friendList").setValue(friendList)
-            
-        default:
-            print("nothing happend")
+            self.userListRef?.child(self.uid).child("friendList").setValue(friendList)
             
         }
+        
+        return [deleteRowAction]
         
     }
     
