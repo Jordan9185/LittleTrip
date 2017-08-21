@@ -306,6 +306,14 @@ extension ScheduleMainTableViewController: ScheduleManagerDelegate {
         self.schedulesTableView.reloadData()
     }
     
+    func manager( _ manager: ScheduleManager, didFailWith error:ScheduleManagerError ) {
+        
+        if error == ScheduleManagerError.snapDoesNotExist {
+            
+            print(error)
+        }
+    }
+    
     func getSingleScheduleDataOnServer(scheduleID: String) {
         
         startLoading(status: "Loading")

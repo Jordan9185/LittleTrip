@@ -22,13 +22,17 @@ class MenuViewController: UIViewController {
     
     var userRef: DatabaseReference?
 
-    override func viewDidLoad() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         
-        super.viewDidLoad()
-
         catchUserData()
         
         userNameTextField.delegate = self
+    }
+    
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
         
         setBackGroundConfig()
         
