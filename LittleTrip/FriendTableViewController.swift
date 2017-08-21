@@ -90,40 +90,26 @@ class FriendTableViewController: UITableViewController {
                 
                 friendIDs.map({ friendID in
                     
-                    self.getFriendData(friendID)
+                    UserManager.shared.catchUserData(userID: friendID, completion: { (user, error) in
+                        
+                        if let error = error {
+                            
+                            print(error)
+                            
+                            endLoading()
+                            
+                            return
+                            
+                        }
+                        
+                        self.friends.append(user!)
+                        
+                        self.tableView.reloadData()
+                        
+                        endLoading()
+                    })
 
                 })
-                
-            }
-            
-            endLoading()
-            
-        })
-        
-    }
-
-    func getFriendData(_ friendID: String) {
-        
-        startLoading(status: "Loading")
-        
-        self.userListRef?.child(friendID).observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            if let values = snapshot.value as? [String:Any],
-                let name = values["name"] as? String,
-                let imageURL = values["imageURL"] as? String,
-                let email = values["email"] as? String
-            {
-                
-                let friend = User(
-                    uid: friendID,
-                    name: name,
-                    pictureURL: imageURL,
-                    email: email
-                )
-                
-                self.friends.append(friend)
-                
-                self.tableView.reloadData()
                 
             }
             

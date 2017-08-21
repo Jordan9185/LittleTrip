@@ -10,10 +10,15 @@ import Foundation
 import FirebaseDatabase
 import FirebaseAuth
 
-enum UserError: Error {
+enum UserError:Error {
+    
+    case catchNameError
+    
+    case catchImageURLError
+    
+    case catchEmailError
     
 }
-
 protocol UserManagerDelegate: class {
     
     func manager(_ manager:UserManager, didGet parnerList: [User])
@@ -23,9 +28,13 @@ protocol UserManagerDelegate: class {
 
 class UserManager {
  
+    static let shared = UserManager()
+    
     weak var delegate: UserManagerDelegate?
     
     func catchParnerList(scheduleID: String) {
+        
+        startLoading(status: "Loading")
         
         parnerRef.child(scheduleID).child("parners").observe(.value, with: { (snapshot) in
             
@@ -39,7 +48,9 @@ class UserManager {
                         
                         if let error = error {
                             
-                            print(error)
+                            endLoading()
+                            
+                            self.delegate?.manager(self, didFailWith: error)
                             
                             return
                         }
@@ -47,6 +58,8 @@ class UserManager {
                         users.append(user!)
                         
                         if users.count == parners.count {
+                            
+                            endLoading()
                             
                             self.delegate?.manager(self, didGet: users)
                         }
@@ -56,20 +69,10 @@ class UserManager {
                 })
                 
             }
-
+            
+            endLoading()
             
         })
-        
-    }
-
-    
-    enum UserError:Error {
-        
-        case catchNameError
-        
-        case catchImageURLError
-        
-        case catchEmailError
         
     }
     
@@ -91,7 +94,7 @@ class UserManager {
                 
                 guard let imageURL = values["imageURL"] as? String else {
                     
-                    completion(nil,UserError.catchImageURLError)
+                    completion(nil, UserError.catchImageURLError)
                     
                     return
                     
@@ -99,7 +102,7 @@ class UserManager {
                 
                 guard let email = values["email"] as? String else {
                     
-                    completion(nil,UserError.catchEmailError)
+                    completion(nil, UserError.catchEmailError)
                     
                     return
                     
@@ -112,7 +115,7 @@ class UserManager {
                     email: email
                 )
                 
-                completion(user,nil)
+                completion(user, nil)
                 
             }
             
