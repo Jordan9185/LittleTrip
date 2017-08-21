@@ -113,32 +113,25 @@ class DailyScheduleTableViewController: UITableViewController {
         
         startLoading(status: "Loading")
         
-        userRef.child(currentSchedule.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+        UserManager.shared.catchUserData(userID: currentSchedule.uid) { (user, error) in
             
-            if let values = snapshot.value as? [String:Any] {
+            if let error = error {
                 
-                let name = values["name"] as? String ?? ""
+                print(error)
                 
-                let pictureURL = values["imageURL"] as? String ?? ""
+                endLoading()
                 
-                let email = values["email"] as? String ?? ""
-                
-                let user = User(
-                    uid: self.currentSchedule.uid,
-                    name: name,
-                    pictureURL: pictureURL,
-                    email: email
-                )
-                
-                let myTabBarViewController = self.tabBarController as! DailyTabBarViewController
-                
-                myTabBarViewController.scheduleHost = user
-                
+                return
             }
+            
+            let myTabBarViewController = self.tabBarController as! DailyTabBarViewController
+            
+            myTabBarViewController.scheduleHost = user
             
             endLoading()
             
-        })
+        }
+
     }
     
     // MARK: - Table view data source
