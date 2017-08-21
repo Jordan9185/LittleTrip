@@ -32,6 +32,7 @@
 		98D11F561F2972C600A157BF /* ScheduleMainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D11F551F2972C600A157BF /* ScheduleMainTableViewController.swift */; };
 		98D11F581F2974E500A157BF /* ScheduleMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D11F571F2974E500A157BF /* ScheduleMainTableViewCell.swift */; };
 		98D11F5B1F29D2B700A157BF /* CreateNewScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D11F5A1F29D2B700A157BF /* CreateNewScheduleViewController.swift */; };
+		98EAD96F1F4AB1A300415172 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EAD96E1F4AB1A300415172 /* UserManager.swift */; };
 		98FBC1DC1F2B114400E2E70F /* DailyScheduleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FBC1DB1F2B114400E2E70F /* DailyScheduleTableViewController.swift */; };
 		98FBC1DE1F2B115800E2E70F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FBC1DD1F2B115800E2E70F /* MapViewController.swift */; };
 		98FBC1E21F2B12A500E2E70F /* DailyTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FBC1E11F2B12A500E2E70F /* DailyTabBarViewController.swift */; };
@@ -71,6 +72,7 @@
 		98D11F551F2972C600A157BF /* ScheduleMainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleMainTableViewController.swift; sourceTree = "<group>"; };
 		98D11F571F2974E500A157BF /* ScheduleMainTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleMainTableViewCell.swift; sourceTree = "<group>"; };
 		98D11F5A1F29D2B700A157BF /* CreateNewScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewScheduleViewController.swift; sourceTree = "<group>"; };
+		98EAD96E1F4AB1A300415172 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		98FBC1DB1F2B114400E2E70F /* DailyScheduleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyScheduleTableViewController.swift; sourceTree = "<group>"; };
 		98FBC1DD1F2B115800E2E70F /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		98FBC1E11F2B12A500E2E70F /* DailyTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyTabBarViewController.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				9827F8331F3AF97500A50043 /* ParnerBoardTableViewCell.swift */,
 				9827F8351F3B05D600A50043 /* ParnerCollectionViewController.swift */,
 				9827F8371F3B05E800A50043 /* ParnerCollectionViewCell.swift */,
+				98EAD96E1F4AB1A300415172 /* UserManager.swift */,
 			);
 			name = ParnerBoard;
 			sourceTree = "<group>";
@@ -434,6 +437,7 @@
 				98D11F581F2974E500A157BF /* ScheduleMainTableViewCell.swift in Sources */,
 				9827F82D1F388F8700A50043 /* FriendTableViewController.swift in Sources */,
 				9827F8321F3AF96700A50043 /* ParnerBoardTableViewController.swift in Sources */,
+				98EAD96F1F4AB1A300415172 /* UserManager.swift in Sources */,
 				980C55FE1F27324B007B4810 /* AppDelegate.swift in Sources */,
 				9827F8361F3B05D600A50043 /* ParnerCollectionViewController.swift in Sources */,
 				981B9EBD1F42EBDD00A4FD6B /* ScheduleManager.swift in Sources */,

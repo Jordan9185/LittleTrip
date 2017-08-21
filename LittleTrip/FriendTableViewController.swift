@@ -18,6 +18,8 @@ struct User {
     
     let pictureURL: String
     
+    let email: String
+    
 }
 
 enum sectionType {
@@ -108,13 +110,15 @@ class FriendTableViewController: UITableViewController {
             
             if let values = snapshot.value as? [String:Any],
                 let name = values["name"] as? String,
-                let imageURL = values["imageURL"] as? String
+                let imageURL = values["imageURL"] as? String,
+                let email = values["email"] as? String
             {
                 
                 let friend = User(
                     uid: friendID,
                     name: name,
-                    pictureURL: imageURL
+                    pictureURL: imageURL,
+                    email: email
                 )
                 
                 self.friends.append(friend)

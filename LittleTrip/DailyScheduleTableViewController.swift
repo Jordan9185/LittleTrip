@@ -121,10 +121,13 @@ class DailyScheduleTableViewController: UITableViewController {
                 
                 let pictureURL = values["imageURL"] as? String ?? ""
                 
+                let email = values["email"] as? String ?? ""
+                
                 let user = User(
                     uid: self.currentSchedule.uid,
                     name: name,
-                    pictureURL: pictureURL
+                    pictureURL: pictureURL,
+                    email: email
                 )
                 
                 let myTabBarViewController = self.tabBarController as! DailyTabBarViewController
