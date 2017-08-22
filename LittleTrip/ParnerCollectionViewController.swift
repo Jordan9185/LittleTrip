@@ -17,13 +17,9 @@ enum CollectionViewSection {
     case parner
 }
 
-class ParnerCollectionViewController: UICollectionViewController {
+class ParnerCollectionViewController: UICollectionViewController, UserManagerDelegate {
     
     var parnerLists: [User] = []
-    
-    let parnerRef = Database.database().reference().child("scheduleParners")
-    
-    let userRef = Database.database().reference().child("user")
     
     var currentSchedule: Schedule!
     
@@ -31,79 +27,31 @@ class ParnerCollectionViewController: UICollectionViewController {
     
     var scheduleHost: User!
     
-    override func viewDidLoad() {
+    let userManager = UserManager()
+    
+    override func viewWillAppear(_ animated: Bool) {
         
-        super.viewDidLoad()
-
-        catchParnerList()
+        super.viewWillAppear(true)
+        
+        userManager.delegate = self
+        
+        userManager.catchParnerList(scheduleID: currentSchedule.scheduleId)
         
     }
     
-    override func didReceiveMemoryWarning() {
+    func manager(_ manager:UserManager, didGet parnerList: [User]){
         
-        super.didReceiveMemoryWarning()
+        self.parnerLists = parnerList
         
-        parnerRef.removeAllObservers()
-        
+        collectionView?.reloadData()
     }
     
-    func catchParnerList() {
+    func manager(_ manager:UserManager, didFailWith error: UserError){
         
-        startLoading(status: "Loading")
-        
-        parnerRef.child(currentSchedule.scheduleId).child("parners").observe(.value, with: { (snapshot) in
-            
-            if let parners = snapshot.value as? [String] {
-                
-                var users: [User] = []
-                
-                parners.map({ (parnerString) in
-                    
-                    startLoading(status: "Loading")
-                    
-                    self.userRef.child(parnerString).observeSingleEvent(of: .value, with: { (snap) in
-                        
-                        if let values = snap.value as? [String:Any] {
-                            
-                            guard let name = values["name"] as? String else {
-                                
-                                return
-                                
-                            }
-                            
-                            guard let imageURL = values["imageURL"] as? String else {
-                                
-                                return
-                                
-                            }
-                            
-                            users.append(
-                                User(
-                                    uid: parnerString,
-                                    name: name,
-                                    pictureURL: imageURL
-                                )
-                            )
-                            
-                        }
-                        
-                        self.parnerLists = users
-                        
-                        self.collectionView?.reloadData()
-                        
-                        endLoading()
-                    })
-                    
-                })
-
-            }
-            
-            endLoading()
-            
-        })
-        
+        print(error)
     }
-
+    
+    
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {

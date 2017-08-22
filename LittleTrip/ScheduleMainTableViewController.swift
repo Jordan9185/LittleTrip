@@ -198,34 +198,46 @@ class ScheduleMainTableViewController: UITableViewController {
                 
                 let currentSchedule = self.scheduleHadJoineds[indexPath.row]
                 
-                scheduleParnersRef.child(currentSchedule.scheduleId).child("parners").observeSingleEvent(of: .value, with: { (snap) in
-                    
+                let parnerRef = scheduleParnersRef.child(currentSchedule.scheduleId).child("parners")
+                
+                parnerRef.observeSingleEvent(of: .value, with: { (snap) in
+                
                     if let values = snap.value as? [String] {
-                        
-                        values.map({ (value) in
-                            if value == uid {
-                                
+                
+                        var localParnerList = values
+                
+                        localParnerList.enumerated().map({ (index,parnerID) in
+                
+                            if parnerID == uid {
+                
+                                localParnerList.remove(at: index)
+                
+                                parnerRef.setValue(localParnerList, withCompletionBlock: { (error, ref) in
+                                    self.tableView.reloadData()
+                                })
+                
                             }
+                
                         })
                     }
                 })
-//                let uid = (Auth.auth().currentUser?.uid)!
-//                
-//                self.scheduleHadJoineds.remove(at: indexPath.row)
-//                
-//                var localSchedules: [String] = []
-//                
-//                self.scheduleHadJoineds.map({ (schedule) in
-//                    
-//                    localSchedules.append(schedule.scheduleId)
-//                    
-//                })
-//                
-//                let currentScheduleHadJoinedRef = scheduleHadJoinedRef.child(uid).child("schedules")
-//                
-//                currentScheduleHadJoinedRef.setValue(localSchedules)
                 
-                self.tableView.reloadData()
+                self.scheduleHadJoineds.remove(at: indexPath.row)
+                
+                var localSchedules: [String] = []
+                
+                self.scheduleHadJoineds.map({ (schedule) in
+                    
+                    localSchedules.append(schedule.scheduleId)
+                    
+                })
+                
+                let currentScheduleHadJoinedRef = scheduleHadJoinedRef.child(uid).child("schedules")
+                
+                currentScheduleHadJoinedRef.setValue(localSchedules, withCompletionBlock: { (error, ref) in
+                    self.tableView.reloadData()
+                })
+                
             }
             
             
@@ -235,7 +247,7 @@ class ScheduleMainTableViewController: UITableViewController {
             
         }
     }
-        
+    
     @IBAction func openMenuAction(_ sender: Any) {
         
         self.slideMenuController()?.openLeft()
@@ -292,6 +304,14 @@ extension ScheduleMainTableViewController: ScheduleManagerDelegate {
         }
         
         self.schedulesTableView.reloadData()
+    }
+    
+    func manager( _ manager: ScheduleManager, didFailWith error:ScheduleManagerError ) {
+        
+        if error == ScheduleManagerError.snapDoesNotExist {
+            
+            print(error)
+        }
     }
     
     func getSingleScheduleDataOnServer(scheduleID: String) {
