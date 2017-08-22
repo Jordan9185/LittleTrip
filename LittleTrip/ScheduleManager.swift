@@ -26,11 +26,18 @@ struct Schedule {
     
 }
 
+enum ScheduleManagerError: Error {
+    
+    case snapDoesNotExist
+}
+
 protocol ScheduleManagerDelegate: class {
     
     func manager( _ manager: ScheduleManager, didget schedules: [Schedule] )
     
     func manager( _ manager: ScheduleManager, didget hadJoinedschedules: [String] )
+    
+    func manager( _ manager: ScheduleManager, didFailWith error:ScheduleManagerError )
     
 }
 
@@ -108,7 +115,7 @@ class ScheduleManager {
                 
             } else {
                 
-                print("snapshot is null")
+                self.delegate?.manager(self, didFailWith: ScheduleManagerError.snapDoesNotExist)
                 
             }
             

@@ -19,3 +19,7 @@ let scheduleHadJoinedRef = dataBaseRef.child("scheduleHadJoined")
 let dailyScheduleRef = dataBaseRef.child("dailySchedule")
 
 let baggageListRef = dataBaseRef.child("baggageList")
+
+let parnerRef = dataBaseRef.child("scheduleParners")
+
+let userRef = dataBaseRef.child("user")

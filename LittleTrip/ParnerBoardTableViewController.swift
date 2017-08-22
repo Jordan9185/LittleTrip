@@ -24,7 +24,7 @@ struct Message {
     
 }
 
-class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UserManagerDelegate {
     
     var currentSchedule: Schedule!
     
@@ -33,6 +33,10 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
     var messages: [Message] = []
     
     var scheduleHost: User!
+    
+    var parnerLists: [User] = []
+    
+    let userManager = UserManager()
     
     @IBOutlet var willSendMsgTextField: UITextField!
 
@@ -56,7 +60,30 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         
         childCollectionViewController.scheduleHost = scheduleHost
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(true)
+        
+        self.userManager.delegate = self
+        
+        self.userManager.catchParnerList(scheduleID: currentSchedule.scheduleId)
+        
+    }
+    
+    func manager(_ manager:UserManager, didGet parnerList: [User]){
+        
+        self.parnerLists = parnerList
+        
+        self.tableView.reloadData()
+        
+    }
+    
+    func manager(_ manager:UserManager, didFailWith error: UserError){
+        
+        print(error)
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -225,8 +252,16 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
             cell.flexiableView.isHidden = false
             
         } else {
-
-            cell.nameLabel.text = "\(poster) \(postTime)"
+            cell.nameLabel.text = "\(self.scheduleHost.name) \(postTime)"
+            
+            self.parnerLists.map({ (user) in
+                if user.email == poster {
+                    
+                    cell.nameLabel.text = "\(user.name) \(postTime)"
+                    
+                    return
+                }
+            })
             
             cell.nameLabel.textAlignment = .left
             
