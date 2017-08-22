@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LittleTrip/FriendTableViewController.swift"
-            timestampString = "524650663.020939"
+            timestampString = "524997831.609512"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "417"
-            endingLineNumber = "417"
+            startingLineNumber = "408"
+            endingLineNumber = "408"
             landmarkName = "addFriendActionTapped(_:)"
             landmarkType = "7">
             <Locations>
@@ -22,31 +22,31 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "LittleTrip.FriendTableViewController.updateFriendList (who : Swift.String, friendID : Swift.String) -&gt; ()"
+                  symbolName = "LittleTrip.FriendTableViewController.(addFriendActionTapped (__ObjC.UIBarButtonItem) -&gt; ()).(closure #2)"
                   moduleName = "LittleTrip"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/jordanlin/Desktop/Appcode/LittleTrip/LittleTrip/FriendTableViewController.swift"
-                  timestampString = "524652530.521556"
+                  timestampString = "525003071.253575"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "418"
-                  endingLineNumber = "418"
-                  offsetFromSymbolStart = "906">
+                  startingLineNumber = "410"
+                  endingLineNumber = "410"
+                  offsetFromSymbolStart = "556">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "LittleTrip.FriendTableViewController.(updateFriendList (who : Swift.String, friendID : Swift.String) -&gt; ()).(closure #2)"
+                  symbolName = "LittleTrip.FriendTableViewController.(addFriendActionTapped (__ObjC.UIBarButtonItem) -&gt; ()).(closure #2).(closure #1)"
                   moduleName = "LittleTrip"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/jordanlin/Desktop/Appcode/LittleTrip/LittleTrip/FriendTableViewController.swift"
-                  timestampString = "524652530.526369"
+                  timestampString = "525003071.260416"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "420"
-                  endingLineNumber = "420"
-                  offsetFromSymbolStart = "62">
+                  startingLineNumber = "412"
+                  endingLineNumber = "412"
+                  offsetFromSymbolStart = "32">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LittleTrip/FriendTableViewController.swift"
-            timestampString = "524650663.020939"
+            timestampString = "524997831.609512"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "417"
-            endingLineNumber = "417"
+            startingLineNumber = "408"
+            endingLineNumber = "408"
             landmarkName = "addFriendActionTapped(_:)"
             landmarkType = "7">
             <Locations>
@@ -70,33 +70,65 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "LittleTrip.FriendTableViewController.updateFriendList (who : Swift.String, friendID : Swift.String) -&gt; ()"
+                  symbolName = "LittleTrip.FriendTableViewController.(addFriendActionTapped (__ObjC.UIBarButtonItem) -&gt; ()).(closure #2)"
                   moduleName = "LittleTrip"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/jordanlin/Desktop/Appcode/LittleTrip/LittleTrip/FriendTableViewController.swift"
-                  timestampString = "524652530.534248"
+                  timestampString = "525003071.27153"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "418"
-                  endingLineNumber = "418"
-                  offsetFromSymbolStart = "906">
+                  startingLineNumber = "410"
+                  endingLineNumber = "410"
+                  offsetFromSymbolStart = "556">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "LittleTrip.FriendTableViewController.(updateFriendList (who : Swift.String, friendID : Swift.String) -&gt; ()).(closure #2)"
+                  symbolName = "LittleTrip.FriendTableViewController.(addFriendActionTapped (__ObjC.UIBarButtonItem) -&gt; ()).(closure #2).(closure #1)"
                   moduleName = "LittleTrip"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/jordanlin/Desktop/Appcode/LittleTrip/LittleTrip/FriendTableViewController.swift"
-                  timestampString = "524652530.537527"
+                  timestampString = "525003071.274901"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "420"
-                  endingLineNumber = "420"
-                  offsetFromSymbolStart = "62">
+                  startingLineNumber = "412"
+                  endingLineNumber = "412"
+                  offsetFromSymbolStart = "32">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LittleTrip/ParnerBoardTableViewController.swift"
+            timestampString = "525000079.160959"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "341"
+            endingLineNumber = "341"
+            landmarkName = "keyboardWillShow(notification:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LittleTrip/ParnerBoardTableViewController.swift"
+            timestampString = "525000079.160959"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "337"
+            endingLineNumber = "337"
+            landmarkName = "textFieldDidEndEditing(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
