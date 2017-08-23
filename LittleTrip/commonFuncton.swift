@@ -103,8 +103,6 @@ func headerViewSetting(viewFrame:CGRect, text:String) -> UIView {
 }
 
 func openCameraOrImageLibrary(imagePicker: UIImagePickerController, viewController: UIViewController) {
-    
-    DispatchQueue.main.async {
         
     let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     
@@ -140,6 +138,8 @@ func openCameraOrImageLibrary(imagePicker: UIImagePickerController, viewControll
     
     actionSheet.addAction(cancel)
     
+    DispatchQueue.main.async {
+        
         viewController.present(actionSheet, animated: true, completion: nil)
         
     }

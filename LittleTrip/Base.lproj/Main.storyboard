@@ -231,7 +231,7 @@
             <objects>
                 <navigationController storyboardIdentifier="LoginFlow" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="iU7-tR-31M" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="mnj-9w-tZn">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mnj-9w-tZn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -459,7 +459,7 @@
                 <navigationController storyboardIdentifier="MainFlow" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fZN-Mb-4ND" customClass="MainFlowViewController" customModule="LittleTrip" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedStatusBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="ckX-kw-jEz">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="ckX-kw-jEz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -607,22 +607,22 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="80" height="79.5"/>
                                                     <subviews>
                                                         <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Os3-rq-Maz">
-                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="16"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="0.0"/>
                                                         </imageView>
                                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cB7-vH-1dI">
-                                                            <rect key="frame" x="0.0" y="21" width="80" height="16.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="23"/>
                                                             <color key="textColor" red="0.20784313730000001" green="0.72156862749999995" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                         </textField>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oue-6H-zYw">
-                                                            <rect key="frame" x="0.0" y="42.5" width="80" height="16"/>
+                                                            <rect key="frame" x="0.0" y="28" width="80" height="23.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" red="0.20784313730000001" green="0.72156862749999995" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tj8-6J-9rE">
-                                                            <rect key="frame" x="0.0" y="63.5" width="80" height="16"/>
+                                                            <rect key="frame" x="0.0" y="56.5" width="80" height="23"/>
                                                             <color key="textColor" red="0.20784313730000001" green="0.72156862749999995" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <textInputTraits key="textInputTraits" returnKeyType="done"/>
@@ -900,7 +900,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NJa-gb-grj" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Daily Schedule" image="dailyschedule" id="bkJ-fc-SmX"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="AgQ-lx-zTQ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="AgQ-lx-zTQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -930,7 +930,33 @@
                     <view key="view" contentMode="scaleToFill" id="zsu-1r-gep">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2qQ-8i-mUs">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                            </view>
+                            <stepper opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="w5w-Bb-bYQ">
+                                <rect key="frame" x="251" y="494" width="94" height="29"/>
+                                <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.0" green="0.26118770419999998" blue="0.4226926318" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="markerStepperValueChanged:" destination="wj1-Te-56p" eventType="valueChanged" id="13C-Aa-9lf"/>
+                                </connections>
+                            </stepper>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="2qQ-8i-mUs" secondAttribute="trailing" id="7yd-C4-jxG"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="2qQ-8i-mUs" secondAttribute="bottom" constant="49" id="McS-C4-jgM"/>
+                            <constraint firstAttribute="topMargin" secondItem="2qQ-8i-mUs" secondAttribute="top" id="Qpi-vl-NUi"/>
+                            <constraint firstItem="2qQ-8i-mUs" firstAttribute="leading" secondItem="zsu-1r-gep" secondAttribute="leading" id="fJj-Oh-s3I"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="w5w-Bb-bYQ" secondAttribute="bottom" constant="80" id="lAY-RD-rFq"/>
+                            <constraint firstAttribute="trailing" secondItem="w5w-Bb-bYQ" secondAttribute="trailing" constant="30" id="pKb-ph-n84"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Map" id="OAN-2G-IRZ">
                         <barButtonItem key="leftBarButtonItem" image="back" id="u9Y-Bo-4XK">
@@ -939,10 +965,14 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="backGroundView" destination="2qQ-8i-mUs" id="g9Z-eu-ESj"/>
+                        <outlet property="markerStepper" destination="w5w-Bb-bYQ" id="9fL-AU-GeK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g2f-hB-fF5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3190" y="2176"/>
+            <point key="canvasLocation" x="3189.5999999999999" y="2175.562218890555"/>
         </scene>
         <!--Map-->
         <scene sceneID="v27-6G-cBx">
@@ -950,7 +980,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="WEI-i3-E2x" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Map" image="map" id="lWI-tT-4PG"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="fbn-4P-a33">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="fbn-4P-a33">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -975,7 +1005,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MSH-Ij-ULG" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Baggage list" image="baglist" selectedImage="baglist-selected" id="9vP-pK-VUG"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="SrV-kL-sNN">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="SrV-kL-sNN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1073,7 +1103,7 @@
         <scene sceneID="p3Q-Ui-on6">
             <objects>
                 <collectionViewController storyboardIdentifier="ParnerCollectionViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3O4-Bb-jLf" customClass="ParnerCollectionViewController" customModule="LittleTrip" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="vvL-H1-nQf">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="vvL-H1-nQf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1190,15 +1220,21 @@
                                                                             <color key="textColor" red="0.0" green="0.26118770421111115" blue="0.4226926317500001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="message" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="U62-gQ-nhj">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="message" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="U62-gQ-nhj">
                                                                             <rect key="frame" x="8" y="18" width="73" height="33.5"/>
-                                                                            <color key="backgroundColor" red="0.6705882353" green="0.70196078429999997" blue="0.69019607839999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                                            <color key="backgroundColor" red="0.75916412052195048" green="0.86045884163018305" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                             <userDefinedRuntimeAttributes>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                     <real key="value" value="2"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                                    <color key="value" red="0.0" green="0.26118770419999998" blue="0.4226926318" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                                    <real key="value" value="0.20000000000000001"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
@@ -1234,12 +1270,23 @@
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2bh-1Q-Wi0">
                                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="message" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="y13-al-Oz3">
-                                                                            <rect key="frame" x="301" y="18" width="65.5" height="33.5"/>
-                                                                            <color key="backgroundColor" red="0.34826255027493758" green="0.97254901959999995" blue="0.55123588196901663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="message" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="y13-al-Oz3">
+                                                                            <rect key="frame" x="293.5" y="18" width="73" height="33.5"/>
+                                                                            <color key="backgroundColor" red="0.69010363188997725" green="0.97254901959999995" blue="0.75379813378459626" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
+                                                                            <userDefinedRuntimeAttributes>
+                                                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                                    <real key="value" value="0.20000000000000001"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                                    <color key="value" red="0.0" green="0.26118770419999998" blue="0.4226926318" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                                    <real key="value" value="2"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                            </userDefinedRuntimeAttributes>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EIL-gZ-HvV">
                                                                             <rect key="frame" x="333.5" y="0.0" width="33" height="14.5"/>
@@ -1403,7 +1450,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="E0t-h2-AjG" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Parner Board" image="parner" id="0C8-1W-7gX"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="YrI-Rb-dVM">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="YrI-Rb-dVM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1427,7 +1474,7 @@
             <objects>
                 <navigationController storyboardIdentifier="FriendList" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NVn-9I-S8m" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="TP7-HX-CWE">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="TP7-HX-CWE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
