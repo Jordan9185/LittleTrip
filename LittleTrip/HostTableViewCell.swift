@@ -1,15 +1,15 @@
 //
-//  ParnerBoardTableViewCell.swift
+//  HostTableViewCell.swift
 //  LittleTrip
 //
-//  Created by JordanLin on 2017/8/9.
+//  Created by JordanLin on 2017/8/23.
 //  Copyright © 2017年 JordanLin. All rights reserved.
 //
 
 import UIKit
 
-class ParnerBoardTableViewCell: UITableViewCell {
-
+class HostTableViewCell: UITableViewCell {
+    
     @IBOutlet var nameLabel: UILabel!
     
     @IBOutlet var messageLabel: UILabel!
