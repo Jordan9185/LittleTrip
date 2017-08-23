@@ -37,9 +37,11 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
     var parnerLists: [User] = []
     
     let userManager = UserManager()
-    
-    @IBOutlet var willSendMsgTextField: UITextField!
 
+    @IBOutlet var scrollViewBottomConstraint: NSLayoutConstraint!
+    
+    @IBOutlet var willSendMsgTextView: UITextView!
+    
     @IBOutlet var tableView: UITableView!
     
     @IBOutlet var scrollView: UIScrollView!
@@ -87,8 +89,6 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
     override func viewDidLoad() {
         
         super.viewDidLoad()
-
-        willSendMsgTextField.delegate = self
         
         tableView.rowHeight = UITableViewAutomaticDimension
         
@@ -102,8 +102,16 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         
         tap.cancelsTouchesInView = false
         
+        willSendMsgTextView.delegate = self
+        
         self.view.addGestureRecognizer(tap)
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        
+        willSendMsgTextView.resignFirstResponder()
     }
     
     func keyboardHidden() {
@@ -190,7 +198,7 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         
         let currentTime = dateFormatter.string(from: date)
         
-        let message = (willSendMsgTextField.text)!
+        let message = (willSendMsgTextView.text)!
         
         if message == "" {
             
@@ -206,7 +214,7 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         
         chatroomRef.child(currentSchedule.scheduleId).child("messages").updateChildValues(["\(self.messages.count)": updateDic])
         
-        willSendMsgTextField.text = ""
+        willSendMsgTextView.text = ""
         
         tableView.reloadData()
 
@@ -227,8 +235,10 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ParnerCell", for: indexPath) as! ParnerBoardTableViewCell
+        let ParnerCell = tableView.dequeueReusableCell(withIdentifier: "ParnerCell", for: indexPath) as! ParnerBoardTableViewCell
 
+        let HostCell = tableView.dequeueReusableCell(withIdentifier: "HostCell", for: indexPath) as! HostTableViewCell
+        
         let poster = messages[indexPath.row].poster
         
         let postTime = messages[indexPath.row].postTime
@@ -237,41 +247,40 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
         
         let userEmail = Auth.auth().currentUser?.email!
         
-        cell.messageLabel.text = messages[indexPath.row].contentText
-        
-        cell.backgroundColor = UIColor.clear
-        
         if messages[indexPath.row].poster == userEmail {
             
-            cell.nameLabel.text = "\(postTime) \(userName!) "
+            HostCell.backgroundColor = UIColor.clear
             
-            cell.nameLabel.textAlignment = .right
+            HostCell.messageLabel.text = messages[indexPath.row].contentText
             
-            cell.messageLabel.textAlignment = .right
             
-            cell.flexiableView.isHidden = false
+            
+            HostCell.nameLabel.text = "\(userName!) \(postTime) "
+            
+            return HostCell
             
         } else {
-            cell.nameLabel.text = "\(self.scheduleHost.name) \(postTime)"
+            
+            ParnerCell.backgroundColor = UIColor.clear
+            
+            ParnerCell.messageLabel.text = messages[indexPath.row].contentText
+            
+            
+            
+            ParnerCell.nameLabel.text = "\(self.scheduleHost.name) \(postTime)"
             
             self.parnerLists.map({ (user) in
                 if user.email == poster {
                     
-                    cell.nameLabel.text = "\(user.name) \(postTime)"
+                    ParnerCell.nameLabel.text = "\(user.name) \(postTime)"
                     
                     return
                 }
             })
             
-            cell.nameLabel.textAlignment = .left
-            
-            cell.messageLabel.textAlignment = .left
-            
-            cell.flexiableView.isHidden = true
+            return ParnerCell
             
         }
-
-        return cell
         
     }
     
@@ -308,17 +317,13 @@ class ParnerBoardTableViewController: UIViewController, UITableViewDelegate, UIT
 
 }
 
-extension ParnerBoardTableViewController: UITextFieldDelegate {
+extension ParnerBoardTableViewController: UITextViewDelegate {
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         
-        textField.resignFirstResponder()
+        textView.text = ""
         
-        return true
-        
-    }
-    
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        textView.textColor = .black
         
         let center = NotificationCenter.default
         
@@ -332,9 +337,9 @@ extension ParnerBoardTableViewController: UITextFieldDelegate {
         return true
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
+    func textViewDidEndEditing(_ textView: UITextView) {
         
-        scrollView.contentInset = UIEdgeInsets.zero
+        scrollViewBottomConstraint.constant = 0
         
     }
     
@@ -344,9 +349,7 @@ extension ParnerBoardTableViewController: UITextFieldDelegate {
         
         let keyboardSize = (userInfo.object(forKey: UIKeyboardFrameEndUserInfoKey)! as AnyObject).cgRectValue.size
         
-        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height - 43, right: 0)
-        
-        scrollView.contentInset = contentInsets
+        scrollViewBottomConstraint.constant = keyboardSize.height - 50
         
     }
     
