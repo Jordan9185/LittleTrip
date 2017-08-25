@@ -28,7 +28,8 @@
 		984E4AAC1F304F0A007766C7 /* BaggageListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984E4AAB1F304F0A007766C7 /* BaggageListTableViewController.swift */; };
 		984E4AAE1F305D73007766C7 /* BaggageListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984E4AAD1F305D73007766C7 /* BaggageListTableViewCell.swift */; };
 		986438E11F27349A001DABC6 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986438E01F27349A001DABC6 /* SignInViewController.swift */; };
-		986438E91F28207A001DABC6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 986438E81F28207A001DABC6 /* GoogleService-Info.plist */; };
+		989A4D9F1F5008DC0003A1FC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 989A4D9E1F5008DC0003A1FC /* Info.plist */; };
+		989A4DA11F5008E20003A1FC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 989A4DA01F5008E20003A1FC /* GoogleService-Info.plist */; };
 		98D11F561F2972C600A157BF /* ScheduleMainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D11F551F2972C600A157BF /* ScheduleMainTableViewController.swift */; };
 		98D11F581F2974E500A157BF /* ScheduleMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D11F571F2974E500A157BF /* ScheduleMainTableViewCell.swift */; };
 		98D11F5B1F29D2B700A157BF /* CreateNewScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D11F5A1F29D2B700A157BF /* CreateNewScheduleViewController.swift */; };
@@ -49,7 +50,6 @@
 		980C56021F27324B007B4810 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		980C56041F27324B007B4810 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		980C56071F27324B007B4810 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		980C56091F27324B007B4810 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		981B9EB41F42E4D400A4FD6B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		981B9EB51F42E4D400A4FD6B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		981B9EBA1F42E6C300A4FD6B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -69,7 +69,8 @@
 		984E4AAB1F304F0A007766C7 /* BaggageListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggageListTableViewController.swift; sourceTree = "<group>"; };
 		984E4AAD1F305D73007766C7 /* BaggageListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaggageListTableViewCell.swift; sourceTree = "<group>"; };
 		986438E01F27349A001DABC6 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		986438E81F28207A001DABC6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		989A4D9E1F5008DC0003A1FC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		989A4DA01F5008E20003A1FC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		98D11F551F2972C600A157BF /* ScheduleMainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleMainTableViewController.swift; sourceTree = "<group>"; };
 		98D11F571F2974E500A157BF /* ScheduleMainTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleMainTableViewCell.swift; sourceTree = "<group>"; };
 		98D11F5A1F29D2B700A157BF /* CreateNewScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewScheduleViewController.swift; sourceTree = "<group>"; };
@@ -186,8 +187,8 @@
 		9821C5041F2822360024B9D4 /* Plist */ = {
 			isa = PBXGroup;
 			children = (
-				980C56091F27324B007B4810 /* Info.plist */,
-				986438E81F28207A001DABC6 /* GoogleService-Info.plist */,
+				989A4D9E1F5008DC0003A1FC /* Info.plist */,
+				989A4DA01F5008E20003A1FC /* GoogleService-Info.plist */,
 			);
 			name = Plist;
 			sourceTree = "<group>";
@@ -377,9 +378,10 @@
 			files = (
 				981B9EB91F42E6C300A4FD6B /* Localizable.strings in Resources */,
 				980C56081F27324B007B4810 /* LaunchScreen.storyboard in Resources */,
+				989A4D9F1F5008DC0003A1FC /* Info.plist in Resources */,
 				980C56051F27324B007B4810 /* Assets.xcassets in Resources */,
 				980C56031F27324B007B4810 /* Main.storyboard in Resources */,
-				986438E91F28207A001DABC6 /* GoogleService-Info.plist in Resources */,
+				989A4DA11F5008E20003A1FC /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
