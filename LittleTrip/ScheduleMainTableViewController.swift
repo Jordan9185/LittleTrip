@@ -30,6 +30,10 @@ class ScheduleMainTableViewController: UITableViewController {
     
     var isTripGroupMode: Bool!
     
+    var refreshController = UIRefreshControl()
+    
+    @IBOutlet var emptyNotice: UILabel!
+    
     @IBOutlet var addBarButton: UIBarButtonItem!
     
     @IBOutlet var schedulesTableView: UITableView!
@@ -43,6 +47,8 @@ class ScheduleMainTableViewController: UITableViewController {
         isTripGroupMode = nav.isTripGroipMode
         
         ScheduleManager.shared.delegate = self
+        
+        startLoading(status: "Loading")
         
         if isTripGroupMode {
             
@@ -65,7 +71,14 @@ class ScheduleMainTableViewController: UITableViewController {
     }
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
+        refreshController.attributedTitle = NSAttributedString(string: "資料讀取中...")
+        
+        refreshController.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        
+        self.tableView.addSubview(refreshController)
         
         scheduleRef.observe(.childAdded, with: { (snapshot) in
             self.tableView.reloadData()
@@ -73,6 +86,22 @@ class ScheduleMainTableViewController: UITableViewController {
 
     }
 
+    func refreshData() {
+
+        ScheduleManager.shared.delegate = self
+        
+        if isTripGroupMode {
+            
+            ScheduleManager.shared.getScheduleHadJoinedOnServer()
+            
+        } else {
+            
+            ScheduleManager.shared.getScheduleDataOnServer()
+            
+        }
+
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -87,11 +116,34 @@ class ScheduleMainTableViewController: UITableViewController {
             
         case .mySchedule:
             
+            if schedules.count == 0 {
+                
+                emptyNotice.isHidden = false
+                
+                return 0
+                
+            } else {
+                
+                emptyNotice.isHidden = true
+                
                 return schedules.count
+            }
+            
             
         case .iAmJoining:
             
+            if scheduleHadJoineds.count == 0 {
+                    
+                emptyNotice.isHidden = false
+                    
+                return 0
+                    
+            } else {
+                    
+                emptyNotice.isHidden = true
+                    
                 return scheduleHadJoineds.count
+            }
             
         }
         
@@ -289,6 +341,10 @@ extension ScheduleMainTableViewController: ScheduleManagerDelegate {
     
     func manager(_ manager: ScheduleManager, didget schedules: [Schedule]) {
         
+        self.refreshController.endRefreshing()
+        
+        endLoading()
+        
         self.schedules = schedules
         
         self.schedulesTableView.reloadData()
@@ -296,6 +352,10 @@ extension ScheduleMainTableViewController: ScheduleManagerDelegate {
     }
     
     func manager( _ manager: ScheduleManager, didget hadJoinedschedules: [String] ) {
+        
+        self.refreshController.endRefreshing()
+        
+        endLoading()
         
         self.scheduleHadJoineds = []
         
