@@ -15,9 +15,23 @@ class MapViewController: UIViewController{
     
     var dailySchedules: [Int: [DailySchedule]]!
     
+    var isGetFirstLocation:Bool = false
+    
+    var markers:[GMSMarker] = []
+    
+    var mapView: GMSMapView!
+    
+    @IBOutlet var backGroundView: UIView!
+    
+    @IBOutlet var markerStepper: UIStepper!
+    
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(true)
+        
+        isGetFirstLocation = false
+        
+        markers = []
         
         let myTabBarViewController = self.tabBarController as! DailyTabBarViewController
         
@@ -30,19 +44,25 @@ class MapViewController: UIViewController{
         locationManager.delegate = self
         
         if CLLocationManager.authorizationStatus() == .notDetermined {
+            
             locationManager.requestWhenInUseAuthorization()
+            
         } else if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+            
             locationManager.startUpdatingLocation()
+            
+            startLoading(status: "Loading")
+            
         } else {
+            
             print(CLLocationManager.authorizationStatus())
+            
         }
         
     }
 
 
     func setGoogleMaps(userLocation: CLLocationCoordinate2D) {
-        
-        //let location = self.dailySchedules?[0]?[0].coordinate
 
         let latitude = userLocation.latitude
         
@@ -50,11 +70,11 @@ class MapViewController: UIViewController{
 
         let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: 8.0)
         
-        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
+        mapView = GMSMapView.map(withFrame: backGroundView.frame, camera: camera)
         
         mapView.isMyLocationEnabled = true
         
-        view = mapView
+        backGroundView.addSubview(mapView)
         
         let days = self.dailySchedules.count
         
@@ -70,22 +90,43 @@ class MapViewController: UIViewController{
                     
                 }
                 
-                let maker = GMSMarker(position: dailySchedule.coordinate)
+                var marker = GMSMarker(position: dailySchedule.coordinate)
                 
-                maker.title = "Day\(day + 1) \(dailySchedule.locationName)"
+                marker.title = "Day\(day + 1) \(dailySchedule.locationName)"
                 
-                maker.snippet = "\(dailySchedule.startTime) to \(dailySchedule.endTime)"
+                marker.snippet = "\(dailySchedule.startTime) to \(dailySchedule.endTime)"
                 
-                maker.icon = GMSMarker.markerImage(with: colors[day % 5])
+                marker.icon = GMSMarker.markerImage(with: colors[day % 5])
                     
-                maker.map = mapView
+                marker.map = mapView
                 
+                markers.append(marker)
             }
             
         }
         
+        markerStepper.maximumValue = Double(markers.count)
+        
+        markerStepper.minimumValue = 1
+        
+        if markers.count > 0 {
+            
+            mapView.selectedMarker = markers.first
+            
+            mapView.camera = GMSCameraPosition.camera(withTarget: (markers.first?.position)!, zoom: 10)
+            
+        }
+
     }
     
+    @IBAction func markerStepperValueChanged(_ sender: UIStepper) {
+        
+        let pointer = Int(sender.value) - 1
+        
+        mapView.selectedMarker = markers[pointer]
+        
+        mapView.camera = GMSCameraPosition.camera(withTarget: markers[pointer].position, zoom: 10)
+    }
     
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
         
@@ -99,7 +140,15 @@ extension MapViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        setGoogleMaps(userLocation: (locations.first?.coordinate)!)
+        if !isGetFirstLocation {
+            
+            setGoogleMaps(userLocation: (locations.first?.coordinate)!)
+            
+            isGetFirstLocation = true
+            
+        }
+        
+        endLoading()
         
         manager.stopUpdatingLocation()
     }
