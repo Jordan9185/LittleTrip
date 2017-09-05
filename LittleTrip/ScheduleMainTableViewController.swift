@@ -368,6 +368,10 @@ extension ScheduleMainTableViewController: ScheduleManagerDelegate {
     
     func manager( _ manager: ScheduleManager, didFailWith error:ScheduleManagerError ) {
         
+        self.refreshController.endRefreshing()
+        
+        endLoading()
+        
         if error == ScheduleManagerError.snapDoesNotExist {
             
             print(error)
