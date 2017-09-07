@@ -1,3 +1,5 @@
+![GITHUB](https://github.com/Jordan9185/LittleTrip/blob/master/Screenshot/iOS%20APP%20LittleTrip.jpg)
+
 # LittleTrip
 
 一款輕量級的旅行規劃APP，使用簡單，操作方便，可以即時跟旅伴們共同編輯行程及對話
@@ -23,11 +25,14 @@
 * Crashlytics
 
 ## ScreenShot
+![GITHUB](https://github.com/Jordan9185/LittleTrip/blob/master/Screenshot/Main.png) ![GITHUB](https://github.com/Jordan9185/LittleTrip/blob/master/Screenshot/IMG_8331.PNG)
+![GITHUB](https://github.com/Jordan9185/LittleTrip/blob/master/Screenshot/IMG_8332.PNG) ![GITHUB](https://github.com/Jordan9185/LittleTrip/blob/master/Screenshot/IMG_8334.PNG)
 
 ## Requirement
 * iOS 10.3+
 * Xcode 8.3+
 * pod install
+
 ## Contacts
 Jordan Lin
 
