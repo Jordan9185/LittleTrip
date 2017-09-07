@@ -57,8 +57,6 @@ class ScheduleManager {
         
         let ref = scheduleRef.queryOrdered(byChild: "uid").queryEqual(toValue: uid)
         
-        startLoading(status: "Loading")
-        
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
             
             var localSchedules: [Schedule] = []
@@ -88,16 +86,12 @@ class ScheduleManager {
                 
             }
             
-            endLoading()
-            
         })
         
     }
     
     
     func getScheduleHadJoinedOnServer() {
-        
-        startLoading(status: "Loading")
         
         let uid = (Auth.auth().currentUser?.uid)!
         
@@ -118,8 +112,6 @@ class ScheduleManager {
                 self.delegate?.manager(self, didFailWith: ScheduleManagerError.snapDoesNotExist)
                 
             }
-            
-            endLoading()
             
         })
         
