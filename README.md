@@ -1,8 +1,13 @@
 ![GITHUB](https://github.com/Jordan9185/LittleTrip/blob/master/Screenshot/iOS%20APP%20LittleTrip.jpg)
 
+App Store : https://goo.gl/X1DHaU
 # LittleTrip
 
-一款輕量級的旅行規劃APP，使用簡單，操作方便，可以即時跟旅伴們共同編輯行程及對話
+「停下腳步喘口氣吧。」
+
+在現在忙碌的都市生活中，在偷閒之餘總是會想起旅行時的美好，卻又抽不出一段時間出門，是時候參考 " LittleTrip " ，一款簡單適合微旅行的APP。
+
+LittleTrip 提供了直覺式的操作、即時行程編輯、邀請旅伴一同規劃行程、自動計算行程間的車程等多項功能，絕對能夠協助你輕鬆規劃一場週末的微旅行！
 
 ## 功能
 
